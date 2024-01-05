@@ -43,11 +43,12 @@ CREATE TABLE if  not exists `message_board` (
 CREATE TABLE if  not exists `order` (
   `order_id` int NOT NULL AUTO_INCREMENT,
   `member_id` int NOT NULL,
-  `room_id` varchar(400) DEFAULT NULL,
-  `car_id` varchar(400) DEFAULT NULL,
-  `extra_id` varchar(400) DEFAULT NULL,
+  `order_item` varchar(400) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
   PRIMARY KEY (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 CREATE TABLE if  not exists `room` (
   `room_id` varchar(20) NOT NULL,
