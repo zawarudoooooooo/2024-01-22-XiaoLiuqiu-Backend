@@ -33,12 +33,14 @@ CREATE TABLE if  not exists `member` (
   PRIMARY KEY (`member_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE if  not exists `message_board` (
-  `message_board_id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE if  not exists `room_message_board` (
+  `room_message_board_id` int NOT NULL AUTO_INCREMENT,
   `member_name` varchar(45) NOT NULL,
-  `message_board_description` varchar(200) NOT NULL,
-  PRIMARY KEY (`message_board_id`)
+  `room_id` varchar(20) NOT NULL,
+  `room_message_board_description` varchar(200) NOT NULL,
+  PRIMARY KEY (`room_message_board_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 CREATE TABLE if  not exists `order` (
   `order_id` int NOT NULL AUTO_INCREMENT,
@@ -63,6 +65,23 @@ CREATE TABLE if  not exists `room_type` (
   `room_type_price` varchar(45) NOT NULL,
   PRIMARY KEY (`room_type_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE if  not exists `attractions` (
+  `attractions_id` int NOT NULL AUTO_INCREMENT,
+  `attractions_name` varchar(45) NOT NULL,
+  `attractions_address` varchar(200) NOT NULL,
+  `attractions_introduce` varchar(200) NOT NULL,
+  PRIMARY KEY (`attractions_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE if  not exists `attractions_message_board` (
+  `attractions_message_board_id` int NOT NULL AUTO_INCREMENT,
+  `member_name` varchar(45) NOT NULL,
+  `attractions_id` varchar(45) NOT NULL,
+  `attractions_message_board_description` varchar(45) NOT NULL,
+  PRIMARY KEY (`attractions_message_board_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 
 
