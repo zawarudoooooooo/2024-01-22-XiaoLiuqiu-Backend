@@ -5,6 +5,7 @@ public enum RtnCode {
 	SUCCESSFUL(200,"Successful!!"),//
 	PARAM_ERROR(400,"Param error"),//
 	ACCOUNT_EXISTED(400,"Account existed!!"),//
+	ACCOUNT_NOT_FOUND(404,"Account not found!!"),//
 	
 	;
 	

@@ -1,5 +1,7 @@
 package com.example.XiaoLiuqiu.service.impl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,14 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberLoginRes login(String account, String pwd) {
+		if(!StringUtils.hasText(account)||!StringUtils.hasText(pwd)) {
+			return new MemberLoginRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage());
+		}
+		Optional<Member> op = memberDao.findByAccount(account);
+		if(op.isEmpty()) {
+			return new MemberLoginRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(),RtnCode.ACCOUNT_NOT_FOUND.getMessage());
+		}
+		
 		return null;
 	}
 
