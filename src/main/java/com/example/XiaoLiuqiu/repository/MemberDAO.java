@@ -1,5 +1,6 @@
 package com.example.XiaoLiuqiu.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,4 +15,8 @@ public interface MemberDAO extends JpaRepository<Member, String> {
 	public boolean  existsByAccount(String accout);
 	
 	public Optional<Member> findByAccount(String account);
+	
+	public List<Member> findByMemberId(int memberId);
+	
+	public Integer findById(Integer id);
 }
