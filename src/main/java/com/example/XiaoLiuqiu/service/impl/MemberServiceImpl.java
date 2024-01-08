@@ -63,11 +63,11 @@ public class MemberServiceImpl implements MemberService {
 		return new MemberGetRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage(),res);
 	}
 
-	@Override
-	public MemberLoginRes upDate(int memberId, String pwd, String memberName, String memberPhone, String memberEmail) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public MemberLoginRes upDate(int memberId, String pwd, String memberName, String memberPhone, String memberEmail) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 	
 
