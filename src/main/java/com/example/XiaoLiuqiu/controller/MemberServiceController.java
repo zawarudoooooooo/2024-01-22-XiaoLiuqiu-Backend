@@ -1,11 +1,15 @@
 package com.example.XiaoLiuqiu.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.XiaoLiuqiu.constants.RtnCode;
 import com.example.XiaoLiuqiu.service.ifs.MemberService;
 import com.example.XiaoLiuqiu.vo.MemberLoginReq;
 import com.example.XiaoLiuqiu.vo.MemberLoginRes;
@@ -19,8 +23,20 @@ public class MemberServiceController {
 	private MemberService memberService;
 	
 	@PostMapping(value="member/login")
-	public MemberLoginRes login(@RequestBody MemberLoginReq req) {
-		return memberService.login(req.getAccount(), req.getPwd());
+	public MemberLoginRes login(@RequestBody MemberLoginReq req,HttpSession session) {
+		String attr=(String) session.getAttribute("account");
+		if(StringUtils.hasText(attr)&&attr.equals(req.getAccount())) {
+			return new MemberLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
+		}
+		MemberLoginRes res=memberService.login(req.getAccount(), req.getPwd());
+		if(res.getCode()==200) {
+			session.setAttribute("account", req.getAccount());
+			//預設有效時間為30秒 
+			//設定 session 有效時間, 單位:秒
+			session.setMaxInactiveInterval(600);
+		}
+		
+		return res;
 	}
 	@PostMapping(value="member/signUp")
 	public MemberLoginRes signUp(@RequestBody MemberSignUpReq req) {

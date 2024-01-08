@@ -18,6 +18,17 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	
+	//swagger
+ 	//implementation 'io.springfox:springfox-boot-starter:3.0.0'
+ 	//open api
+ 	implementation 'org.springdoc:springdoc-openapi-ui:1.7.0'
+ 	
+ 	//cache
+ 	implementation 'org.springframework.boot:spring-boot-starter-cache'
+ 	//caffeine cache
+ 	implementation 'com.github.ben-manes.caffeine:caffeine'
+	
 	//spring data jpa
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	
