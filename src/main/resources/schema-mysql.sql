@@ -66,21 +66,13 @@ CREATE TABLE if  not exists `room_type` (
   PRIMARY KEY (`room_type_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE if  not exists `attractions` (
-  `attractions_id` int NOT NULL AUTO_INCREMENT,
-  `attractions_name` varchar(45) NOT NULL,
-  `attractions_address` varchar(200) NOT NULL,
-  `attractions_introduce` varchar(200) NOT NULL,
-  PRIMARY KEY (`attractions_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
 CREATE TABLE if  not exists `attractions_message_board` (
   `attractions_message_board_id` int NOT NULL AUTO_INCREMENT,
   `member_name` varchar(45) NOT NULL,
-  `attractions_id` varchar(45) NOT NULL,
   `attractions_message_board_description` varchar(45) NOT NULL,
   PRIMARY KEY (`attractions_message_board_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 
 

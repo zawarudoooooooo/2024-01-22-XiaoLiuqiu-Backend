@@ -35,9 +35,8 @@ public class Member {
 		super();
 	}
 
-	public Member(int memberId, String account, String pwd, String memberName, String memberPhone, String memberEmail) {
+	public Member(String account, String pwd, String memberName, String memberPhone, String memberEmail) {
 		super();
-		this.memberId = memberId;
 		this.account = account;
 		this.pwd = pwd;
 		this.memberName = memberName;
@@ -92,6 +91,8 @@ public class Member {
 	public void setMemberEmail(String memberEmail) {
 		this.memberEmail = memberEmail;
 	}
+
+	
 	
 	
 }
