@@ -30,8 +30,12 @@ public class MemberServiceImpl implements MemberService {
 		if(op.isEmpty()) {
 			return new MemberLoginRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(),RtnCode.ACCOUNT_NOT_FOUND.getMessage());
 		}
+		Member member=op.get();
+		if(!encoder.matches(pwd, member.getPwd())) {
+			return new MemberLoginRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(),RtnCode.ACCOUNT_NOT_FOUND.getMessage());
+		}
 		
-		return null;
+		return new MemberLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
 	}
 
 	@Override
