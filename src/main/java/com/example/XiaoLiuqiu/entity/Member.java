@@ -16,6 +16,7 @@ public class Member {
 	@Column(name = "member_id")
 	private int memberId;
 	
+	@Column(name = "account")
 	private String account;
 	
 	@Column(name = "password")
