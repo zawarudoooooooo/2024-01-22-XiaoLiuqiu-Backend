@@ -20,13 +20,13 @@ public class RoomType {
 	private String roomTypeName;
 	
 	@Column(name = "room_type_price")
-	private String roomTypePrice;
+	private int roomTypePrice;
 
 	public RoomType() {
 		super();
 	}
 
-	public RoomType(int roomTypeId, String roomTypeName, String roomTypePrice) {
+	public RoomType(int roomTypeId, String roomTypeName, int roomTypePrice) {
 		super();
 		this.roomTypeId = roomTypeId;
 		this.roomTypeName = roomTypeName;
@@ -49,11 +49,11 @@ public class RoomType {
 		this.roomTypeName = roomTypeName;
 	}
 
-	public String getRoomTypePrice() {
+	public int getRoomTypePrice() {
 		return roomTypePrice;
 	}
 
-	public void setRoomTypePrice(String roomTypePrice) {
+	public void setRoomTypePrice(int roomTypePrice) {
 		this.roomTypePrice = roomTypePrice;
 	}
 	

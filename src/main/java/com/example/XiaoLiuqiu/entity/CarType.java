@@ -20,13 +20,13 @@ public class CarType {
 	private String carTypeName;
 	
 	@Column(name = "car_type_price")
-	private String carTypePrice;
+	private int carTypePrice;
 
 	public CarType() {
 		super();
 	}
 
-	public CarType(int carTypeId, String carTypeName, String carTypePrice) {
+	public CarType(int carTypeId, String carTypeName, int carTypePrice) {
 		super();
 		CarTypeId = carTypeId;
 		this.carTypeName = carTypeName;
@@ -49,11 +49,11 @@ public class CarType {
 		this.carTypeName = carTypeName;
 	}
 
-	public String getCarTypePrice() {
+	public int getCarTypePrice() {
 		return carTypePrice;
 	}
 
-	public void setCarTypePrice(String carTypePrice) {
+	public void setCarTypePrice(int carTypePrice) {
 		this.carTypePrice = carTypePrice;
 	}
 	
