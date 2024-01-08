@@ -1,18 +1,18 @@
-package com.example.XiaoLiuqiu.constants;
+package com.example.XiaoLiuqiu.vo;
 
-public enum RtnCode {
-
-	SUCCESSFUL(200,"Successful!!"),//
-	PARAM_ERROR(400,"Param error"),//
-	ACCOUNT_EXISTED(400,"Account existed!!"),//
-	
-	;
+public class MemberLoginRes {
 	
 	private int code;
-	
+
 	private String message;
 
-	private RtnCode(int code, String message) {
+	public MemberLoginRes() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public MemberLoginRes(int code, String message) {
+		super();
 		this.code = code;
 		this.message = message;
 	}
@@ -34,5 +34,5 @@ public enum RtnCode {
 	}
 	
 	
-	
+
 }
