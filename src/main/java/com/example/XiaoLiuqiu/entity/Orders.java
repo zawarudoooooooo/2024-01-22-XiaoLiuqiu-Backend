@@ -1,5 +1,7 @@
 package com.example.XiaoLiuqiu.entity;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,8 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "order")
-public class Order {
+@Table(name = "room_order")
+public class Orders {
 	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
@@ -22,23 +24,27 @@ public class Order {
 	@Column(name = "room_id")
 	private String roomId;
 	
-	@Column(name = "car_id")
-	private String carId;
+	@Column(name = "order_item")
+	private String orderItem;
 	
-	@Column(name = "extra_id")
-	private String extraId;
+	@Column(name = "start_date")
+	private LocalDate startDate;
+	
+	@Column(name = "end_date")
+	private LocalDate endDate;
 
-	public Order() {
+	public Orders() {
 		super();
 	}
 
-	public Order(int orderId, int memberId, String roomId, String carId, String extraId) {
+	public Orders(int orderId, int memberId, String roomId, String orderItem, LocalDate startDate, LocalDate endDate) {
 		super();
 		this.orderId = orderId;
 		this.memberId = memberId;
 		this.roomId = roomId;
-		this.carId = carId;
-		this.extraId = extraId;
+		this.orderItem = orderItem;
+		this.startDate = startDate;
+		this.endDate = endDate;
 	}
 
 	public int getOrderId() {
@@ -65,22 +71,30 @@ public class Order {
 		this.roomId = roomId;
 	}
 
-	public String getCarId() {
-		return carId;
+	public String getOrderItem() {
+		return orderItem;
 	}
 
-	public void setCarId(String carId) {
-		this.carId = carId;
+	public void setOrderItem(String orderItem) {
+		this.orderItem = orderItem;
 	}
 
-	public String getExtraId() {
-		return extraId;
+	public LocalDate getStartDate() {
+		return startDate;
 	}
 
-	public void setExtraId(String extraId) {
-		this.extraId = extraId;
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
 	}
-	
+
+	public LocalDate getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(LocalDate endDate) {
+		this.endDate = endDate;
+	}
+
 	
 
 }
