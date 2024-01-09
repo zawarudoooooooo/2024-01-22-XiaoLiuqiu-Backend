@@ -16,6 +16,7 @@ import com.example.XiaoLiuqiu.vo.MemberGetRes;
 import com.example.XiaoLiuqiu.vo.MemberLoginReq;
 import com.example.XiaoLiuqiu.vo.MemberLoginRes;
 import com.example.XiaoLiuqiu.vo.MemberSignUpReq;
+import com.example.XiaoLiuqiu.vo.MemberUpDateReq;
 
 @CrossOrigin
 @RestController
@@ -51,4 +52,8 @@ public class MemberServiceController {
 		return memberService.member(memberId);
 	}
 	
+	@PostMapping(value="member/upDate")
+	public MemberLoginRes upDate(@RequestParam int memberId,@RequestBody MemberUpDateReq req) {
+		return memberService.upDate(memberId,req.getMemberName(),req.getMemberPhone(),req.getMemberEmail());
+	}
 }
