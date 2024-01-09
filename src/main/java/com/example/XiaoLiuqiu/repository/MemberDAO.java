@@ -10,7 +10,7 @@ import com.example.XiaoLiuqiu.entity.Member;
 
 
 @Repository
-public interface MemberDAO extends JpaRepository<Member, String> {
+public interface MemberDAO extends JpaRepository<Member, Integer> {
 
 	public boolean  existsByAccount(String accout);
 	

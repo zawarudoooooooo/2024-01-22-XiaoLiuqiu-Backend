@@ -63,11 +63,28 @@ public class MemberServiceImpl implements MemberService {
 		return new MemberGetRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage(),res);
 	}
 
-//	@Override
-//	public MemberLoginRes upDate(int memberId, String pwd, String memberName, String memberPhone, String memberEmail) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	@Override
+	public MemberLoginRes upDate(int memberId, String memberName, String memberPhone, String memberEmail) {
+		if(memberId<=0) {
+			return new MemberLoginRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage());
+		}
+		Optional<Member> op= memberDao.findById(memberId);
+		if(op.isEmpty()) {
+			return new MemberLoginRes(RtnCode.MEMBER_NOT_FOUMD.getCode(),RtnCode.MEMBER_NOT_FOUMD.getMessage());
+		}
+		Member member=op.get();
+		if(StringUtils.hasText(memberName)) {
+			member.setMemberName(memberName);
+		}
+		if(StringUtils.hasText(memberPhone)) {
+			member.setMemberPhone(memberPhone);
+		}
+		if(StringUtils.hasText(memberEmail)) {
+			member.setMemberEmail(memberEmail);
+		}
+		memberDao.save(member);
+		return new MemberLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
+	}
 
 	
 
