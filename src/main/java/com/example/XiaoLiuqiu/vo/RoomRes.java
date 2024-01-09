@@ -1,26 +1,35 @@
 package com.example.XiaoLiuqiu.vo;
 
-import com.example.XiaoLiuqiu.constants.RtnCode;
-
 public class RoomRes {
 	
-	private RtnCode rtnCode;
+	private int rtnCode;
+	
+	private String message;
 
 	public RoomRes() {
 		super();
 	}
 
-	public RoomRes(RtnCode rtncode) {
+	public RoomRes(int rtnCode, String message) {
 		super();
-		this.rtnCode = rtncode;
+		this.rtnCode = rtnCode;
+		this.message = message;
 	}
 
-	public RtnCode getRtncode() {
+	public int getRtnCode() {
 		return rtnCode;
 	}
 
-	public void setRtncode(RtnCode rtncode) {
-		this.rtnCode = rtncode;
+	public void setRtnCode(int rtnCode) {
+		this.rtnCode = rtnCode;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 }
