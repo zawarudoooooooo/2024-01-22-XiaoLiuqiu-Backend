@@ -73,6 +73,15 @@ CREATE TABLE if  not exists `attractions_message_board` (
   PRIMARY KEY (`attractions_message_board_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+CREATE TABLE if  not exists `employee` (
+  `employee_id` int NOT NULL AUTO_INCREMENT,
+  `account` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `access` tinyint NOT NULL DEFAULT '0',
+  PRIMARY KEY (`employee_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
 
 
 
