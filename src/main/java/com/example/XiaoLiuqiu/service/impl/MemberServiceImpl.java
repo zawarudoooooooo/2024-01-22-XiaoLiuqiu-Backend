@@ -1,5 +1,6 @@
 package com.example.XiaoLiuqiu.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import com.example.XiaoLiuqiu.constants.RtnCode;
 import com.example.XiaoLiuqiu.entity.Member;
 import com.example.XiaoLiuqiu.repository.MemberDAO;
 import com.example.XiaoLiuqiu.service.ifs.MemberService;
+import com.example.XiaoLiuqiu.vo.MemberGetRes;
 import com.example.XiaoLiuqiu.vo.MemberLoginRes;
 
 
@@ -30,8 +32,12 @@ public class MemberServiceImpl implements MemberService {
 		if(op.isEmpty()) {
 			return new MemberLoginRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(),RtnCode.ACCOUNT_NOT_FOUND.getMessage());
 		}
+		Member member=op.get();
+		if(!encoder.matches(pwd, member.getPwd())) {
+			return new MemberLoginRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(),RtnCode.ACCOUNT_NOT_FOUND.getMessage());
+		}
 		
-		return null;
+		return new MemberLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
 	}
 
 	@Override
@@ -47,6 +53,25 @@ public class MemberServiceImpl implements MemberService {
 		memberDao.save(new Member(account,encoder.encode(pwd), memberName, memberPhone, memberEmail));
 		return new MemberLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
 	}
+
+	@Override
+	public MemberGetRes member(int memberId) {
+		if(memberId<=0) {
+			return new MemberGetRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage(),null);
+		}
+		List<Member> res=memberDao.findByMemberId(memberId);
+		return new MemberGetRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage(),res);
+	}
+
+//	@Override
+//	public MemberLoginRes upDate(int memberId, String pwd, String memberName, String memberPhone, String memberEmail) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
+	
+
+	
 
 	
 
