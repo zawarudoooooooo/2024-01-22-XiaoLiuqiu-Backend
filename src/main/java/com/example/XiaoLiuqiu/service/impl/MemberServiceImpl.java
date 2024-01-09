@@ -14,6 +14,7 @@ import com.example.XiaoLiuqiu.repository.MemberDAO;
 import com.example.XiaoLiuqiu.service.ifs.MemberService;
 import com.example.XiaoLiuqiu.vo.MemberGetRes;
 import com.example.XiaoLiuqiu.vo.MemberLoginRes;
+import com.example.XiaoLiuqiu.vo.MemberPwdReq;
 
 
 @Service
@@ -85,6 +86,34 @@ public class MemberServiceImpl implements MemberService {
 		memberDao.save(member);
 		return new MemberLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
 	}
+
+	@Override
+	public MemberLoginRes pwdUpDate(int memberId,String pwd,String newPwd,String confirmPwd) {
+		if(memberId<=0) {
+			return new MemberLoginRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage());
+		}
+		Optional<Member> op = memberDao.findById(memberId);
+		if(op.isEmpty()) {
+			return new MemberLoginRes(RtnCode.PWD_NOT_FOUMD.getCode(),RtnCode.PWD_NOT_FOUMD.getMessage());
+		}
+		Member member =op.get();
+		if(!encoder.matches(pwd, member.getPwd())) {
+			return new MemberLoginRes(RtnCode.PWD_ERROR.getCode(),RtnCode.PWD_ERROR.getMessage());
+		}
+		if(!newPwd.equals(confirmPwd)) {
+			return new MemberLoginRes(RtnCode.NEW_PWD_ERROR.getCode(),RtnCode.NEW_PWD_ERROR.getMessage());
+		}
+		if(!confirmPwd.equals(newPwd)) {
+			return new MemberLoginRes(RtnCode.NEW_PWD_ERROR.getCode(),RtnCode.NEW_PWD_ERROR.getMessage());
+		}
+		member.setPwd(encoder.encode(newPwd));
+		memberDao.save(member);
+		return new MemberLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
+	}
+
+	
+
+	
 
 	
 

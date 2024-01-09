@@ -15,6 +15,7 @@ import com.example.XiaoLiuqiu.service.ifs.MemberService;
 import com.example.XiaoLiuqiu.vo.MemberGetRes;
 import com.example.XiaoLiuqiu.vo.MemberLoginReq;
 import com.example.XiaoLiuqiu.vo.MemberLoginRes;
+import com.example.XiaoLiuqiu.vo.MemberPwdReq;
 import com.example.XiaoLiuqiu.vo.MemberSignUpReq;
 import com.example.XiaoLiuqiu.vo.MemberUpDateReq;
 
@@ -55,5 +56,10 @@ public class MemberServiceController {
 	@PostMapping(value="member/upDate")
 	public MemberLoginRes upDate(@RequestParam int memberId,@RequestBody MemberUpDateReq req) {
 		return memberService.upDate(memberId,req.getMemberName(),req.getMemberPhone(),req.getMemberEmail());
+	}
+	
+	@PostMapping(value="member/pwdUpDate")
+	public MemberLoginRes pwdUpDate(@RequestParam int memberId ,@RequestBody MemberPwdReq req) {
+		return memberService.pwdUpDate(memberId,req.getPwd(),req.getNewPwd(),req.getConfirmPwd());
 	}
 }
