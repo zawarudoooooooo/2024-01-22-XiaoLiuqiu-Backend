@@ -4,6 +4,7 @@ import com.example.XiaoLiuqiu.vo.RoomRes;
 
 public interface RoomService {
 	
-	public RoomRes roomInfo(String roomId, int roomTypeId, String roomIntroduce);
+	public RoomRes search(String roomId);
 
+	
 }

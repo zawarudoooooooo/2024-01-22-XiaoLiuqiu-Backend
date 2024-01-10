@@ -1,27 +1,28 @@
 package com.example.XiaoLiuqiu.vo;
 
-public class RoomRes {
+
+public class OrdersRes {
 	
-	private int rtnCode;
-	
+	private int code;
+
 	private String message;
 
-	public RoomRes() {
+	public OrdersRes() {
 		super();
 	}
 
-	public RoomRes(int rtnCode, String message) {
+	public OrdersRes(int code, String message) {
 		super();
-		this.rtnCode = rtnCode;
+		this.code = code;
 		this.message = message;
 	}
 
-	public int getRtnCode() {
-		return rtnCode;
+	public int getCode() {
+		return code;
 	}
 
-	public void setRtnCode(int rtnCode) {
-		this.rtnCode = rtnCode;
+	public void setCode(int code) {
+		this.code = code;
 	}
 
 	public String getMessage() {
@@ -31,5 +32,7 @@ public class RoomRes {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
+	
 
 }
