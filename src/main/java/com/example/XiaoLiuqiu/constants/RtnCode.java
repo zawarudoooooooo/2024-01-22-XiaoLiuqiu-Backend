@@ -6,7 +6,7 @@ public enum RtnCode {
 	PARAM_ERROR(400,"Param error"),//
 	ACCOUNT_EXISTED(400,"Account existed!!"),//
 	ACCOUNT_NOT_FOUND(404,"Account not found!!"),//
-	
+	CAR_EXISTED_ERROR(400,"CarId existed!!"),
 	;
 	
 	private int code;

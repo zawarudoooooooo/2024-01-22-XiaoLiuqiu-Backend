@@ -27,11 +27,23 @@ public class CarServiceImpl implements CarService {
 		if (carId!=""||carTypeId != 0||carIntroduce!="") {
 			res = carDAO.findByCarIdContainingAndCarTypeIdAndCarIntroduceContaining(carId, carTypeId, carIntroduce);
 		} else {
-			res = carDAO.findAll(carId, carTypeId, carIntroduce);
+			res = carDAO.findAll();
 		}
 		
 		return new CarSearchRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
 
+	}
+
+	@Override
+	public CarSearchRes create(String carId, int carTypeId, String carIntroduce) {
+		if(carId==""|| carTypeId == 0||carIntroduce=="") {
+			return new CarSearchRes(RtnCode.PARAM_ERROR.getCode(), RtnCode.PARAM_ERROR.getMessage());
+		}
+		if(carDAO.existsByCarId(carId)) {
+			return new CarSearchRes(RtnCode.CAR_EXISTED_ERROR.getCode(), RtnCode.CAR_EXISTED_ERROR.getMessage());
+		}
+		carDAO.save(new Car(carId,carTypeId,carIntroduce));
+		return new CarSearchRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
 	}
 
 }

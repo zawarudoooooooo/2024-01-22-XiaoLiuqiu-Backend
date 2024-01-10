@@ -19,4 +19,8 @@ public class CarServiceController {
 	public CarSearchRes search(@RequestBody CarSearchReq req) {
 		return carService.search(req.getCarId(), req.getCarTypeId(), req.getCarIntroduce());
 	}
+	@PostMapping(value="car/create")
+	public CarSearchRes create(@RequestBody CarSearchReq req) {
+		return carService.create(req.getCarId(), req.getCarTypeId(), req.getCarIntroduce());
+	}
 	}
