@@ -39,7 +39,8 @@ public class Orders {
 		super();
 	}
 
-	public Orders(int orderId, int memberId, String roomId, String orderItem, LocalDate startDate, LocalDate endDate) {
+	public Orders(int orderId, int memberId, Map<String, List<String>> roomId, Map<String, List<Integer>> orderItem,
+			LocalDate startDate, LocalDate endDate) {
 		super();
 		this.orderId = orderId;
 		this.memberId = memberId;
@@ -65,19 +66,19 @@ public class Orders {
 		this.memberId = memberId;
 	}
 
-	public String getRoomId() {
+	public Map<String, List<String>> getRoomId() {
 		return roomId;
 	}
 
-	public void setRoomId(String roomId) {
+	public void setRoomId(Map<String, List<String>> roomId) {
 		this.roomId = roomId;
 	}
 
-	public String getOrderItem() {
+	public Map<String, List<Integer>> getOrderItem() {
 		return orderItem;
 	}
 
-	public void setOrderItem(String orderItem) {
+	public void setOrderItem(Map<String, List<Integer>> orderItem) {
 		this.orderItem = orderItem;
 	}
 
@@ -96,6 +97,8 @@ public class Orders {
 	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
+
+	
 
 	
 
