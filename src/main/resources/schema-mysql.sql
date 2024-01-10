@@ -42,7 +42,7 @@ CREATE TABLE if  not exists `room_message_board` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
-CREATE TABLE if  not exists `order` (
+CREATE TABLE if  not exists `orders` (
   `order_id` int NOT NULL AUTO_INCREMENT,
   `member_id` int NOT NULL,
   `order_item` varchar(400) NOT NULL,

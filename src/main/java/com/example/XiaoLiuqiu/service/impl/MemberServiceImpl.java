@@ -14,7 +14,6 @@ import com.example.XiaoLiuqiu.repository.MemberDAO;
 import com.example.XiaoLiuqiu.service.ifs.MemberService;
 import com.example.XiaoLiuqiu.vo.MemberGetRes;
 import com.example.XiaoLiuqiu.vo.MemberLoginRes;
-import com.example.XiaoLiuqiu.vo.MemberPwdReq;
 
 
 @Service

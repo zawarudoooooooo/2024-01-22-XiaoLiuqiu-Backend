@@ -8,8 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "message_board")
-public class MessageBoard {
+@Table(name = "room_message_board")
+public class RoomMessageBoard {
 	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
@@ -19,18 +19,21 @@ public class MessageBoard {
 	@Column(name = "member_name")
 	private String memberName;
 	
-	@Column(name = "message_board_description")
-	private String messageBoardDescription;
+	@Column(name = "room_id")
+	private String roomId;
+	
+	@Column(name = "room_message_board_description")
+	private String roomMessageBoardDescription;
 
-	public MessageBoard() {
+	public RoomMessageBoard() {
 		super();
 	}
 
-	public MessageBoard(int messageBoardId, String memberName, String messageBoardDescription) {
+	public RoomMessageBoard(String memberName, String roomId, String roomMessageBoardDescription) {
 		super();
-		this.messageBoardId = messageBoardId;
 		this.memberName = memberName;
-		this.messageBoardDescription = messageBoardDescription;
+		this.roomId = roomId;
+		this.roomMessageBoardDescription = roomMessageBoardDescription;
 	}
 
 	public int getMessageBoardId() {
@@ -49,13 +52,23 @@ public class MessageBoard {
 		this.memberName = memberName;
 	}
 
-	public String getMessageBoardDescription() {
-		return messageBoardDescription;
+	public String getRoomId() {
+		return roomId;
 	}
 
-	public void setMessageBoardDescription(String messageBoardDescription) {
-		this.messageBoardDescription = messageBoardDescription;
+	public void setRoomId(String roomId) {
+		this.roomId = roomId;
 	}
+
+	public String getRoomMessageBoardDescription() {
+		return roomMessageBoardDescription;
+	}
+
+	public void setRoomMessageBoardDescription(String roomMessageBoardDescription) {
+		this.roomMessageBoardDescription = roomMessageBoardDescription;
+	}
+
+	
 	
 	
 

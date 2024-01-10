@@ -29,6 +29,12 @@ public class OrdersServiceImpl implements OrdersService{
 		return new OrdersGetRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage(), res);
 
 	}
+
+	@Override
+	public OrdersRes ordersCreate(int memberId, String roomId, String orderItem, LocalDate startDate,
+			LocalDate endDate) {
+		return null;
+	}
 	
 	
 

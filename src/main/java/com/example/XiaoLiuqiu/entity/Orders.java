@@ -1,6 +1,8 @@
 package com.example.XiaoLiuqiu.entity;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,10 +24,10 @@ public class Orders {
 	private int memberId;
 	
 	@Column(name = "room_id")
-	private String roomId;
+	private Map<String, List<String>> roomId;
 	
 	@Column(name = "order_item")
-	private String orderItem;
+	private Map<String, List<Integer>> orderItem;
 	
 	@Column(name = "start_date")
 	private LocalDate startDate;
