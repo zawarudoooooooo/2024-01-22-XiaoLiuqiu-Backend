@@ -12,6 +12,7 @@ import com.example.XiaoLiuqiu.entity.Car;
 
 @Repository
 public interface CarDAO extends JpaRepository<Car, String>{
+	public List<Car>findAll(String carId, int carTypeId, String carIntroduce);
 	public List<Car>findByCarIdContainingAndCarTypeIdAndCarIntroduceContaining(String carId, int carTypeId, String carIntroduce);
 	public List<Car>findByCarIdContainingAndCarIntroduceContaining(String carId,  String carIntroduce);
 }

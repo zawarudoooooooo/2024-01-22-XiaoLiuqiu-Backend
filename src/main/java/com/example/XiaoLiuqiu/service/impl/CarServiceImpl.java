@@ -24,11 +24,12 @@ public class CarServiceImpl implements CarService {
 		carTypeId = carTypeId == 0 ? 0 : carTypeId;
 		carIntroduce = !StringUtils.hasText(carIntroduce) ? "" : carIntroduce;
 		List<Car> res = new ArrayList<>();
-		if (carTypeId != 0) {
+		if (carId!=""||carTypeId != 0||carIntroduce!="") {
 			res = carDAO.findByCarIdContainingAndCarTypeIdAndCarIntroduceContaining(carId, carTypeId, carIntroduce);
 		} else {
-			res = carDAO.findByCarIdContainingAndCarIntroduceContaining(carId, carIntroduce);
+			res = carDAO.findAll(carId, carTypeId, carIntroduce);
 		}
+		
 		return new CarSearchRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
 
 	}
