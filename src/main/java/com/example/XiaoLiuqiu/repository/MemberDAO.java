@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.XiaoLiuqiu.entity.Member;
@@ -19,4 +21,7 @@ public interface MemberDAO extends JpaRepository<Member, Integer> {
 	public List<Member> findByMemberId(int memberId);
 	
 	public Optional<Member> findByPwd(String pwd);
+	
+	@Query(value="select * from member where account = :account", nativeQuery = true)
+	public List<Member> findByAcc(@Param("account")String account);
 }

@@ -55,12 +55,21 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberGetRes member(int memberId) {
-		if(memberId<=0) {
+	public MemberGetRes member(String account) {
+		
+		if(!StringUtils.hasText(account)) {
 			return new MemberGetRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage(),null);
 		}
-		List<Member> res=memberDao.findByMemberId(memberId);
+		List<Member> res=memberDao.findByAcc(account);
 		return new MemberGetRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage(),res);
+		
+//		if(memberId<=0) {
+//			return new MemberGetRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage(),null);
+//		}
+		
+//		List<Member> res=memberDao.findByMemberId(memberId);
+//		
+		
 	}
 
 	@Override
@@ -109,6 +118,21 @@ public class MemberServiceImpl implements MemberService {
 		memberDao.save(member);
 		return new MemberLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
 	}
+
+//	@Override
+//	public MemberGetRes member1(String account) {
+//		if(!StringUtils.hasText(account)) {
+//			return new MemberGetRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage(),null);
+//		}
+//		Optional<Member> op = memberDao.findByAccount(account);
+//		if(op.isEmpty()) {
+//			return new MemberGetRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(),RtnCode.ACCOUNT_NOT_FOUND.getMessage(),null);
+//		}
+//		Member member=op.get();
+//		List<Member> res=member.getAccount();
+//		return new MemberGetRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage(),res);
+//		return null;
+//	}
 
 	
 

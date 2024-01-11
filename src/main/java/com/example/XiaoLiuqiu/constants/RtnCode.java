@@ -10,6 +10,8 @@ public enum RtnCode {
 	PWD_NOT_FOUMD(400,"Pwd not foumd"),
 	PWD_ERROR(400,"Pwd error"),//
 	NEW_PWD_ERROR(400,"New pwd error"),//
+	DATE_FORMAT_ERROR(400,"Date format error"),//
+	ORDER_CREATE_ERROR(400,"Order create error")
 	;
 	
 	private int code;

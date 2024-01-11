@@ -1,8 +1,6 @@
 package com.example.XiaoLiuqiu.entity;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "room_order")
+@Table(name = "orders")
 public class Orders {
 	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,11 +21,13 @@ public class Orders {
 	@Column(name = "member_id")
 	private int memberId;
 	
-	@Column(name = "room_id")
-	private Map<String, List<String>> roomId;
+	 
+	 @Column(name = "room_id")
+	private String roomId;
 	
-	@Column(name = "order_item")
-	private Map<String, List<Integer>> orderItem;
+
+	 @Column(name = "order_item")
+	private String orderItem;
 	
 	@Column(name = "start_date")
 	private LocalDate startDate;
@@ -39,10 +39,8 @@ public class Orders {
 		super();
 	}
 
-	public Orders(int orderId, int memberId, Map<String, List<String>> roomId, Map<String, List<Integer>> orderItem,
-			LocalDate startDate, LocalDate endDate) {
+	public Orders(int memberId, String roomId, String orderItem, LocalDate startDate, LocalDate endDate) {
 		super();
-		this.orderId = orderId;
 		this.memberId = memberId;
 		this.roomId = roomId;
 		this.orderItem = orderItem;
@@ -66,19 +64,19 @@ public class Orders {
 		this.memberId = memberId;
 	}
 
-	public Map<String, List<String>> getRoomId() {
+	public String getRoomIdStr() {
 		return roomId;
 	}
 
-	public void setRoomId(Map<String, List<String>> roomId) {
+	public void setRoomIdStr(String roomId) {
 		this.roomId = roomId;
 	}
 
-	public Map<String, List<Integer>> getOrderItem() {
+	public String getOrderItemStr() {
 		return orderItem;
 	}
 
-	public void setOrderItem(Map<String, List<Integer>> orderItem) {
+	public void setOrderItemStr(String orderItem) {
 		this.orderItem = orderItem;
 	}
 
@@ -97,6 +95,11 @@ public class Orders {
 	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
+
+	
+
+	
+	
 
 	
 

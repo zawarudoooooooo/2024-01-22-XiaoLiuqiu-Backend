@@ -16,23 +16,19 @@ public class Extra {
 	@Column(name = "extra_id")
 	private int extraId;
 	
-	@Column(name = "room_id")
-	private String roomId;
-	
 	@Column(name = "extra_name")
 	private String extraName;
 	
 	@Column(name = "extra_price")
-	private String extraPrice;
+	private int extraPrice;
 
 	public Extra() {
 		super();
 	}
 
-	public Extra(int extraId, String roomId, String extraName, String extraPrice) {
+	public Extra(int extraId, String extraName, int extraPrice) {
 		super();
 		this.extraId = extraId;
-		this.roomId = roomId;
 		this.extraName = extraName;
 		this.extraPrice = extraPrice;
 	}
@@ -45,14 +41,6 @@ public class Extra {
 		this.extraId = extraId;
 	}
 
-	public String getRoomId() {
-		return roomId;
-	}
-
-	public void setRoomId(String roomId) {
-		this.roomId = roomId;
-	}
-
 	public String getExtraName() {
 		return extraName;
 	}
@@ -61,11 +49,11 @@ public class Extra {
 		this.extraName = extraName;
 	}
 
-	public String getExtraPrice() {
+	public int getExtraPrice() {
 		return extraPrice;
 	}
 
-	public void setExtraPrice(String extraPrice) {
+	public void setExtraPrice(int extraPrice) {
 		this.extraPrice = extraPrice;
 	}
 

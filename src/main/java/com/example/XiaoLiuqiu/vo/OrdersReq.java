@@ -1,16 +1,22 @@
 package com.example.XiaoLiuqiu.vo;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import com.example.XiaoLiuqiu.entity.Extra;
+import com.example.XiaoLiuqiu.entity.Room;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class OrdersReq {
 	
+	@JsonProperty(value = "member_id")
+	private int memberID;
+	
 	@JsonProperty(value = "room_id")
-	private String roomId;
+	private List<Room> roomId;
 	
 	@JsonProperty(value = "order_item")
-	private String orderItem;
+	private List<Extra> orderItem;
 	
 	@JsonProperty(value = "start_date")
 	private LocalDate startDate;
@@ -22,27 +28,36 @@ public class OrdersReq {
 		super();
 	}
 
-	public OrdersReq(String roomId, String orderItem, LocalDate startDate, LocalDate endDate) {
+	public OrdersReq(int memberID, List<Room> roomId, List<Extra> orderItem, LocalDate startDate, LocalDate endDate) {
 		super();
+		this.memberID = memberID;
 		this.roomId = roomId;
 		this.orderItem = orderItem;
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}
 
-	public String getRoomId() {
+	public int getMemberID() {
+		return memberID;
+	}
+
+	public void setMemberID(int memberID) {
+		this.memberID = memberID;
+	}
+
+	public List<Room> getRoomId() {
 		return roomId;
 	}
 
-	public void setRoomId(String roomId) {
+	public void setRoomId(List<Room> roomId) {
 		this.roomId = roomId;
 	}
 
-	public String getOrderItem() {
+	public List<Extra> getOrderItem() {
 		return orderItem;
 	}
 
-	public void setOrderItem(String orderItem) {
+	public void setOrderItem(List<Extra> orderItem) {
 		this.orderItem = orderItem;
 	}
 
@@ -61,6 +76,10 @@ public class OrdersReq {
 	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
+
+	
+
+	
 
 	
 	
