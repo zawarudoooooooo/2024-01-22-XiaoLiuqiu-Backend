@@ -20,13 +20,12 @@ public class Orders {
 	
 	@Column(name = "member_id")
 	private int memberId;
-	
+
 	 
 	 @Column(name = "room_id")
 	private String roomId;
 	
-
-	 @Column(name = "order_item")
+	@Column(name = "order_item")
 	private String orderItem;
 	
 	@Column(name = "start_date")
@@ -37,6 +36,7 @@ public class Orders {
 
 	public Orders() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public Orders(int memberId, String roomId, String orderItem, LocalDate startDate, LocalDate endDate) {
@@ -96,7 +96,6 @@ public class Orders {
 		this.endDate = endDate;
 	}
 
-	
 
 	
 	

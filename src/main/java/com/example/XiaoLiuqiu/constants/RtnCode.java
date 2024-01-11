@@ -8,10 +8,12 @@ public enum RtnCode {
 	ACCOUNT_NOT_FOUND(404,"Account not found!!"),//
 	MEMBER_NOT_FOUMD(400,"Member not foumd"),//
 	PWD_NOT_FOUMD(400,"Pwd not foumd"),
+	PWD_IS_EMPTY(400,"Pwd is empty"),
 	PWD_ERROR(400,"Pwd error"),//
 	NEW_PWD_ERROR(400,"New pwd error"),//
 	DATE_FORMAT_ERROR(400,"Date format error"),//
-	ORDER_CREATE_ERROR(400,"Order create error")
+	ORDER_CREATE_ERROR(400,"Order create error"),//
+	ACCESS_IS_NOT_ALLOWED(400, "Access is not allowed")
 	;
 	
 	private int code;
