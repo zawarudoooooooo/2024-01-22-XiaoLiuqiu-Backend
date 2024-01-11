@@ -24,10 +24,10 @@ public class Orders {
 	private int memberId;
 	
 	@Column(name = "room_id")
-	private Map<String, List<String>> roomId;
+	private String roomId;
 	
 	@Column(name = "order_item")
-	private Map<String, List<Integer>> orderItem;
+	private String orderItem;
 	
 	@Column(name = "start_date")
 	private LocalDate startDate;
