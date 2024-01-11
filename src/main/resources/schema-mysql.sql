@@ -15,13 +15,13 @@ CREATE TABLE if  not exists `car_type` (
   PRIMARY KEY (`car_type_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE  if  not exists `extra` (
+CREATE TABLE if  not exists `extra` (
   `extra_id` int NOT NULL AUTO_INCREMENT,
-  `room_id` varchar(20) NOT NULL,
   `extra_name` varchar(45) NOT NULL,
   `extra_price` varchar(45) NOT NULL,
   PRIMARY KEY (`extra_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 CREATE TABLE if  not exists `member` (
   `member_id` int NOT NULL AUTO_INCREMENT,
@@ -45,11 +45,13 @@ CREATE TABLE if  not exists `room_message_board` (
 CREATE TABLE if  not exists `orders` (
   `order_id` int NOT NULL AUTO_INCREMENT,
   `member_id` int NOT NULL,
+  `room_id` varchar(400) NOT NULL,
   `order_item` varchar(400) NOT NULL,
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 
 CREATE TABLE if  not exists `room` (

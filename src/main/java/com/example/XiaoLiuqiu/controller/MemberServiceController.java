@@ -25,10 +25,12 @@ public class MemberServiceController {
 
 	@Autowired
 	private MemberService memberService;
+
 	
 	@PostMapping(value="member/login")
 	public MemberLoginRes login(@RequestBody MemberLoginReq req,HttpSession session) {
 		String attr=(String) session.getAttribute("account");
+		
 		if(StringUtils.hasText(attr)&&attr.equals(req.getAccount())) {
 			return new MemberLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
 		}
@@ -38,8 +40,10 @@ public class MemberServiceController {
 			//預設有效時間為30秒 
 			//設定 session 有效時間, 單位:秒
 			session.setMaxInactiveInterval(600);
+			
 		}
 		
+		System.out.println(session.getId());
 		return res;
 	}
 	@PostMapping(value="member/signUp")
@@ -49,8 +53,8 @@ public class MemberServiceController {
 	}
 	
 	@PostMapping(value="member/member")
-	public MemberGetRes member(@RequestParam int memberId) {
-		return memberService.member(memberId);
+	public MemberGetRes member(@RequestParam String account) {
+		return memberService.member(account);
 	}
 	
 	@PostMapping(value="member/upDate")

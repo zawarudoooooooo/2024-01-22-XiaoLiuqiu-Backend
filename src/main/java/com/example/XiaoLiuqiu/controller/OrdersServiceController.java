@@ -18,9 +18,17 @@ public class OrdersServiceController {
 	@Autowired
 	private OrdersService ordersService;
 	
-	@PostMapping(value = "order/search")
-	public OrdersRes search(@RequestBody OrdersReq req) {
-		return ordersService.search(req.getRoomId(), req.getStartDate(), req.getEndDate());
+	@PostMapping(value = "order/ordersCreate")
+	public OrdersRes ordersCreate(@RequestBody OrdersReq req) {
+		return ordersService.ordersCreate(req.getMemberID(), req.getRoomId(), req.getOrderItem(), req.getStartDate(), req.getEndDate());
+		
 	}
+	
+	
+	
+//	@PostMapping(value = "order/search")
+//	public OrdersRes search(@RequestBody OrdersReq req) {
+//		return ordersService.search(req.getRoomId(), req.getStartDate(), req.getEndDate());
+//	}
 
 }

@@ -23,4 +23,9 @@ class MemberServiceTest {
 		MemberLoginRes res=memberService.login("aa123", "b55688");
 		System.out.println(res.getCode()+res.getMessage());
 	}
+	
+	@Test
+	public void coookie() {
+		
+	}
 }

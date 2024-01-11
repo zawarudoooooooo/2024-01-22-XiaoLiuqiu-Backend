@@ -11,6 +11,8 @@ public enum RtnCode {
 	PWD_IS_EMPTY(400,"Pwd is empty"),
 	PWD_ERROR(400,"Pwd error"),//
 	NEW_PWD_ERROR(400,"New pwd error"),//
+	DATE_FORMAT_ERROR(400,"Date format error"),//
+	ORDER_CREATE_ERROR(400,"Order create error"),//
 	ACCESS_IS_NOT_ALLOWED(400, "Access is not allowed")
 	;
 	

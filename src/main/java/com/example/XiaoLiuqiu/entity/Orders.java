@@ -1,8 +1,6 @@
 package com.example.XiaoLiuqiu.entity;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "room_order")
+@Table(name = "orders")
 public class Orders {
 	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,8 +20,9 @@ public class Orders {
 	
 	@Column(name = "member_id")
 	private int memberId;
-	
-	@Column(name = "room_id")
+
+	 
+	 @Column(name = "room_id")
 	private String roomId;
 	
 	@Column(name = "order_item")
@@ -40,9 +39,8 @@ public class Orders {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Orders(int orderId, int memberId, String roomId, String orderItem, LocalDate startDate, LocalDate endDate) {
+	public Orders(int memberId, String roomId, String orderItem, LocalDate startDate, LocalDate endDate) {
 		super();
-		this.orderId = orderId;
 		this.memberId = memberId;
 		this.roomId = roomId;
 		this.orderItem = orderItem;
@@ -66,19 +64,19 @@ public class Orders {
 		this.memberId = memberId;
 	}
 
-	public String getRoomId() {
+	public String getRoomIdStr() {
 		return roomId;
 	}
 
-	public void setRoomId(String roomId) {
+	public void setRoomIdStr(String roomId) {
 		this.roomId = roomId;
 	}
 
-	public String getOrderItem() {
+	public String getOrderItemStr() {
 		return orderItem;
 	}
 
-	public void setOrderItem(String orderItem) {
+	public void setOrderItemStr(String orderItem) {
 		this.orderItem = orderItem;
 	}
 
@@ -98,5 +96,12 @@ public class Orders {
 		this.endDate = endDate;
 	}
 
+
+	
+	
+
+	
+
+	
 
 }

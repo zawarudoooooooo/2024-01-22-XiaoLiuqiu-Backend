@@ -8,9 +8,9 @@ import com.example.XiaoLiuqiu.entity.RoomMessageBoard;
 
 public interface RoomMessageBoardDAO extends JpaRepository<RoomMessageBoard, Integer>{
 	
-	
-//								  findByRoomIdContainingAndStartDateGreaterThanEqualAndEndDateLessThanEqual
-//								  
-	
-//	public List<RoomMessageBoard> findByMemberNameContainingIgnoreCaseAndRoomIdAndRoomMessageBoardDescriptionContainingIgnoreCase(String memberName, String roomId, String roomMessageBoardDescription);
+//	public List<RoomMessageBoard> findByMemberNameContainingAndRoomIdContainingAndRoomMessageBoardDescriptionContaining(String memberName, String roomId, String roomMessageBoardDescription);
+
+//	List<RoomMessageBoard> findByMemberNameContainingAndRoomIdContainingAndRoomMessageBoardDescriptionContaining(
+//		    String memberName, String roomId, String roomMessageBoardDescription);
+
 }

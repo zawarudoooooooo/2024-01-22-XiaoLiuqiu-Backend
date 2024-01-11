@@ -33,7 +33,7 @@ public class RoomMessageBoardServiceImpl implements RoomMessageBoardService{
 //		memberName=!StringUtils.hasText(memberName)?"":memberName;
 //		roomId=!StringUtils.hasText(roomId)?"":roomId;
 //		roomMessageBoardDescription=!StringUtils.hasText(roomMessageBoardDescription)?"":roomMessageBoardDescription;
-//		List<RoomMessageBoard> res=roomMessageBoardDao.findByMemberNameContainingIgnoreCaseAndRoomIdAndRoomMessageBoardDescriptionContainingIgnoreCase(memberName, roomId, roomMessageBoardDescription);
+//		List<RoomMessageBoard> res=roomMessageBoardDao.findByMemberNameContainingAndRoomIdContainingAndRoomMessageBoardDescriptionContaining(memberName, roomId, roomMessageBoardDescription);
 //		return new RoomMessageBoardGetRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage(),res);
 //	}
 
