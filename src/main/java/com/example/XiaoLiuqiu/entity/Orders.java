@@ -24,10 +24,10 @@ public class Orders {
 	private int memberId;
 	
 	@Column(name = "room_id")
-	private Map<String, List<String>> roomId;
+	private String roomId;
 	
 	@Column(name = "order_item")
-	private Map<String, List<Integer>> orderItem;
+	private String orderItem;
 	
 	@Column(name = "start_date")
 	private LocalDate startDate;
@@ -37,6 +37,7 @@ public class Orders {
 
 	public Orders() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public Orders(int orderId, int memberId, String roomId, String orderItem, LocalDate startDate, LocalDate endDate) {
@@ -97,6 +98,5 @@ public class Orders {
 		this.endDate = endDate;
 	}
 
-	
 
 }

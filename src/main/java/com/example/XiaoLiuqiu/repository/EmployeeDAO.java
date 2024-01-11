@@ -12,6 +12,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.XiaoLiuqiu.entity.Employee;
+import com.example.XiaoLiuqiu.vo.EmployeeLoginRes;
 
 @Repository
 public interface EmployeeDAO extends JpaRepository<Employee, Integer>{
@@ -26,6 +27,17 @@ public interface EmployeeDAO extends JpaRepository<Employee, Integer>{
 			@Param("account")String account,//
 			@Param("password")String pwd);
 	
+	@Transactional(rollbackOn = Exception.class)
+	@Modifying
+	@Query(value = "insert into employee(account, password, access)"
+			+ "select :account, :password, :access "
+			+ "where not exists (select 1 from employee where account = :account)",		
+	nativeQuery = true)
+	public int insertMaster(//
+			@Param("account")String account,//
+			@Param("password")String pwd,
+			@Param("access")boolean access);
+	
 	public Optional<Employee>  findByAccount(String account);
 	
 	public List<Employee> findByAccountContaining(String account);
@@ -38,5 +50,6 @@ public interface EmployeeDAO extends JpaRepository<Employee, Integer>{
 	public int updatePassword(//
 			@Param("account")String account,//
 			@Param("password")String pwd);
+	
 
 }

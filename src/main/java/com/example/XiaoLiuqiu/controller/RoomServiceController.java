@@ -22,5 +22,15 @@ public class RoomServiceController {
 		return roomService.search(req.getRoomId());
 		
 	}
+	
+	@PostMapping(value = "room/create")
+	public RoomRes createRoom(@RequestBody RoomReq req) {
+		return roomService.createRoom(req.getRoomId(), req.getRoomTypeId(), req.getRoomIntroduce());
+	}
+	
+	@PostMapping(value = "room/update")
+	public RoomRes updateRoom(@RequestBody RoomReq req) {
+		return roomService.updateRoom(req.getRoomId(), req.getRoomTypeId(), req.getRoomIntroduce());
+	}
 
 }

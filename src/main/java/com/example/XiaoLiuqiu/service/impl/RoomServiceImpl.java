@@ -27,6 +27,18 @@ public class RoomServiceImpl implements RoomService{
 		return new RoomGetRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage(), res);
 	}
 
+	@Override
+	public RoomRes createRoom(String roomId, int roomTypeId, String roomIntroduce) {
+		roomDao.insertRoom(roomId, roomTypeId, roomIntroduce);
+		return new RoomRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
+	}
+
+	@Override
+	public RoomRes updateRoom(String roomId, int roomTypeId, String roomIntroduce) {
+		roomDao.updateRoom(roomId, roomTypeId, roomIntroduce);
+		return new RoomRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
+	}
+
 
 
 
