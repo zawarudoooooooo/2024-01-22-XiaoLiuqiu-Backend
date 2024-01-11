@@ -19,7 +19,7 @@ public class RoomServiceController {
 	
 	@PostMapping(value = "room/search")
 	public RoomRes search(@RequestBody RoomReq req) {
-		return roomService.search(req.getRoomId());
+		return roomService.search(req.getRoomId(), req.getRoomTypeId(), req.getRoomIntroduce());
 		
 	}
 	

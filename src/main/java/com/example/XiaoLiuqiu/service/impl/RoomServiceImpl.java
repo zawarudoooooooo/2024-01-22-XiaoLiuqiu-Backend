@@ -20,7 +20,7 @@ public class RoomServiceImpl implements RoomService{
 	private RoomDAO roomDao;
 
 	@Override
-	public RoomRes search(String roomId) {
+	public RoomRes search(String roomId, int roomTypeId, String roomIntroduce) {
 		roomId = !StringUtils.hasText(roomId) ? "" : roomId;
 //		roomTypeId = roomTypeId <= 10 ? 0 : roomTypeId;
 		List<Room> res = roomDao.findByRoomIdContaining(roomId);
