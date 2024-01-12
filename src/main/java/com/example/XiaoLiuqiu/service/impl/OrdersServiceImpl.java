@@ -1,6 +1,7 @@
 package com.example.XiaoLiuqiu.service.impl;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,7 @@ public class OrdersServiceImpl implements OrdersService{
 		}try {
 			String roomId=mapper.writeValueAsString(roomIdStr);
 			String orderItem=mapper.writeValueAsString(orderItemStr);
-			orderDao.save(new Orders(memberId,roomId,orderItem,startDate,endDate));
+			orderDao.save(new Orders(memberId,roomId,orderItem,startDate,endDate,LocalDateTime.now()));
 			return new OrdersRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
 		} catch (JsonProcessingException e) {
 			return new OrdersRes(RtnCode.ORDER_CREATE_ERROR.getCode(), RtnCode.ORDER_CREATE_ERROR.getMessage());
