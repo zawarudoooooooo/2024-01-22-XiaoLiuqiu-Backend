@@ -34,8 +34,8 @@ public class RoomServiceImpl implements RoomService{
 	}
 
 	@Override
-	public RoomRes updateRoom(String roomId, int roomTypeId, String roomIntroduce) {
-		roomDao.updateRoom(roomId, roomTypeId, roomIntroduce);
+	public RoomRes updateRoom(String roomId ,int roomTypeId, String roomIntroduce ) {
+		roomDao.updateRoom(roomId ,roomTypeId, roomIntroduce );
 		return new RoomRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
 	}
 

@@ -30,14 +30,13 @@ public interface RoomDAO extends JpaRepository<Room, String>{
 			@Param("room_type_id")int roomTypeId,
 			@Param("room_introduce")String roomIntroduce);
 	
+	//還是可以用，但是一般不建議讓PK可設定
+	//判斷數值、布林值用 CASE WHEN
+	//COALESCE()若都是NULL回傳NULL，int boolean若使用會與期望成果相悖，抑或是寫成大寫Integer、Boolean便可使用
 	@Transactional(rollbackOn = Exception.class)
 	@Modifying(clearAutomatically = true)
-	@Query(value = "update room set "
-			+ " room_id = :room_id, room_type_id = :room_type_id, room_introduce = :room_introduce "
-			+ " where room_id = :room_id", nativeQuery = true)
-	public int updateRoom(//
-			@Param("room_id")String roomId,//
-			@Param("room_type_id")int roomTypeId,
-			@Param("room_introduce")String roomIntroduce);
+	@Query(value = "update room set room_type_id = ?2, room_introduce = ?3"
+			+ " where room_id = ?1", nativeQuery = true)
+	public int updateRoom(String roomId, int roomTypeId, String roomIntroduce);
 	
 }

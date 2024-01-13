@@ -30,7 +30,7 @@ public class RoomServiceController {
 	
 	@PostMapping(value = "room/update")
 	public RoomRes updateRoom(@RequestBody RoomReq req) {
-		return roomService.updateRoom(req.getRoomId(), req.getRoomTypeId(), req.getRoomIntroduce());
+		return roomService.updateRoom(req.getRoomId() ,req.getRoomTypeId(), req.getRoomIntroduce());
 	}
 
 }
