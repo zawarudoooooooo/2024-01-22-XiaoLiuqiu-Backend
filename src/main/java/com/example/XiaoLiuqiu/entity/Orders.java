@@ -1,6 +1,7 @@
 package com.example.XiaoLiuqiu.entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,19 +34,24 @@ public class Orders {
 	
 	@Column(name = "end_date")
 	private LocalDate endDate;
+	
+	@Column(name = "order_date_time")
+	private LocalDateTime orderDateTime;
 
 	public Orders() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Orders(int memberId, String roomId, String orderItem, LocalDate startDate, LocalDate endDate) {
+	public Orders(int memberId, String roomId, String orderItem, LocalDate startDate, LocalDate endDate,
+			LocalDateTime orderDateTime) {
 		super();
 		this.memberId = memberId;
 		this.roomId = roomId;
 		this.orderItem = orderItem;
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.orderDateTime = orderDateTime;
 	}
 
 	public int getOrderId() {
@@ -64,19 +70,19 @@ public class Orders {
 		this.memberId = memberId;
 	}
 
-	public String getRoomIdStr() {
+	public String getRoomId() {
 		return roomId;
 	}
 
-	public void setRoomIdStr(String roomId) {
+	public void setRoomId(String roomId) {
 		this.roomId = roomId;
 	}
 
-	public String getOrderItemStr() {
+	public String getOrderItem() {
 		return orderItem;
 	}
 
-	public void setOrderItemStr(String orderItem) {
+	public void setOrderItem(String orderItem) {
 		this.orderItem = orderItem;
 	}
 
@@ -95,6 +101,16 @@ public class Orders {
 	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
+
+	public LocalDateTime getOrderDateTime() {
+		return orderDateTime;
+	}
+
+	public void setOrderDateTime(LocalDateTime orderDateTime) {
+		this.orderDateTime = orderDateTime;
+	}
+
+	
 
 
 	

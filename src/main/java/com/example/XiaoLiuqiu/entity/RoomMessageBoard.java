@@ -13,7 +13,7 @@ public class RoomMessageBoard {
 	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
-	@Column(name = "message_board_id")
+	@Column(name = "room_message_board_id")
 	private int messageBoardId;
 	
 	@Column(name = "member_name")

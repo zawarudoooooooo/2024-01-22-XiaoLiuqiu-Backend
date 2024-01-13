@@ -28,13 +28,13 @@ public class RoomMessageBoardServiceImpl implements RoomMessageBoardService{
 		return new RoomMessageBoardRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
 	}
 
-//	@Override
-//	public RoomMessageBoardGetRes search(String memberName, String roomId, String roomMessageBoardDescription) {
-//		memberName=!StringUtils.hasText(memberName)?"":memberName;
-//		roomId=!StringUtils.hasText(roomId)?"":roomId;
-//		roomMessageBoardDescription=!StringUtils.hasText(roomMessageBoardDescription)?"":roomMessageBoardDescription;
-//		List<RoomMessageBoard> res=roomMessageBoardDao.findByMemberNameContainingAndRoomIdContainingAndRoomMessageBoardDescriptionContaining(memberName, roomId, roomMessageBoardDescription);
-//		return new RoomMessageBoardGetRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage(),res);
-//	}
+	@Override
+	public RoomMessageBoardGetRes search(String memberName, String roomId, String roomMessageBoardDescription) {
+		memberName=!StringUtils.hasText(memberName)?"":memberName;
+		roomId=!StringUtils.hasText(roomId)?"":roomId;
+		roomMessageBoardDescription=!StringUtils.hasText(roomMessageBoardDescription)?"":roomMessageBoardDescription;
+		List<RoomMessageBoard> res=roomMessageBoardDao.findByLike(memberName, roomId, roomMessageBoardDescription);
+		return new RoomMessageBoardGetRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage(),res);
+	}
 
 }
