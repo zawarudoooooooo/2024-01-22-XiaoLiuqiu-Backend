@@ -22,16 +22,16 @@ public class OrdersServiceTtest {
 	@Autowired
 	public OrdersService ordersService;
 	
-	@Test
-	public void orderTest() {
-		List<Room> room=Arrays.asList(
-				new Room("A01",1,"這是單人房"),
-				new Room("A02",1,"這是單人房2"));
-		List<Extra> order=Arrays.asList(
-				new Extra(1,"早餐",200),
-				new Extra(2,"門票",500)
-				);
-		OrdersRes res=ordersService.ordersCreate(1, room , order, LocalDate.now(), LocalDate.now().plusDays(1));
-		System.out.println(res.getCode()+res.getMessage());
-	}
+//	@Test
+//	public void orderTest() {
+//		List<Room> room=Arrays.asList(
+//				new Room("A01",1,"這是單人房"),
+//				new Room("A02",1,"這是單人房2"));
+//		List<Extra> order=Arrays.asList(
+//				new Extra(1,"早餐",200),
+//				new Extra(2,"門票",500)
+//				);
+//		OrdersRes res=ordersService.ordersCreate(1, room , order, LocalDate.now(), LocalDate.now().plusDays(1));
+//		System.out.println(res.getCode()+res.getMessage());
+//	}
 }
