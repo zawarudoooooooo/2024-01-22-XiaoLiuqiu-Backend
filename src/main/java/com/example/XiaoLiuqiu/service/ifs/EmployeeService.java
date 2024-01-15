@@ -11,7 +11,7 @@ public interface EmployeeService {
 
 	public EmployeeLoginRes create(String account, String pwd);
 	
-	public EmployeeLoginRes create(String account, String pwd, boolean access);
+	public EmployeeLoginRes createMaster(String account, String pwd, boolean access);
 	
 	public EmployeeLoginRes update(int employeeId,String pwd, String newPwd, String confirmPwd);
 

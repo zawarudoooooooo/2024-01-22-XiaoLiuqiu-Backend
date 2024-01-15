@@ -45,7 +45,7 @@ public class EmployeeServiceController {
 	
 	@PostMapping(value = "employee/createMaster")
 	public EmployeeLoginRes createMaster(@RequestBody EmployeeReq req) {
-		return employeeService.create(req.getAccount(), req.getPwd(), req.isAccess());
+		return employeeService.createMaster(req.getAccount(), req.getPwd(), req.isAccess());
 	}
 	
 	@PostMapping(value = "employee/create")

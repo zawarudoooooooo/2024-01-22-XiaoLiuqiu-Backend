@@ -54,19 +54,15 @@ CREATE TABLE if  not exists `orders` (
 
 
 
-CREATE TABLE if  not exists `room` (
+CREATE TABLE if not exists `room` (
   `room_id` varchar(20) NOT NULL,
   `room_type_id` int NOT NULL,
   `room_introduce` varchar(200) DEFAULT NULL,
+  `room_name` varchar(45) DEFAULT NULL,
+  `room_price` int DEFAULT NULL,
   PRIMARY KEY (`room_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE if  not exists `room_type` (
-  `room_type_id` int NOT NULL AUTO_INCREMENT,
-  `room_type_name` varchar(45) NOT NULL,
-  `room_type_price` varchar(45) NOT NULL,
-  PRIMARY KEY (`room_type_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE if  not exists `attractions_message_board` (
   `attractions_message_board_id` int NOT NULL AUTO_INCREMENT,
@@ -78,7 +74,7 @@ CREATE TABLE if  not exists `attractions_message_board` (
 CREATE TABLE if  not exists `employee` (
   `employee_id` int NOT NULL AUTO_INCREMENT,
   `account` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `access` tinyint NOT NULL DEFAULT '0',
   PRIMARY KEY (`employee_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
