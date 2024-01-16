@@ -14,7 +14,8 @@ public enum RtnCode {
 	DATE_FORMAT_ERROR(400,"Date format error"),//
 	ORDER_CREATE_ERROR(400,"Order create error"),//
 	ACCESS_IS_NOT_ALLOWED(400, "Access is not allowed"),//
-	PLEASE_LOGIN_FIRST(400,"Please logon first")
+	PLEASE_LOGIN_FIRST(400,"Please logon first"),//
+	Room_ID_IS_EXISTED(400,"RoomId is existed!!"),
 	;
 	
 	private int code;

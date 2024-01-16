@@ -59,7 +59,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 	
 	@Override
-	public EmployeeLoginRes create(String account, String pwd, boolean access) {
+	public EmployeeLoginRes createMaster(String account, String pwd, boolean access) {
 		if (!StringUtils.hasText(account) || !StringUtils.hasText(pwd)) {
 			return new EmployeeLoginRes(RtnCode.PARAM_ERROR);
 		}

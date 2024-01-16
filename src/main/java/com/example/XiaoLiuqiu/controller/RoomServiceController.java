@@ -19,18 +19,18 @@ public class RoomServiceController {
 	
 	@PostMapping(value = "room/search")
 	public RoomRes search(@RequestBody RoomReq req) {
-		return roomService.search(req.getRoomId(), req.getRoomTypeId(), req.getRoomIntroduce());
+		return roomService.search(req.getRoomId(), req.getRoomTypeId(), req.getRoomIntroduce(), req.getRoomName(), req.getRoomPrice());
 		
 	}
 	
 	@PostMapping(value = "room/create")
 	public RoomRes createRoom(@RequestBody RoomReq req) {
-		return roomService.createRoom(req.getRoomId(), req.getRoomTypeId(), req.getRoomIntroduce());
+		return roomService.createRoom(req.getRoomId(), req.getRoomTypeId(), req.getRoomIntroduce(), req.getRoomName(), req.getRoomPrice());
 	}
 	
 	@PostMapping(value = "room/update")
 	public RoomRes updateRoom(@RequestBody RoomReq req) {
-		return roomService.updateRoom(req.getRoomId() ,req.getRoomTypeId(), req.getRoomIntroduce());
+		return roomService.updateRoom(req.getRoomId() ,req.getRoomTypeId(), req.getRoomIntroduce(), req.getRoomName(), req.getRoomPrice());
 	}
 
 }
