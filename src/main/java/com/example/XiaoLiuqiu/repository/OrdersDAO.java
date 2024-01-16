@@ -15,8 +15,8 @@ import com.example.XiaoLiuqiu.entity.RoomMessageBoard;
 @Repository
 public interface OrdersDAO extends JpaRepository<Orders, Integer>{
 	
-	public List<Orders> findByStartDateGreaterThanEqualAndEndDateLessThanEqual
-	(LocalDate startDate, LocalDate endDate);
+	public List<Orders> findByMemberNameContainingAndStartDateGreaterThanEqualAndEndDateLessThanEqual
+	(String memberName ,LocalDate startDate, LocalDate endDate);
 	
 	
 	@Query(value="select * from orders where room_id like ?1"

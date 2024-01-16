@@ -19,10 +19,9 @@ public class Orders {
 	@Column(name = "order_id")
 	private int orderId;
 	
-	@Column(name = "member_id")
-	private int memberId;
+	@Column(name = "member_name")
+	private String memberName;
 
-	 
 	 @Column(name = "room_id")
 	private String roomId;
 	
@@ -43,10 +42,10 @@ public class Orders {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Orders(int memberId, String roomId, String orderItem, LocalDate startDate, LocalDate endDate,
+	public Orders(String memberName, String roomId, String orderItem, LocalDate startDate, LocalDate endDate,
 			LocalDateTime orderDateTime) {
 		super();
-		this.memberId = memberId;
+		this.memberName = memberName;
 		this.roomId = roomId;
 		this.orderItem = orderItem;
 		this.startDate = startDate;
@@ -62,12 +61,12 @@ public class Orders {
 		this.orderId = orderId;
 	}
 
-	public int getMemberId() {
-		return memberId;
+	public String getMemberName() {
+		return memberName;
 	}
 
-	public void setMemberId(int memberId) {
-		this.memberId = memberId;
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 
 	public String getRoomId() {
@@ -109,6 +108,8 @@ public class Orders {
 	public void setOrderDateTime(LocalDateTime orderDateTime) {
 		this.orderDateTime = orderDateTime;
 	}
+
+	
 
 	
 

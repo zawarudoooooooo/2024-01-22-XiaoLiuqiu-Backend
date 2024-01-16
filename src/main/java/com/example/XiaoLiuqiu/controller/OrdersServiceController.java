@@ -21,7 +21,7 @@ public class OrdersServiceController {
 	
 	@PostMapping(value = "order/ordersCreate")
 	public OrdersRes ordersCreate(@RequestBody OrdersReq req) {
-		return ordersService.ordersCreate(req.getMemberID(), req.getRoomId(), req.getOrderItem(), req.getStartDate(), req.getEndDate());
+		return ordersService.ordersCreate(req.getMemberName(), req.getRoomId(), req.getOrderItem(), req.getStartDate(), req.getEndDate());
 		
 	}
 	
@@ -29,7 +29,7 @@ public class OrdersServiceController {
 	
 	@PostMapping(value = "order/search")
 	public OrdersRes search(@RequestBody OrdersSearchReq req) {
-		return ordersService.search(req.getStartDate(), req.getEndDate());
+		return ordersService.search(req.getMemberName(),req.getStartDate(), req.getEndDate());
 	}
 
 }

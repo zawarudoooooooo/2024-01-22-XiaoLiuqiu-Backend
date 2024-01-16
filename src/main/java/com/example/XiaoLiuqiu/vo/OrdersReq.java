@@ -3,14 +3,15 @@ package com.example.XiaoLiuqiu.vo;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.Column;
+
 import com.example.XiaoLiuqiu.entity.Extra;
 import com.example.XiaoLiuqiu.entity.Room;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class OrdersReq {
 	
-	@JsonProperty(value = "member_id")
-	private int memberID;
+	private String memberName;
 	
 	@JsonProperty(value = "room_id")
 	private List<Room> roomId;
@@ -28,21 +29,22 @@ public class OrdersReq {
 		super();
 	}
 
-	public OrdersReq(int memberID, List<Room> roomId, List<Extra> orderItem, LocalDate startDate, LocalDate endDate) {
+	public OrdersReq(String memberName, List<Room> roomId, List<Extra> orderItem, LocalDate startDate,
+			LocalDate endDate) {
 		super();
-		this.memberID = memberID;
+		this.memberName = memberName;
 		this.roomId = roomId;
 		this.orderItem = orderItem;
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}
 
-	public int getMemberID() {
-		return memberID;
+	public String getMemberName() {
+		return memberName;
 	}
 
-	public void setMemberID(int memberID) {
-		this.memberID = memberID;
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 
 	public List<Room> getRoomId() {
@@ -76,6 +78,8 @@ public class OrdersReq {
 	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
+
+	
 
 	
 

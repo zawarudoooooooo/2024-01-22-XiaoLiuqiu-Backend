@@ -29,27 +29,19 @@ public class OrdersServiceImpl implements OrdersService{
 	private OrdersDAO orderDao;
 	
 	@Override
-	public OrdersRes search( LocalDate startDate, LocalDate endDate) {
-			startDate = startDate == null ? startDate = LocalDate.of(1970, 01, 01) : startDate;
-			endDate = endDate == null ? endDate = LocalDate.of(2099, 12, 31) : endDate;
-			List<Orders> res = orderDao.findByStartDateGreaterThanEqualAndEndDateLessThanEqual(startDate, endDate);
-			return new OrdersGetRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage(), res);
+	public OrdersRes search(String memberName, LocalDate startDate, LocalDate endDate) {
+		memberName=!StringUtils.hasText(memberName)?"":memberName;
+		startDate = startDate == null ? startDate = LocalDate.of(1970, 01, 01) : startDate;
+		endDate = endDate == null ? endDate = LocalDate.of(2099, 12, 31) : endDate;
+		List<Orders> res = orderDao.findByMemberNameContainingAndStartDateGreaterThanEqualAndEndDateLessThanEqual(memberName,startDate, endDate);
+		return new OrdersGetRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage(), res);
 	}
 	
-//	@Override
-//	public OrdersRes search(List<Room> roomId, LocalDate startDate, LocalDate endDate) {
-//		roomId = roomId==null ? Collections.emptyList()  :roomId;
-//		startDate = startDate == null ? startDate = LocalDate.of(1970, 01, 01) : startDate;
-//		endDate = endDate == null ? endDate = LocalDate.of(2099, 12, 31) : endDate;
-//		List<Orders> res = orderDao.findByLike(roomId, startDate, endDate);
-//		return new OrdersGetRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage(), res);
-//
-//	}
 
 	@Override
-	public OrdersRes ordersCreate(int memberId, List<Room> roomIdStr, List<Extra> orderItemStr, LocalDate startDate,
+	public OrdersRes ordersCreate(String memberName, List<Room> roomIdStr, List<Extra> orderItemStr, LocalDate startDate,
 			LocalDate endDate) {
-		if (memberId == 0|| startDate == null || endDate == null) {
+		if (!StringUtils.hasText(memberName)|| startDate == null || endDate == null) {
 			return new OrdersRes(RtnCode.PARAM_ERROR.getCode(), RtnCode.PARAM_ERROR.getMessage());
 		}
 		if (startDate.isAfter(endDate)) {
@@ -57,12 +49,14 @@ public class OrdersServiceImpl implements OrdersService{
 		}try {
 			String roomId=mapper.writeValueAsString(roomIdStr);
 			String orderItem=mapper.writeValueAsString(orderItemStr);
-			orderDao.save(new Orders(memberId,roomId,orderItem,startDate,endDate,LocalDateTime.now()));
+			orderDao.save(new Orders(memberName,roomId,orderItem,startDate,endDate,LocalDateTime.now()));
 			return new OrdersRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
 		} catch (JsonProcessingException e) {
 			return new OrdersRes(RtnCode.ORDER_CREATE_ERROR.getCode(), RtnCode.ORDER_CREATE_ERROR.getMessage());
 		}
 	}
+
+	
 
 
 	
