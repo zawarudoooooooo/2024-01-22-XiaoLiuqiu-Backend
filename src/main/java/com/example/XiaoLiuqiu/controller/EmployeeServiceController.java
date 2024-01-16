@@ -33,6 +33,11 @@ public class EmployeeServiceController {
 		return employeeService.search(req.getAccount());
 	}
 	
+	@PostMapping(value = "employee/employeeSearch")
+	public EmployeeGetRes employeeSearch(@RequestParam String account) {
+		return employeeService.search(account);
+	}
+	
 	@PostMapping(value = "employee/login")
 	public EmployeeLoginRes login(@RequestBody EmployeeLoginReq req, HttpSession session ,HttpServletResponse response) {
 //		System.out.println(session.getId());

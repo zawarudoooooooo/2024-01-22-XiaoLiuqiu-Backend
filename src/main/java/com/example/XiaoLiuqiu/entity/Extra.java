@@ -26,12 +26,15 @@ public class Extra {
 		super();
 	}
 
-	public Extra(int extraId, String extraName, int extraPrice) {
+	
+
+	public Extra(String extraName, int extraPrice) {
 		super();
-		this.extraId = extraId;
 		this.extraName = extraName;
 		this.extraPrice = extraPrice;
 	}
+
+
 
 	public int getExtraId() {
 		return extraId;

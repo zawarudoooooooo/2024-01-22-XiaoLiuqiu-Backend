@@ -7,9 +7,6 @@ public class RoomReq {
 	@JsonProperty(value = "room_id")
 	private String roomId;
 
-	@JsonProperty(value = "room_type_id")
-	private int roomTypeId;
-
 	@JsonProperty(value = "room_introduce")
 	private String roomIntroduce;
 
@@ -23,14 +20,17 @@ public class RoomReq {
 		super();
 	}
 
-	public RoomReq(String roomId, int roomTypeId, String roomIntroduce, String roomName, int roomPrice) {
+	
+
+	public RoomReq(String roomId, String roomIntroduce, String roomName, int roomPrice) {
 		super();
 		this.roomId = roomId;
-		this.roomTypeId = roomTypeId;
 		this.roomIntroduce = roomIntroduce;
 		this.roomName = roomName;
 		this.roomPrice = roomPrice;
 	}
+
+
 
 	public String getRoomId() {
 		return roomId;
@@ -38,14 +38,6 @@ public class RoomReq {
 
 	public void setRoomId(String roomId) {
 		this.roomId = roomId;
-	}
-
-	public int getRoomTypeId() {
-		return roomTypeId;
-	}
-
-	public void setRoomTypeId(int roomTypeId) {
-		this.roomTypeId = roomTypeId;
 	}
 
 	public String getRoomIntroduce() {

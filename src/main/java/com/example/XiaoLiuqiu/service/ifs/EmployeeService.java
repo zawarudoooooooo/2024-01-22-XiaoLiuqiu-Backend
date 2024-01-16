@@ -7,6 +7,8 @@ public interface EmployeeService {
 	
 	public EmployeeGetRes search(String account);
 	
+	public EmployeeGetRes employeeSearch(String account);
+	
 	public EmployeeLoginRes login(String account, String pwd);
 
 	public EmployeeLoginRes create(String account, String pwd);

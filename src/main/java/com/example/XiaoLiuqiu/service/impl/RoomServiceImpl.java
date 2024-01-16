@@ -20,27 +20,28 @@ public class RoomServiceImpl implements RoomService{
 	private RoomDAO roomDao;
 
 	@Override
-	public RoomRes search(String roomId, int roomTypeId, String roomIntroduce, String roomName, int roomPrice) {
-		roomId = !StringUtils.hasText(roomId) ? "" : roomId;
+	public RoomRes search(String roomName) {
+		roomName=!StringUtils.hasText(roomName)?"":roomName;
 //		roomTypeId = roomTypeId <= 10 ? 0 : roomTypeId;
-		List<Room> res = roomDao.findByRoomIdContaining(roomId);
+		List<Room> res = roomDao.findByRoomName(roomName);
 		return new RoomGetRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage(), res);
 	}
-
 	@Override
-	public RoomRes createRoom(String roomId, int roomTypeId, String roomIntroduce, String roomName, int roomPrice) {
+	public RoomRes createRoom(String roomId, String roomIntroduce, String roomName, int roomPrice) {
 		if(roomDao.existsByRoomId(roomId)) {
 			return new RoomRes(RtnCode.Room_ID_IS_EXISTED.getCode(), RtnCode.Room_ID_IS_EXISTED.getMessage());
 		}
-		roomDao.insertRoom(roomId, roomTypeId, roomIntroduce, roomName, roomPrice);
+		roomDao.insertRoom(roomId, roomIntroduce, roomName, roomPrice);
 		return new RoomRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
 	}
 
 	@Override
-	public RoomRes updateRoom(String roomId ,int roomTypeId, String roomIntroduce , String roomName, int roomPrice) {
-		roomDao.updateRoom(roomId ,roomTypeId, roomIntroduce, roomName, roomPrice);
+	public RoomRes updateRoom(String roomId, String roomIntroduce , String roomName, int roomPrice) {
+		roomDao.updateRoom(roomId, roomIntroduce, roomName, roomPrice);
 		return new RoomRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
 	}
+
+
 
 
 
