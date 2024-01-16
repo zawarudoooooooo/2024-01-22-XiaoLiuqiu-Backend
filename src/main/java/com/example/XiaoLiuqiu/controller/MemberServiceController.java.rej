@@ -1,0 +1,13 @@
+diff a/src/main/java/com/example/XiaoLiuqiu/controller/MemberServiceController.java b/src/main/java/com/example/XiaoLiuqiu/controller/MemberServiceController.java	(rejected hunks)
+@@ -30,9 +30,10 @@
+ 
+ 	
+ 	@PostMapping(value="member/login")
+-	public MemberLoginRes login(@RequestBody MemberLoginReq req,HttpSession session) {
++	public MemberLoginRes login(@RequestBody MemberLoginReq req,HttpSession session ,HttpServletResponse response) {
+ 		String attr=(String) session.getAttribute("account");
+ 		
++		
+ 		if(StringUtils.hasText(attr)&&attr.equals(req.getAccount())) {
+ 			return new MemberLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
+ 		}
