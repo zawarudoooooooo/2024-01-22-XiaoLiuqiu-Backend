@@ -13,7 +13,8 @@ public enum RtnCode {
 	NEW_PWD_ERROR(400,"New pwd error"),//
 	DATE_FORMAT_ERROR(400,"Date format error"),//
 	ORDER_CREATE_ERROR(400,"Order create error"),//
-	ACCESS_IS_NOT_ALLOWED(400, "Access is not allowed")
+	ACCESS_IS_NOT_ALLOWED(400, "Access is not allowed"),//
+	PLEASE_LOGIN_FIRST(400,"Please logon first")
 	;
 	
 	private int code;

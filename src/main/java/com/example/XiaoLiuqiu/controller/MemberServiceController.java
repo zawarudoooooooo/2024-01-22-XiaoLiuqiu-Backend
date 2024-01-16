@@ -60,7 +60,7 @@ public class MemberServiceController {
 	}
 	
 	@PostMapping(value="member/member")
-	public MemberGetRes member(@RequestParam String account) {
+	public MemberGetRes member(@RequestParam String account , HttpSession session) {
 		return memberService.member(account);
 	}
 	
@@ -72,5 +72,18 @@ public class MemberServiceController {
 	@PostMapping(value="member/pwdUpDate")
 	public MemberLoginRes pwdUpDate(@RequestParam int memberId ,@RequestBody MemberPwdReq req) {
 		return memberService.pwdUpDate(memberId,req.getPwd(),req.getNewPwd(),req.getConfirmPwd());
+	}
+	
+	@PostMapping(value="member/logout")
+	public MemberLoginRes logout(HttpSession session ,HttpServletResponse response) {
+		Cookie memberIdCookie = new Cookie("memberId", "");
+		memberIdCookie.setMaxAge(0); 
+		memberIdCookie.setPath("/");
+        response.addCookie(memberIdCookie);
+		
+		session.invalidate();
+		System.out.println(session.getId());
+		return new MemberLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage()) ;
+		
 	}
 }

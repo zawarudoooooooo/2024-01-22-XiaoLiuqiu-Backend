@@ -1,5 +1,7 @@
 package com.example.XiaoLiuqiu.controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.XiaoLiuqiu.constants.RtnCode;
 import com.example.XiaoLiuqiu.service.ifs.EmployeeService;
 import com.example.XiaoLiuqiu.vo.EmployeeGetRes;
+import com.example.XiaoLiuqiu.vo.EmployeeLoginReq;
 import com.example.XiaoLiuqiu.vo.EmployeeLoginRes;
 import com.example.XiaoLiuqiu.vo.EmployeeReq;
 import com.example.XiaoLiuqiu.vo.EmployeeUpdateReq;
+import com.example.XiaoLiuqiu.vo.MemberLoginRes;
 
 @CrossOrigin
 @RestController
@@ -30,7 +34,7 @@ public class EmployeeServiceController {
 	}
 	
 	@PostMapping(value = "employee/login")
-	public EmployeeLoginRes login(@RequestBody EmployeeReq req, HttpSession session) {
+	public EmployeeLoginRes login(@RequestBody EmployeeLoginReq req, HttpSession session ,HttpServletResponse response) {
 //		System.out.println(session.getId());
 		String attr = (String)session.getAttribute("account");
 		if(StringUtils.hasText(attr) && attr.equals(req.getAccount())) {
@@ -39,8 +43,25 @@ public class EmployeeServiceController {
 		EmployeeLoginRes res = employeeService.login(req.getAccount(), req.getPwd());
 		if(res.getRtncode().getCode() == 200) {
 			session.setAttribute("account", req.getAccount());
+			Cookie memberIdCookie = new Cookie("employee", req.getAccount());
+			memberIdCookie.setMaxAge(600); 
+			memberIdCookie.setPath("/");
+            response.addCookie(memberIdCookie);
 		}
 		return res;
+	}
+	
+	@PostMapping(value="employee/logout")
+	public MemberLoginRes logout(HttpSession session ,HttpServletResponse response) {
+		Cookie employeeCookie = new Cookie("employee", "");
+		employeeCookie.setMaxAge(0); 
+		employeeCookie.setPath("/");
+        response.addCookie(employeeCookie);
+		
+		session.invalidate();
+		System.out.println(session.getId());
+		return new MemberLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage()) ;
+		
 	}
 	
 	@PostMapping(value = "employee/createMaster")
