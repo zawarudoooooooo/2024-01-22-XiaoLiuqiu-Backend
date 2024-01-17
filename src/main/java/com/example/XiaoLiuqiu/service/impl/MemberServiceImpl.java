@@ -56,8 +56,43 @@ public class MemberServiceImpl implements MemberService {
 		if(memberDao.existsByAccount(account)) {
 			return new MemberLoginRes(RtnCode.ACCOUNT_EXISTED.getCode(),RtnCode.ACCOUNT_EXISTED.getMessage());
 		}
-		memberDao.save(new Member(account,encoder.encode(pwd), memberName, memberPhone, memberEmail));
+		
+		Member member = new Member();
+		member.setAccount(account);
+		member.setPwd(encoder.encode(pwd));
+		member.setMemberName(memberName);
+		member.setMemberPhone(memberPhone);
+		member.setMemberEmail(memberEmail);
+		member.setVerificationCode(UUID.randomUUID().toString());
+		member.setVerified(false);
+		
+		memberDao.save(member);
+		
+		sendsendVerificationEmail(member);
+		
 		return new MemberLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
+	}
+
+	private void sendsendVerificationEmail(Member member) {
+		
+		String verificationLink = "http://localhost:5173/verify?memberEmail=" + member.getMemberEmail() + "&verificationCode=" + member.getVerificationCode();
+		
+		String emailContent = "親愛的 " + member.getMemberName() + "，\n" +
+                "感謝您註冊！請點擊以下連結進行帳號驗證：\n" +
+                verificationLink;
+		
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setTo(member.getMemberEmail());
+		message.setSubject("帳號驗證");
+		message.setText(emailContent);
+
+		emailSender.send(message);
+	        
+	    try {
+	        emailSender.send(message);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
 	}
 
 	@Override
@@ -131,8 +166,9 @@ public class MemberServiceImpl implements MemberService {
 	            return new MemberLoginRes(RtnCode.PARAM_ERROR.getCode(), RtnCode.PARAM_ERROR.getMessage());
 	        }
 
-	        Member member = memberDao.findByAccount(account).orElse(null);
-	        if (member == null) {
+	        Optional<Member> op = memberDao.findByAccount(account);
+	        Member member = op.get();
+	        if (member.getAccount() == null) {
 	            return new MemberLoginRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(), RtnCode.ACCOUNT_NOT_FOUND.getMessage());
 	        }
 
@@ -142,22 +178,43 @@ public class MemberServiceImpl implements MemberService {
 	        memberDao.save(member);
 
 	        // 發送郵件
-	        sendResetPasswordEmail(account, resetCode);
+	        sendResetPasswordEmail(member.getAccount(), resetCode, member.getMemberEmail());
 
 	        return new MemberLoginRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
 	}
-	private void sendResetPasswordEmail(String account, String resetCode) {
-	        String to = "xiaoliuqiu0122@gmail.com"; // 修改為實際的郵件接收者地址
+	private void sendResetPasswordEmail(String account, String resetCode, String toEmail) {
 	        String subject = "重置密碼";
 	        String text = "請點擊以下連結重置密碼:\n" +
-	                "http://localhost:5173/reset_password?account=" + account + "&resetCode=" + resetCode;
+	                "http://localhost:5173/reset?account=" + account + "&resetCode=" + resetCode;
 
+	        
 	        SimpleMailMessage message = new SimpleMailMessage();
-	        message.setTo(to);
+	        message.setTo(toEmail);
 	        message.setSubject(subject);
 	        message.setText(text);
 	        emailSender.send(message);
+	        
+	        try {
+	            emailSender.send(message);
+	        } catch (Exception e) {
+	            // 處理郵件發送異常，可以記錄日誌或者返回相應的錯誤信息
+	            e.printStackTrace();
+	        }
 	    }
+
+	@Override
+	public boolean verifyAccount(String memberEmail, String verificationCode) {
+		 Optional<Member> op = memberDao.findByMemberEmailAndVerificationCode(memberEmail, verificationCode);
+		 
+		 if(op.isPresent()) {
+			 Member member = op.get();
+			 member.setVerified(true);
+			 member.setVerificationCode(null);
+			 memberDao.save(member);
+			 return true;
+		 }
+		return false;
+	}
 
 //	@Override
 //	public MemberGetRes member1(String account) {

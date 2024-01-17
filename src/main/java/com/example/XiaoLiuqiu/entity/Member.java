@@ -33,18 +33,25 @@ public class Member {
 	
 	@Column(name = "rest_code")
 	private String restCode;
+	
+	@Column(name = "verification_code")
+	private String verificationCode;
+	
+	@Column(name = "verified")
+	private boolean verified;
 
 	public Member() {
 		super();
 	}
 
-	public Member(String account, String pwd, String memberName, String memberPhone, String memberEmail) {
+	public Member(String account, String pwd, String memberName, String memberPhone, String memberEmail, boolean verified) {
 		super();
 		this.account = account;
 		this.pwd = pwd;
 		this.memberName = memberName;
 		this.memberPhone = memberPhone;
 		this.memberEmail = memberEmail;
+		this.verified = verified;
 	}
 
 	public int getMemberId() {
@@ -101,6 +108,22 @@ public class Member {
 
 	public void setRestCode(String restCode) {
 		this.restCode = restCode;
+	}
+
+	public String getVerificationCode() {
+		return verificationCode;
+	}
+
+	public void setVerificationCode(String verificationCode) {
+		this.verificationCode = verificationCode;
+	}
+
+	public boolean isVerified() {
+		return verified;
+	}
+
+	public void setVerified(boolean verified) {
+		this.verified = verified;
 	}
 
 }

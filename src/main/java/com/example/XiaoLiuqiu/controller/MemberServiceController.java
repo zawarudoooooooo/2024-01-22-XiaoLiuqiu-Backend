@@ -3,6 +3,8 @@ package com.example.XiaoLiuqiu.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -68,8 +70,19 @@ public class MemberServiceController {
 	}
 	
 	@PostMapping(value="member/rest_password")
-	public MemberLoginRes restPassword(@RequestBody String email) {
-		
-		return null;
+	public MemberLoginRes restPassword(@RequestBody MemberSignUpReq req) {
+		return memberService.sendResetPasswordEmail(req.getAccount());
 	}
+	
+	 @PostMapping(value = "member/verify")
+	 public ResponseEntity<String> verifyAccount(@RequestParam String memberEmail, @RequestParam String verificationCode) {
+		 
+		 boolean isVerified = memberService.verifyAccount(memberEmail, verificationCode);
+		 
+		 if(isVerified) {
+			 return new ResponseEntity<>("帳號驗證成功", HttpStatus.OK);
+		 } else {
+			 return new ResponseEntity<>("帳號驗證失敗", HttpStatus.BAD_REQUEST);
+		 }		 
+	 }
 }
