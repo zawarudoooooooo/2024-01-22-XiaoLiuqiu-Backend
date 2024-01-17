@@ -39,8 +39,8 @@ public class OrdersServiceImpl implements OrdersService{
 	
 
 	@Override
-	public OrdersRes ordersCreate(String memberName, List<Room> roomIdStr, List<Extra> orderItemStr, LocalDate startDate,
-			LocalDate endDate) {
+	public OrdersRes ordersCreate(String memberName, List<Room> roomIdStr,List<Extra> orderItemStr, 
+			LocalDate startDate, LocalDate endDate, boolean orderPayment ,boolean payOrNot) {
 		if (!StringUtils.hasText(memberName)|| startDate == null || endDate == null) {
 			return new OrdersRes(RtnCode.PARAM_ERROR.getCode(), RtnCode.PARAM_ERROR.getMessage());
 		}
@@ -49,7 +49,7 @@ public class OrdersServiceImpl implements OrdersService{
 		}try {
 			String roomId=mapper.writeValueAsString(roomIdStr);
 			String orderItem=mapper.writeValueAsString(orderItemStr);
-			orderDao.save(new Orders(memberName,roomId,orderItem,startDate,endDate,LocalDateTime.now()));
+			orderDao.save(new Orders(memberName,roomId,orderItem,startDate,endDate,LocalDateTime.now(), orderPayment, payOrNot));
 			return new OrdersRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
 		} catch (JsonProcessingException e) {
 			return new OrdersRes(RtnCode.ORDER_CREATE_ERROR.getCode(), RtnCode.ORDER_CREATE_ERROR.getMessage());

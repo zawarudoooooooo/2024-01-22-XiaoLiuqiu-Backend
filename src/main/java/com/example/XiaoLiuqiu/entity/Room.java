@@ -21,23 +21,23 @@ public class Room {
 
 	@Column(name = "room_price")
 	private int roomPrice;
+	
+	@Column(name = "is_open")
+	private boolean isOpen;
 
 	public Room() {
 		super();
 	}
 
-	
-
-	public Room(String roomId, String roomIntroduce, String roomName, int roomPrice) {
+	public Room(String roomId, String roomIntroduce, String roomName, int roomPrice, boolean isOpen) {
 		super();
 		this.roomId = roomId;
 		this.roomIntroduce = roomIntroduce;
 		this.roomName = roomName;
 		this.roomPrice = roomPrice;
+		this.isOpen = isOpen;
 	}
-
-
-
+	
 	public String getRoomId() {
 		return roomId;
 	}
@@ -68,6 +68,14 @@ public class Room {
 
 	public void setRoomPrice(int roomPrice) {
 		this.roomPrice = roomPrice;
+	}
+
+	public boolean isOpen() {
+		return isOpen;
+	}
+
+	public void setOpen(boolean isOpen) {
+		this.isOpen = isOpen;
 	}
 
 }

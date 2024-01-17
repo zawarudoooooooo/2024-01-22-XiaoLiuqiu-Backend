@@ -27,17 +27,17 @@ public class RoomServiceImpl implements RoomService{
 		return new RoomGetRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage(), res);
 	}
 	@Override
-	public RoomRes createRoom(String roomId, String roomIntroduce, String roomName, int roomPrice) {
+	public RoomRes createRoom(String roomId, String roomIntroduce, String roomName, int roomPrice, boolean isOpen) {
 		if(roomDao.existsByRoomId(roomId)) {
 			return new RoomRes(RtnCode.Room_ID_IS_EXISTED.getCode(), RtnCode.Room_ID_IS_EXISTED.getMessage());
 		}
-		roomDao.insertRoom(roomId, roomIntroduce, roomName, roomPrice);
+		roomDao.insertRoom(roomId, roomIntroduce, roomName, roomPrice,isOpen);
 		return new RoomRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
 	}
 
 	@Override
-	public RoomRes updateRoom(String roomId, String roomIntroduce , String roomName, int roomPrice) {
-		roomDao.updateRoom(roomId, roomIntroduce, roomName, roomPrice);
+	public RoomRes updateRoom(String roomId, String roomIntroduce , String roomName, int roomPrice, boolean isOpen) {
+		roomDao.updateRoom(roomId, roomIntroduce, roomName, roomPrice, isOpen);
 		return new RoomRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
 	}
 

@@ -24,20 +24,32 @@ public class OrdersReq {
 	
 	@JsonProperty(value = "end_date")
 	private LocalDate endDate;
+	
+	@JsonProperty(value = "order_payment")
+	private boolean orderPayment;
+	
+	@JsonProperty(value = "pay_or_not")
+	private boolean payOrNot;
 
 	public OrdersReq() {
 		super();
 	}
 
+	
+
 	public OrdersReq(String memberName, List<Room> roomId, List<Extra> orderItem, LocalDate startDate,
-			LocalDate endDate) {
+			LocalDate endDate, boolean orderPayment, boolean payOrNot) {
 		super();
 		this.memberName = memberName;
 		this.roomId = roomId;
 		this.orderItem = orderItem;
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.orderPayment = orderPayment;
+		this.payOrNot = payOrNot;
 	}
+
+
 
 	public String getMemberName() {
 		return memberName;
@@ -77,6 +89,30 @@ public class OrdersReq {
 
 	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
+	}
+
+
+
+	public boolean isOrderPayment() {
+		return orderPayment;
+	}
+
+
+
+	public void setOrderPayment(boolean orderPayment) {
+		this.orderPayment = orderPayment;
+	}
+
+
+
+	public boolean isPayOrNot() {
+		return payOrNot;
+	}
+
+
+
+	public void setPayOrNot(boolean payOrNot) {
+		this.payOrNot = payOrNot;
 	}
 
 	

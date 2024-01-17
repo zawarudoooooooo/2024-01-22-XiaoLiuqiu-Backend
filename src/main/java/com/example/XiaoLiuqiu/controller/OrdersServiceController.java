@@ -21,7 +21,8 @@ public class OrdersServiceController {
 	
 	@PostMapping(value = "order/ordersCreate")
 	public OrdersRes ordersCreate(@RequestBody OrdersReq req) {
-		return ordersService.ordersCreate(req.getMemberName(), req.getRoomId(), req.getOrderItem(), req.getStartDate(), req.getEndDate());
+		return ordersService.ordersCreate(req.getMemberName(), req.getRoomId(), req.getOrderItem(), 
+				req.getStartDate(), req.getEndDate(),req.isOrderPayment(),req.isPayOrNot());
 		
 	}
 	

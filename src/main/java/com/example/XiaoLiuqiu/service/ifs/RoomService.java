@@ -6,8 +6,8 @@ public interface RoomService {
 	
 	public RoomRes search(String roomName);
 
-	public RoomRes createRoom(String roomId, String roomIntroduce, String roomName, int roomPrice);
+	public RoomRes createRoom(String roomId, String roomIntroduce, String roomName, int roomPrice, boolean isOpen);
 	
-	public RoomRes updateRoom(String roomId, String roomIntroduce, String roomName, int roomPrice);
+	public RoomRes updateRoom(String roomId, String roomIntroduce, String roomName, int roomPrice, boolean isOpen);
 	
 }

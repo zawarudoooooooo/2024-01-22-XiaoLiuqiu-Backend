@@ -15,6 +15,9 @@ public class RoomReq {
 
 	@JsonProperty(value = "room_price")
 	private int roomPrice;
+	
+	@JsonProperty(value = "is_open")
+	private boolean isOpen;
 
 	public RoomReq() {
 		super();
@@ -22,13 +25,22 @@ public class RoomReq {
 
 	
 
-	public RoomReq(String roomId, String roomIntroduce, String roomName, int roomPrice) {
+	
+
+
+
+	public RoomReq(String roomId, String roomIntroduce, String roomName, int roomPrice, boolean isOpen) {
 		super();
 		this.roomId = roomId;
 		this.roomIntroduce = roomIntroduce;
 		this.roomName = roomName;
 		this.roomPrice = roomPrice;
+		this.isOpen = isOpen;
 	}
+
+
+
+
 
 
 
@@ -62,6 +74,26 @@ public class RoomReq {
 
 	public void setRoomPrice(int roomPrice) {
 		this.roomPrice = roomPrice;
+	}
+
+
+
+
+
+
+
+	public boolean isOpen() {
+		return isOpen;
+	}
+
+
+
+
+
+
+
+	public void setOpen(boolean isOpen) {
+		this.isOpen = isOpen;
 	}
 
 }
