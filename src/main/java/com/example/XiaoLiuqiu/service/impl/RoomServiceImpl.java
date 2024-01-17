@@ -30,7 +30,7 @@ public class RoomServiceImpl implements RoomService{
 	@Override
 	public RoomRes createRoom(String roomId, int roomTypeId, String roomIntroduce, String roomName, int roomPrice) {
 		if(roomDao.existsByRoomId(roomId)) {
-			return new RoomRes(RtnCode.Room_ID_IS_EXISTED.getCode(), RtnCode.Room_ID_IS_EXISTED.getMessage());
+			return new RoomRes(RtnCode.ROOM_ID_IS_EXISTED.getCode(), RtnCode.ROOM_ID_IS_EXISTED.getMessage());
 		}
 		roomDao.insertRoom(roomId, roomTypeId, roomIntroduce, roomName, roomPrice);
 		return new RoomRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
@@ -41,13 +41,5 @@ public class RoomServiceImpl implements RoomService{
 		roomDao.updateRoom(roomId ,roomTypeId, roomIntroduce, roomName, roomPrice);
 		return new RoomRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
 	}
-
-
-
-
-
-
-
-
 
 }

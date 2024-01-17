@@ -30,6 +30,9 @@ public class Member {
 	
 	@Column(name = "member_email")
 	private String memberEmail;
+	
+	@Column(name = "rest_code")
+	private String restCode;
 
 	public Member() {
 		super();
@@ -92,7 +95,12 @@ public class Member {
 		this.memberEmail = memberEmail;
 	}
 
-	
-	
-	
+	public String getRestCode() {
+		return restCode;
+	}
+
+	public void setRestCode(String restCode) {
+		this.restCode = restCode;
+	}
+
 }

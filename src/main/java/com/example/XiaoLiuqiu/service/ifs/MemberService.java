@@ -17,5 +17,7 @@ public interface MemberService {
 	
 	public MemberGetRes member(String account);
 	
+	public MemberLoginRes sendResetPasswordEmail(String account);
+	
 //	public MemberGetRes member1(String account);
 }

@@ -66,4 +66,9 @@ public class MemberServiceController {
 	public MemberLoginRes pwdUpDate(@RequestParam int memberId ,@RequestBody MemberPwdReq req) {
 		return memberService.pwdUpDate(memberId,req.getPwd(),req.getNewPwd(),req.getConfirmPwd());
 	}
+	
+	@PostMapping(value="member/rest_password")
+	public MemberLoginRes restPassword(@RequestBody String email) {
+		return null;
+	}
 }

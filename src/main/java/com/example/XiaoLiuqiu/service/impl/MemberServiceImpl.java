@@ -2,8 +2,11 @@ package com.example.XiaoLiuqiu.service.impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -22,6 +25,9 @@ public class MemberServiceImpl implements MemberService {
 	private BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
 	@Autowired
 	private MemberDAO memberDao;
+	
+	@Autowired
+	private JavaMailSender emailSender;
 
 	@Override
 	public MemberLoginRes login(String account, String pwd) {
@@ -118,6 +124,40 @@ public class MemberServiceImpl implements MemberService {
 		memberDao.save(member);
 		return new MemberLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
 	}
+
+	@Override
+	public MemberLoginRes sendResetPasswordEmail(String account) {
+		 if (!StringUtils.hasText(account)) {
+	            return new MemberLoginRes(RtnCode.PARAM_ERROR.getCode(), RtnCode.PARAM_ERROR.getMessage());
+	        }
+
+	        Member member = memberDao.findByAccount(account).orElse(null);
+	        if (member == null) {
+	            return new MemberLoginRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(), RtnCode.ACCOUNT_NOT_FOUND.getMessage());
+	        }
+
+	        // 生成重置碼
+	        String resetCode = UUID.randomUUID().toString();
+	        member.setRestCode(resetCode);
+	        memberDao.save(member);
+
+	        // 發送郵件
+	        sendResetPasswordEmail(account, resetCode);
+
+	        return new MemberLoginRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
+	}
+	private void sendResetPasswordEmail(String account, String resetCode) {
+	        String to = "xiaoliuqiu0122@gmail.com"; // 修改為實際的郵件接收者地址
+	        String subject = "重置密碼";
+	        String text = "請點擊以下連結重置密碼:\n" +
+	                "http://localhost:5173/reset_password?account=" + account + "&resetCode=" + resetCode;
+
+	        SimpleMailMessage message = new SimpleMailMessage();
+	        message.setTo(to);
+	        message.setSubject(subject);
+	        message.setText(text);
+	        emailSender.send(message);
+	    }
 
 //	@Override
 //	public MemberGetRes member1(String account) {

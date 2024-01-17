@@ -24,4 +24,7 @@ public interface MemberDAO extends JpaRepository<Member, Integer> {
 	
 	@Query(value="select * from member where account = :account", nativeQuery = true)
 	public List<Member> findByAcc(@Param("account")String account);
+	
+	public boolean existsByMemberEmail(String memberEmail);
+	
 }
