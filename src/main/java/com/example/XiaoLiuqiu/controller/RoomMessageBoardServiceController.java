@@ -22,10 +22,10 @@ public class RoomMessageBoardServiceController {
 		
 		return roomMessageBoardService.messageCreate(req.getMemberName(), req.getRoomId(), req.getRoomMessageBoardDescription());
 	}
-//	@PostMapping(value="message/search")
-//	public RoomMessageBoardRes search(@RequestBody RoomMessageBoardReq req) {
-//		
-//		return roomMessageBoardService.search(req.getMemberName(), req.getRoomId(), req.getRoomMessageBoardDescription());
-//	}
+	@PostMapping(value="message/search")
+	public RoomMessageBoardRes search(@RequestBody RoomMessageBoardReq req) {
+		
+		return roomMessageBoardService.search(req.getMemberName(), req.getRoomId(), req.getRoomMessageBoardDescription());
+	}
 
 }

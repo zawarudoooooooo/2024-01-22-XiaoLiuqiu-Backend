@@ -15,6 +15,7 @@ import com.example.XiaoLiuqiu.repository.EmployeeDAO;
 import com.example.XiaoLiuqiu.service.ifs.EmployeeService;
 import com.example.XiaoLiuqiu.vo.EmployeeGetRes;
 import com.example.XiaoLiuqiu.vo.EmployeeLoginRes;
+import com.example.XiaoLiuqiu.vo.MemberGetRes;
 import com.example.XiaoLiuqiu.vo.MemberLoginRes;
 
 @Service
@@ -60,7 +61,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	@Override
 	public EmployeeLoginRes createMaster(String account, String pwd, boolean access) {
-		if (!StringUtils.hasText(account) || !StringUtils.hasText(pwd) || access == false) {
+		if (!StringUtils.hasText(account) || !StringUtils.hasText(pwd)) {
 			return new EmployeeLoginRes(RtnCode.PARAM_ERROR);
 		}
 		employeeDao.insertMaster(account, encoder.encode(pwd), access);
@@ -87,6 +88,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employee.setPwd(encoder.encode(newPwd));
 		employeeDao.save(employee);
 		return new EmployeeLoginRes(RtnCode.SUCCESSFUL);
+	}
+
+	@Override
+	public EmployeeGetRes employeeSearch(String account) {
+		if(!StringUtils.hasText(account)) {
+			return new EmployeeGetRes(RtnCode.PARAM_ERROR,null);
+		}
+		List<Employee> res = employeeDao.findByAcc(account);
+		return new EmployeeGetRes(RtnCode.SUCCESSFUL, res);
 	}
 
 }

@@ -12,7 +12,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.XiaoLiuqiu.entity.Employee;
-import com.example.XiaoLiuqiu.vo.EmployeeLoginRes;
 
 @Repository
 public interface EmployeeDAO extends JpaRepository<Employee, Integer>{
@@ -50,6 +49,10 @@ public interface EmployeeDAO extends JpaRepository<Employee, Integer>{
 	public int updatePassword(//
 			@Param("account")String account,//
 			@Param("password")String pwd);
+	
+	
+	@Query(value="select * from employee where account = :account", nativeQuery = true)
+	public List<Employee> findByAcc(@Param("account")String account);
 	
 
 }

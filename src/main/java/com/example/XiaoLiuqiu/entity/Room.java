@@ -13,9 +13,6 @@ public class Room {
 	@Column(name = "room_id")
 	private String roomId;
 
-	@Column(name = "room_type_id")
-	private int roomTypeId;
-
 	@Column(name = "room_introduce")
 	private String roomIntroduce;
 
@@ -29,14 +26,17 @@ public class Room {
 		super();
 	}
 
-	public Room(String roomId, int roomTypeId, String roomIntroduce, String roomName, int roomPrice) {
+	
+
+	public Room(String roomId, String roomIntroduce, String roomName, int roomPrice) {
 		super();
 		this.roomId = roomId;
-		this.roomTypeId = roomTypeId;
 		this.roomIntroduce = roomIntroduce;
 		this.roomName = roomName;
 		this.roomPrice = roomPrice;
 	}
+
+
 
 	public String getRoomId() {
 		return roomId;
@@ -44,14 +44,6 @@ public class Room {
 
 	public void setRoomId(String roomId) {
 		this.roomId = roomId;
-	}
-
-	public int getRoomTypeId() {
-		return roomTypeId;
-	}
-
-	public void setRoomTypeId(int roomTypeId) {
-		this.roomTypeId = roomTypeId;
 	}
 
 	public String getRoomIntroduce() {

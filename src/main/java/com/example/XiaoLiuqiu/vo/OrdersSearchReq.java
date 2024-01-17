@@ -1,23 +1,15 @@
 package com.example.XiaoLiuqiu.vo;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import javax.persistence.Column;
 
-import com.example.XiaoLiuqiu.entity.Extra;
-import com.example.XiaoLiuqiu.entity.Room;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class OrdersReq {
-	
+public class OrdersSearchReq {
+
+	@Column(name = "member_name")
 	private String memberName;
-	
-	@JsonProperty(value = "room_id")
-	private List<Room> roomId;
-	
-	@JsonProperty(value = "order_item")
-	private List<Extra> orderItem;
 	
 	@JsonProperty(value = "start_date")
 	private LocalDate startDate;
@@ -25,16 +17,14 @@ public class OrdersReq {
 	@JsonProperty(value = "end_date")
 	private LocalDate endDate;
 
-	public OrdersReq() {
+	public OrdersSearchReq() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public OrdersReq(String memberName, List<Room> roomId, List<Extra> orderItem, LocalDate startDate,
-			LocalDate endDate) {
+	public OrdersSearchReq(String memberName, LocalDate startDate, LocalDate endDate) {
 		super();
 		this.memberName = memberName;
-		this.roomId = roomId;
-		this.orderItem = orderItem;
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}
@@ -45,22 +35,6 @@ public class OrdersReq {
 
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
-	}
-
-	public List<Room> getRoomId() {
-		return roomId;
-	}
-
-	public void setRoomId(List<Room> roomId) {
-		this.roomId = roomId;
-	}
-
-	public List<Extra> getOrderItem() {
-		return orderItem;
-	}
-
-	public void setOrderItem(List<Extra> orderItem) {
-		this.orderItem = orderItem;
 	}
 
 	public LocalDate getStartDate() {
@@ -80,12 +54,6 @@ public class OrdersReq {
 	}
 
 	
-
-	
-
-	
-
 	
 	
-
 }

@@ -69,6 +69,7 @@ public class MemberServiceController {
 	
 	@PostMapping(value="member/rest_password")
 	public MemberLoginRes restPassword(@RequestBody String email) {
+		
 		return null;
 	}
 }

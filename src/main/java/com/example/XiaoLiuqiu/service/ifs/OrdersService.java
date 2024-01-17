@@ -10,8 +10,8 @@ import com.example.XiaoLiuqiu.vo.OrdersRes;
 
 public interface OrdersService {
 
-	public OrdersRes search(String roomId, LocalDate startDate, LocalDate endDate);
+	public OrdersRes search(String memberName, LocalDate startDate, LocalDate endDate);
 	
-	public OrdersRes ordersCreate(int memberId, List<Room> roomIdStr,List<Extra> orderItemStr, LocalDate startDate, LocalDate endDate);
+	public OrdersRes ordersCreate(String memberName, List<Room> roomIdStr,List<Extra> orderItemStr, LocalDate startDate, LocalDate endDate);
 
 }

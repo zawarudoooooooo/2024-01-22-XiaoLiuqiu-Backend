@@ -54,14 +54,14 @@ CREATE TABLE if  not exists `orders` (
 
 
 
-CREATE TABLE if not exists `room` (
+CREATE TABLE if  not exists `room` (
   `room_id` varchar(20) NOT NULL,
-  `room_type_id` int NOT NULL,
+  `room_name` varchar(45) NOT NULL,
   `room_introduce` varchar(200) DEFAULT NULL,
-  `room_name` varchar(45) DEFAULT NULL,
-  `room_price` int DEFAULT NULL,
+  `room_price` int NOT NULL,
   PRIMARY KEY (`room_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 
 CREATE TABLE if  not exists `attractions_message_board` (
