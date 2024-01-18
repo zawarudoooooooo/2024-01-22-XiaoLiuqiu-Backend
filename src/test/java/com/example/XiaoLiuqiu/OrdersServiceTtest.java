@@ -29,7 +29,7 @@ public class OrdersServiceTtest {
 				new Extra("早餐",200),
 				new Extra("門票",500)
 				);
-		OrdersRes res=ordersService.ordersCreate("王曉明", room , order, 
+		OrdersRes res=ordersService.ordersCreate("Roy", room , order, 
 				LocalDate.now(), LocalDate.now().plusDays(1),true,false);
 		System.out.println(res.getCode()+res.getMessage());
 	}
@@ -41,7 +41,7 @@ public class OrdersServiceTtest {
 		List<Extra> order=Arrays.asList(
 				new Extra("早餐",200)
 				);
-		OrdersRes res=ordersService.ordersCreate("王曉明", room , order, 
+		OrdersRes res=ordersService.ordersCreate("Roy", room , order, 
 				LocalDate.now(), LocalDate.now().plusDays(1),true,false);
 		System.out.println(res.getCode()+res.getMessage());
 	}

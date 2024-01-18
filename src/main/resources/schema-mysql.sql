@@ -46,15 +46,18 @@ CREATE TABLE if  not exists `room_message_board` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
-CREATE TABLE if  not exists `orders` (
-  `order_id` int NOT NULL AUTO_INCREMENT,
-  `member_id` int NOT NULL,
-  `room_id` varchar(400) NOT NULL,
-  `order_item` varchar(400) NOT NULL,
-  `start_date` date NOT NULL,
-  `end_date` date NOT NULL,
-  PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE if not exists orders (
+  order_id int NOT NULL AUTO_INCREMENT,
+  member_name varchar(45) NOT NULL,
+  room_id varchar(400) NOT NULL,
+  order_item varchar(400) NOT NULL,
+  start_date date NOT NULL,
+  end_date date NOT NULL,
+  order_date_time datetime DEFAULT NULL,
+  order_payment tinyint NOT NULL DEFAULT '0',
+  pay_or_not tinyint NOT NULL DEFAULT '0',
+  PRIMARY KEY (order_id)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 

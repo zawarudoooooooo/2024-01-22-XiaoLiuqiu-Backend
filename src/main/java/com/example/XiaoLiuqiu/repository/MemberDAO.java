@@ -22,6 +22,8 @@ public interface MemberDAO extends JpaRepository<Member, Integer> {
 	
 	public List<Member> findByMemberId(int memberId);
 	
+	public Optional<Member> findByMemberName(String memberName);
+	
 	public Optional<Member> findByPwd(String pwd);
 	
 	@Query(value="select * from member where account = :account", nativeQuery = true)
