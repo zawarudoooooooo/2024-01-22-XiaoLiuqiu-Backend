@@ -50,27 +50,26 @@ public class OrdersServiceImpl implements OrdersService {
 	}
 
 	@Override
-	public OrdersRes ordersCreate(String memberName, List<Room> roomIdStr, List<Extra> orderItemStr,
-			LocalDate startDate, LocalDate endDate) {
-		if (!StringUtils.hasText(memberName) || startDate == null || endDate == null) {
+	
+	public OrdersRes ordersCreate(String memberName, List<Room> roomIdStr,List<Extra> orderItemStr, 
+			LocalDate startDate, LocalDate endDate, boolean orderPayment ,boolean payOrNot) {
+		if (!StringUtils.hasText(memberName)|| startDate == null || endDate == null) {
 			return new OrdersRes(RtnCode.PARAM_ERROR.getCode(), RtnCode.PARAM_ERROR.getMessage());
 		}
 		if (startDate.isAfter(endDate)) {
 			return new OrdersRes(RtnCode.DATE_FORMAT_ERROR.getCode(), RtnCode.DATE_FORMAT_ERROR.getMessage());
+
+		}try {
+			String roomId=mapper.writeValueAsString(roomIdStr);
+			String orderItem=mapper.writeValueAsString(orderItemStr);
+			Orders newOrder = new Orders(memberName, roomId, orderItem, startDate, endDate, LocalDateTime.now(), orderPayment, payOrNot);
+            orderDao.save(newOrder);
+         // 成功建立訂單後發送郵件通知顧客
+            sendOrderConfirmationEmail(newOrder);
+			return new OrdersRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
+		} catch (JsonProcessingException e) {
+			return new OrdersRes(RtnCode.ORDER_CREATE_ERROR.getCode(), RtnCode.ORDER_CREATE_ERROR.getMessage());
 		}
-		try {
-			 String roomId = mapper.writeValueAsString(roomIdStr);
-	            String orderItem = mapper.writeValueAsString(orderItemStr);
-	            Orders newOrder = new Orders(memberName, roomId, orderItem, startDate, endDate, LocalDateTime.now());
-	            orderDao.save(newOrder);
-
-	            // 成功建立訂單後發送郵件通知顧客
-	            sendOrderConfirmationEmail(newOrder);
-
-	            return new OrdersRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
-	        } catch (JsonProcessingException e) {
-	            return new OrdersRes(RtnCode.ORDER_CREATE_ERROR.getCode(), RtnCode.ORDER_CREATE_ERROR.getMessage());
-	        }
 	}
 	 private void sendOrderConfirmationEmail(Orders order) {
 		 
