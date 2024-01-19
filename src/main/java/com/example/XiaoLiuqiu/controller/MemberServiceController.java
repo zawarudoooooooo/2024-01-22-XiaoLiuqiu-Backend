@@ -1,10 +1,13 @@
 package com.example.XiaoLiuqiu.controller;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,11 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.XiaoLiuqiu.constants.RtnCode;
+import com.example.XiaoLiuqiu.entity.Member;
+import com.example.XiaoLiuqiu.repository.MemberDAO;
 import com.example.XiaoLiuqiu.service.ifs.MemberService;
 import com.example.XiaoLiuqiu.vo.MemberGetRes;
 import com.example.XiaoLiuqiu.vo.MemberLoginReq;
 import com.example.XiaoLiuqiu.vo.MemberLoginRes;
 import com.example.XiaoLiuqiu.vo.MemberPwdReq;
+import com.example.XiaoLiuqiu.vo.MemberResetPwdReq;
 import com.example.XiaoLiuqiu.vo.MemberSignUpReq;
 import com.example.XiaoLiuqiu.vo.MemberUpDateReq;
 
@@ -27,6 +33,11 @@ public class MemberServiceController {
 
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private MemberDAO memberDao;
+	
+	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 	
 	@PostMapping(value="member/login")
@@ -69,9 +80,14 @@ public class MemberServiceController {
 		return memberService.pwdUpDate(memberId,req.getPwd(),req.getNewPwd(),req.getConfirmPwd());
 	}
 	
-	@PostMapping(value="member/rest_password")
-	public MemberLoginRes restPassword(@RequestBody MemberSignUpReq req) {
+	@PostMapping(value="member/send_email")
+	public MemberLoginRes sendEmail(@RequestBody MemberSignUpReq req) {
 		return memberService.sendResetPasswordEmail(req.getAccount());
+	}
+	
+	@PostMapping(value="member/reset_password")
+	public  MemberLoginRes resetPassword(@RequestParam String account, @RequestParam String resetCode, @RequestBody MemberResetPwdReq req) {
+		 return memberService.restPwd(account, resetCode, req.getNewPwd(), req.getConfirmPwd());
 	}
 	
 	 @PostMapping(value = "member/verify")
