@@ -51,7 +51,7 @@ public class MemberServiceController {
 	@PostMapping(value="member/signUp")
 	public MemberLoginRes signUp(@RequestBody MemberSignUpReq req) {
 		return memberService.signUp(req.getAccount(), req.getPwd(), req.getMemberName(), req.getMemberPhone()
-				, req.getMemberEmail());
+				, req.getMemberEmail(),req.getMemberPhoto());
 	}
 	
 	@PostMapping(value="member/member")
@@ -61,7 +61,7 @@ public class MemberServiceController {
 	
 	@PostMapping(value="member/upDate")
 	public MemberLoginRes upDate(@RequestParam int memberId,@RequestBody MemberUpDateReq req) {
-		return memberService.upDate(memberId,req.getMemberName(),req.getMemberPhone(),req.getMemberEmail());
+		return memberService.upDate(memberId,req.getMemberName(),req.getMemberPhone(),req.getMemberEmail(),req.getMemberPhoto());
 	}
 	
 	@PostMapping(value="member/pwdUpDate")

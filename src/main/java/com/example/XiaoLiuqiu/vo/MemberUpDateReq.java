@@ -7,17 +7,20 @@ public class MemberUpDateReq {
 	private String memberPhone;
 	
 	private String memberEmail;
+	
+	private String memberPhoto;
 
 	public MemberUpDateReq() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public MemberUpDateReq(String memberName, String memberPhone, String memberEmail) {
+	public MemberUpDateReq(String memberName, String memberPhone, String memberEmail, String memberPhoto) {
 		super();
 		this.memberName = memberName;
 		this.memberPhone = memberPhone;
 		this.memberEmail = memberEmail;
+		this.memberPhoto = memberPhoto;
 	}
 
 	public String getMemberName() {
@@ -42,6 +45,14 @@ public class MemberUpDateReq {
 
 	public void setMemberEmail(String memberEmail) {
 		this.memberEmail = memberEmail;
+	}
+
+	public String getMemberPhoto() {
+		return memberPhoto;
+	}
+
+	public void setMemberPhoto(String memberPhoto) {
+		this.memberPhoto = memberPhoto;
 	}
 	
 	

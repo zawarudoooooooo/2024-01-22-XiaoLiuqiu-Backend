@@ -16,6 +16,8 @@ public class MemberSignUpReq {
 	
 	private String memberEmail;
 	
+	private String memberPhoto;
+	
 	
 
 	public MemberSignUpReq() {
@@ -23,13 +25,14 @@ public class MemberSignUpReq {
 		// TODO Auto-generated constructor stub
 	}
 
-	public MemberSignUpReq(String account, String pwd, String memberName, String memberPhone, String memberEmail) {
+	public MemberSignUpReq(String account, String pwd, String memberName, String memberPhone, String memberEmail, String memberPhoto) {
 		super();
 		this.account = account;
 		this.pwd = pwd;
 		this.memberName = memberName;
 		this.memberPhone = memberPhone;
 		this.memberEmail = memberEmail;
+		this.memberPhoto = memberPhoto;
 	}
 
 	public String getAccount() {
@@ -71,6 +74,15 @@ public class MemberSignUpReq {
 	public void setMemberEmail(String memberEmail) {
 		this.memberEmail = memberEmail;
 	}
+
+	public String getMemberPhoto() {
+		return memberPhoto;
+	}
+
+	public void setMemberPhoto(String memberPhoto) {
+		this.memberPhoto = memberPhoto;
+	}
+	
 	
 	
 }
