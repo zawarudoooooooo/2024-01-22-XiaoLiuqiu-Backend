@@ -20,6 +20,7 @@ import com.example.XiaoLiuqiu.vo.MemberGetRes;
 import com.example.XiaoLiuqiu.vo.MemberLoginReq;
 import com.example.XiaoLiuqiu.vo.MemberLoginRes;
 import com.example.XiaoLiuqiu.vo.MemberPwdReq;
+import com.example.XiaoLiuqiu.vo.MemberResetPwdReq;
 import com.example.XiaoLiuqiu.vo.MemberSignUpReq;
 import com.example.XiaoLiuqiu.vo.MemberUpDateReq;
 
