@@ -8,10 +8,10 @@ public interface MemberService {
 	public MemberLoginRes login(String account , String pwd);
 	
 	public MemberLoginRes signUp(String account , String pwd , String memberName, 
-			String memberPhone, String memberEmail);
+			String memberPhone, String memberEmail, String memberPhoto);
 	
 	public MemberLoginRes upDate(int memberId, String memberName, 
-			String memberPhone, String memberEmail);
+			String memberPhone, String memberEmail, String memberPhoto);
 	
 	public MemberLoginRes pwdUpDate(int memberId,String pwd,String newPwd,String confirmPwd);
 	
