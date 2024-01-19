@@ -137,23 +137,40 @@ public class OrdersServiceImpl implements OrdersService {
 
 	}
 
+	@Override
+	public OrdersRes searchRoomId(String roomId, LocalDate startDate, LocalDate endDate) {
+		Orders order = new Orders();
+		ObjectMapper mapper = new ObjectMapper();
+		StringBuffer buff = new StringBuffer();
+		String roomStr = order.getRoomId();
+		roomStr = roomStr.replace("roomId", "房間編號").replace("roomName", "房型");
+		try {
+			List<Map<String, Object>> list = mapper.readValue(roomStr, List.class);
+			for(Map<String, Object> item : list) {
+				for(Entry<String, Object> mapItem : item.entrySet()) {
+					if(mapItem.getKey().equalsIgnoreCase("房間編號") 
+							|| mapItem.getKey().equalsIgnoreCase("房型")) {
+						buff.append(" " + mapItem.getKey()).append(": ").append(mapItem.getValue()).append("; ");
+					}
+				}
+			}
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 //	@Override
-//	public OrdersRes ordersCreate(int memberId, List<Room> roomId, List<Extra> orderItem, LocalDate startDate,
-//			LocalDate endDate) {
-//		if (memberId != 0||!roomId.isEmpty()||!orderItem.isEmpty()|| startDate == null || endDate == null) {
-//			return new OrdersRes(RtnCode.PARAM_ERROR.getCode(), RtnCode.PARAM_ERROR.getMessage());
-//		}
-//		if (startDate.isAfter(endDate)) {
-//			return new OrdersRes(RtnCode.DATE_FORMAT_ERROR.getCode(), RtnCode.DATE_FORMAT_ERROR.getMessage());
-//		}
-//		try {
-//			String roomIdStr=mapper.writeValueAsString(roomId);
-//			String orderItemStr=mapper.writeValueAsString(orderItem);
-//			orderDao.save(new Orders(memberId,roomIdStr,orderItemStr,startDate,endDate));
-//			return new OrdersRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
-//		} catch (JsonProcessingException e) {
-//			return new OrdersRes(RtnCode.ORDER_CREATE_ERROR.getCode(), RtnCode.ORDER_CREATE_ERROR.getMessage());
-//		}
+//	public OrdersRes search(String memberName, LocalDate startDate, LocalDate endDate) {
+//		memberName = !StringUtils.hasText(memberName) ? "" : memberName;
+//		startDate = startDate == null ? startDate = LocalDate.of(1970, 01, 01) : startDate;
+//		endDate = endDate == null ? endDate = LocalDate.of(2099, 12, 31) : endDate;
+//		List<Orders> res = orderDao.findByMemberNameContainingAndStartDateGreaterThanEqualAndEndDateLessThanEqual(
+//				memberName, startDate, endDate);
+//		return new OrdersGetRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage(), res);
 //	}
+
+
 
 }

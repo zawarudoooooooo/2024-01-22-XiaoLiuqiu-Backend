@@ -1,5 +1,7 @@
 package com.example.XiaoLiuqiu.controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +32,7 @@ public class MemberServiceController {
 
 	
 	@PostMapping(value="member/login")
-	public MemberLoginRes login(@RequestBody MemberLoginReq req,HttpSession session) {
+	public MemberLoginRes login(@RequestBody MemberLoginReq req,HttpSession session, HttpServletResponse response) {
 		String attr=(String) session.getAttribute("account");
 		
 		if(StringUtils.hasText(attr)&&attr.equals(req.getAccount())) {
@@ -42,6 +44,11 @@ public class MemberServiceController {
 			//預設有效時間為30秒 
 			//設定 session 有效時間, 單位:秒
 			session.setMaxInactiveInterval(600);
+			
+			Cookie memberIdCookie = new Cookie("member", req.getAccount());
+			memberIdCookie.setMaxAge(600); 
+			memberIdCookie.setPath("/");
+            response.addCookie(memberIdCookie);
 			
 		}
 		

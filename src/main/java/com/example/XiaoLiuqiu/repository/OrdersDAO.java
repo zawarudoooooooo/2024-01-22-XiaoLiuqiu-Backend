@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.example.XiaoLiuqiu.entity.Orders;
 import com.example.XiaoLiuqiu.entity.Room;
 import com.example.XiaoLiuqiu.entity.RoomMessageBoard;
+import com.example.XiaoLiuqiu.vo.RoomVo;
 
 @Repository
 public interface OrdersDAO extends JpaRepository<Orders, Integer>{
@@ -24,5 +25,12 @@ public interface OrdersDAO extends JpaRepository<Orders, Integer>{
 			+ " AND end_date <= ?3",nativeQuery = true)
 	public List<Orders> findByLike(@Param("roomId")List<Room> roomId, 
 			@Param("startDate")LocalDate startDate, @Param("endDate")LocalDate endDate);
+	
+	
+//	@Query("select new com.example.XiaoLiuqiu.vo.RoomVo(, O.startDate, O.endDate, "
+//			+ " R.roomName) "
+//			+ " form Orders as O "
+//			+ " join Room as R on O.num = W.quizNum ")
+//	public List<RoomVo> joinTwoTables();
 
 }
