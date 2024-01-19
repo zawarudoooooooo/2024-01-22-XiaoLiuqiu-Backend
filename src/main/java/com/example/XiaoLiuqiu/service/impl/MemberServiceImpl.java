@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -76,10 +78,10 @@ public class MemberServiceImpl implements MemberService {
 
 	private void sendsendVerificationEmail(Member member) {
 		
-		String verificationLink = "http://localhost:5173/verify?memberEmail=" + member.getMemberEmail() + "&verificationCode=" + member.getVerificationCode();
+		String verificationLink = "http://localhost:5173/member/verify?memberEmail=" + member.getMemberEmail() + "&verificationCode=" + member.getVerificationCode();
 		
 		String emailContent = "親愛的 " + member.getMemberName() + "，\n" +
-                "感謝您註冊！請點擊以下連結進行帳號驗證：\n" +
+                "感謝您的註冊！請點擊以下連結進行帳號驗證：\n" +
                 verificationLink;
 		
 		SimpleMailMessage message = new SimpleMailMessage();
@@ -186,7 +188,7 @@ public class MemberServiceImpl implements MemberService {
 	private void sendResetPasswordEmail(String account, String resetCode, String toEmail) {
 	        String subject = "重置密碼";
 	        String text = "請點擊以下連結重置密碼:\n" +
-	                "http://localhost:5173/reset?account=" + account + "&resetCode=" + resetCode;
+	                "http://localhost:5173/member/reset_password?account=" + account + "&resetCode=" + resetCode;
 
 	        
 	        SimpleMailMessage message = new SimpleMailMessage();
@@ -217,29 +219,21 @@ public class MemberServiceImpl implements MemberService {
 		return false;
 	}
 
-//	@Override
-//	public MemberGetRes member1(String account) {
-//		if(!StringUtils.hasText(account)) {
-//			return new MemberGetRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage(),null);
-//		}
-//		Optional<Member> op = memberDao.findByAccount(account);
-//		if(op.isEmpty()) {
-//			return new MemberGetRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(),RtnCode.ACCOUNT_NOT_FOUND.getMessage(),null);
-//		}
-//		Member member=op.get();
-//		List<Member> res=member.getAccount();
-//		return new MemberGetRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage(),res);
-//		return null;
-//	}
-
-	
-
-	
-
-	
-
-	
-
-	
-
+	@Override
+	public MemberLoginRes restPwd(String account, String resetCode, String newPwd, String confirmPwd) {
+		Optional<Member> op = memberDao.findByAccountAndRestCode(account, resetCode);
+	    if (!op.isPresent()) {
+	    	return new MemberLoginRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage());
+	    }
+	    if(!newPwd.equals(confirmPwd)) {
+	    	return new MemberLoginRes(RtnCode.NEW_PWD_ERROR.getCode(),RtnCode.NEW_PWD_ERROR.getMessage());
+	    }
+	    	Member member = op.get();
+	    	// 驗證成功，更新密碼
+	    	member.setPwd(encoder.encode(newPwd));
+	    	member.setRestCode(null);  // 重置重置碼，避免重複使用
+	    	memberDao.save(member);
+	    	
+	    return new MemberLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
+	}
 }

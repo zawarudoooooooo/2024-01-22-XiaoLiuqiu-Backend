@@ -31,6 +31,8 @@ public interface MemberDAO extends JpaRepository<Member, Integer> {
 	
 	public boolean existsByMemberEmail(String memberEmail);
 	
+	public Optional<Member> findByAccountAndRestCode(String account, String restCode);
+	
 	public Optional<Member> findByMemberEmailAndVerificationCode(String memberEmail, String verificationCode);
 	
 }

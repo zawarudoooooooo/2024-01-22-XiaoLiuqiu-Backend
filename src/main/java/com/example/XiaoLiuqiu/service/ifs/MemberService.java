@@ -21,5 +21,7 @@ public interface MemberService {
 	
 	public boolean verifyAccount(String memberEmail, String verificationCode); 
 	
+	public MemberLoginRes restPwd(String account, String resetCode, String newPwd, String confirmPwd);
+	
 //	public MemberGetRes member1(String account);
 }

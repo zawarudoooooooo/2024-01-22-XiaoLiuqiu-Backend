@@ -76,9 +76,14 @@ public class MemberServiceController {
 		return memberService.pwdUpDate(memberId,req.getPwd(),req.getNewPwd(),req.getConfirmPwd());
 	}
 	
-	@PostMapping(value="member/rest_password")
-	public MemberLoginRes restPassword(@RequestBody MemberSignUpReq req) {
+	@PostMapping(value="member/send_email")
+	public MemberLoginRes sendEmail(@RequestBody MemberSignUpReq req) {
 		return memberService.sendResetPasswordEmail(req.getAccount());
+	}
+	
+	@PostMapping(value="member/reset_password")
+	public  MemberLoginRes resetPassword(@RequestParam String account, @RequestParam String resetCode, @RequestBody MemberResetPwdReq req) {
+		 return memberService.restPwd(account, resetCode, req.getNewPwd(), req.getConfirmPwd());
 	}
 	
 	 @PostMapping(value = "member/verify")
