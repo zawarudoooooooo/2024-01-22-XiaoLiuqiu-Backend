@@ -9,18 +9,18 @@ import com.example.XiaoLiuqiu.vo.EmployeeLoginRes;
 
 @SpringBootTest
 class XiaoLiuqiuApplicationTests {
-	
+
 	@Autowired
 	public EmployeeService employeeService;
-	
+
 	@Test
 	void contextLoads() {
 	}
-	
+
 	@Test
 	public void employeeTest() {
-//		EmployeeLoginRes res=employeeService.create("As01", "qaz159", true);
-//		System.out.println(res.getRtncode());
+		EmployeeLoginRes res = employeeService.createMaster("A01", "159", true);
+		System.out.println(res.getRtncode());
 	}
 
 }

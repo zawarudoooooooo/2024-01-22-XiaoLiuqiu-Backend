@@ -24,17 +24,18 @@ CREATE TABLE if  not exists `extra` (
 
 
 CREATE TABLE if not exists `member` (
-  `member_id` int NOT NULL AUTO_INCREMENT,
-  `account` varchar(20) NOT NULL,
-  `password` varchar(60) NOT NULL,
-  `member_name` varchar(45) NOT NULL,
-  `member_phone` varchar(45) DEFAULT NULL,
-  `member_email` varchar(45) DEFAULT NULL,
-  `rest_code` varchar(255) DEFAULT NULL,
-  `verification_code` varchar(255) DEFAULT NULL,
-  `verified` tinyint DEFAULT '0',
-  PRIMARY KEY (`member_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  member_id int NOT NULL AUTO_INCREMENT,
+  account varchar(20) NOT NULL,
+  password varchar(60) NOT NULL,
+  member_name varchar(45) NOT NULL,
+  member_phone varchar(45) DEFAULT NULL,
+  member_email varchar(45) DEFAULT NULL,
+  rest_code varchar(255) DEFAULT NULL,
+  verification_code varchar(255) DEFAULT NULL,
+  verified tinyint DEFAULT '0',
+  member_photo mediumtext NOT NULL,
+  PRIMARY KEY (member_id)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 CREATE TABLE if  not exists `room_message_board` (
@@ -62,13 +63,14 @@ CREATE TABLE if not exists orders (
 
 
 CREATE TABLE if not exists `room` (
-  `room_id` varchar(20) NOT NULL,
-  `room_introduce` varchar(200) DEFAULT NULL,
-  `room_name` varchar(45) DEFAULT NULL,
-  `room_price` int DEFAULT NULL,
-  PRIMARY KEY (`room_id`)
+  room_id varchar(20) NOT NULL,
+  room_name varchar(45) NOT NULL,
+  room_introduce varchar(200) DEFAULT NULL,
+  room_price int NOT NULL,
+  is_open tinyint NOT NULL DEFAULT '0',
+  room_photo mediumtext NOT NULL,
+  PRIMARY KEY (room_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
 
 
 
