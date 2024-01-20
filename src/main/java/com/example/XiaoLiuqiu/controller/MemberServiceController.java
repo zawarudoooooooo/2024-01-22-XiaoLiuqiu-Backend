@@ -58,7 +58,7 @@ public class MemberServiceController {
 	@PostMapping(value="member/signUp")
 	public MemberLoginRes signUp(@RequestBody MemberSignUpReq req) {
 		return memberService.signUp(req.getAccount(), req.getPwd(), req.getMemberName(), req.getMemberPhone()
-				, req.getMemberEmail(),req.getMemberPhoto());
+				, req.getMemberEmail(),req.getMemberPhone());
 	}
 	
 	@PostMapping(value="member/member")
@@ -68,7 +68,7 @@ public class MemberServiceController {
 	
 	@PostMapping(value="member/upDate")
 	public MemberLoginRes upDate(@RequestParam int memberId,@RequestBody MemberUpDateReq req) {
-		return memberService.upDate(memberId,req.getMemberName(),req.getMemberPhone(),req.getMemberEmail(),req.getMemberPhoto());
+		return memberService.upDate(memberId,req.getMemberName(),req.getMemberPhone(),req.getMemberEmail(),req.getMemberPhone());
 	}
 	
 	@PostMapping(value="member/pwdUpDate")
@@ -92,4 +92,17 @@ public class MemberServiceController {
 			 return new ResponseEntity<>("±b∏π≈Á√“•¢±—", HttpStatus.BAD_REQUEST);
 		 }		 
 	 }
+	 
+	 @PostMapping(value="member/logout")
+		public MemberLoginRes logout(HttpSession session ,HttpServletResponse response) {
+			Cookie employeeCookie = new Cookie("member", "");
+			employeeCookie.setMaxAge(0); 
+			employeeCookie.setPath("/");
+	        response.addCookie(employeeCookie);
+			
+			session.invalidate();
+			System.out.println(session.getId());
+			return new MemberLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage()) ;
+			
+		}
 }

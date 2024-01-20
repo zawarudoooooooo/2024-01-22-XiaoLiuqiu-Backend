@@ -5,13 +5,13 @@ import java.time.LocalDate;
 public class RoomVo {
 	
 	private String roomId;
-	
-	private String roomName;
-	
+		
 	private LocalDate startDate;
 	
 	private LocalDate endDate;
 
+	private String roomName;
+	
 	public RoomVo() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -19,7 +19,7 @@ public class RoomVo {
 
 	
 
-	public RoomVo( String roomId, String roomName, LocalDate startDate, LocalDate endDate) {
+	public RoomVo( String roomId, LocalDate startDate, LocalDate endDate, String roomName) {
 		super();
 		this.roomId = roomId;
 		this.roomName = roomName;

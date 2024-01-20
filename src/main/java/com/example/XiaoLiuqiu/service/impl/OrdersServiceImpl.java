@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,11 @@ import com.example.XiaoLiuqiu.entity.Orders;
 import com.example.XiaoLiuqiu.entity.Room;
 import com.example.XiaoLiuqiu.repository.MemberDAO;
 import com.example.XiaoLiuqiu.repository.OrdersDAO;
+import com.example.XiaoLiuqiu.repository.RoomDAO;
 import com.example.XiaoLiuqiu.service.ifs.OrdersService;
 import com.example.XiaoLiuqiu.vo.OrdersGetRes;
 import com.example.XiaoLiuqiu.vo.OrdersRes;
+import com.example.XiaoLiuqiu.vo.RoomVo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -39,6 +42,9 @@ public class OrdersServiceImpl implements OrdersService {
 
 	@Autowired
 	private MemberDAO memberDao;
+	
+	@Autowired
+	private RoomDAO roomDao;
 
 	@Autowired
 	private JavaMailSender emailSender;
@@ -138,27 +144,44 @@ public class OrdersServiceImpl implements OrdersService {
 	}
 
 	@Override
-	public OrdersRes searchRoomId(String roomId, LocalDate startDate, LocalDate endDate) {
-		Orders order = new Orders();
-		ObjectMapper mapper = new ObjectMapper();
+	public OrdersRes searchRoomId(String memberName) {
+		
+		memberName = !StringUtils.hasText(memberName) ? "" : memberName;
+		
+		Orders order=new Orders();
+		Optional<Orders> op = orderDao.findByName(memberName);
+		
+		order=op.get();
 		StringBuffer buff = new StringBuffer();
 		String roomStr = order.getRoomId();
-		roomStr = roomStr.replace("roomId", "房間編號").replace("roomName", "房型");
+		List<Map<String, Object>> list;
 		try {
-			List<Map<String, Object>> list = mapper.readValue(roomStr, List.class);
+			list = mapper.readValue(roomStr, List.class);
 			for(Map<String, Object> item : list) {
+				buff.setLength(0);
 				for(Entry<String, Object> mapItem : item.entrySet()) {
-					if(mapItem.getKey().equalsIgnoreCase("房間編號") 
-							|| mapItem.getKey().equalsIgnoreCase("房型")) {
-						buff.append(" " + mapItem.getKey()).append(": ").append(mapItem.getValue()).append("; ");
+					if(mapItem.getKey().equalsIgnoreCase("roomId")) {
+						buff.append(mapItem.getValue());
+						System.out.println(buff.toString());
+						Optional<Room> roomRes=roomDao.findById(buff.toString());
+						Room room=roomRes.get();
+						
+//						System.out.println(res);
 					}
 				}
 			}
+			
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
+			 System.err.println("Error processing JSON: " + e.getMessage());
 			e.printStackTrace();
 		}
 		return null;
+		
+		
+		
+		
+		
 	}
 	
 //	@Override
