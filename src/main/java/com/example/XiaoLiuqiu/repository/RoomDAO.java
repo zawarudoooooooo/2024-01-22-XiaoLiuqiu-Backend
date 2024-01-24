@@ -42,7 +42,7 @@ public interface RoomDAO extends JpaRepository<Room, String>{
 	//COALESCE()若都是NULL回傳NULL，int boolean若使用會與期望成果相悖，抑或是寫成大寫Integer、Boolean便可使用
 	@Transactional(rollbackOn = Exception.class)
 	@Modifying(clearAutomatically = true)
-	@Query(value = "update room setroom_introduce = ?2, room_name = ?3, room_price = ?4, is_open=?5"
+	@Query(value = "update room set room_introduce = ?2, room_name = ?3, room_price = ?4, is_open=?5"
 			+ " where room_id = ?1", nativeQuery = true)
 	public int updateRoom(String roomId, String roomIntroduce, String roomName, int roomPrice, boolean isOpen);
 	

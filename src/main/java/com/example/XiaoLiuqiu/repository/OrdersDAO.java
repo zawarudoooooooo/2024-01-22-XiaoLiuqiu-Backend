@@ -21,6 +21,10 @@ public interface OrdersDAO extends JpaRepository<Orders, Integer>{
 	public List<Orders> findByMemberNameContainingAndStartDateGreaterThanEqualAndEndDateLessThanEqual
 	(String memberName ,LocalDate startDate, LocalDate endDate);
 	
+	public List<Orders> findByMemberNameContaining(String memberName);
+	
+	@Query(value="select * from orders where member_name like %:member_name% " ,nativeQuery = true)
+	public List<Orders> findByLikeMember(@Param("member_name")String memberName);
 	
 	@Query(value="select * from orders where room_id like ?1"
 			+ " AND start_date >= ?2"
@@ -34,7 +38,12 @@ public interface OrdersDAO extends JpaRepository<Orders, Integer>{
 	@Query("select new com.example.XiaoLiuqiu.vo.RoomVo(O.roomId, O.startDate, O.endDate, "
 			+ " R.roomName) "
 			+ " from Orders as O "
-			+ " join Room as R on O.roomId = R.roomId  where O.roomId = ?1")
-	public List<RoomVo> joinTwoTables(String roomiId);
+			+ " join Room as R on O.roomId = R.roomId "
+			+ " where O.startDate >= :startDate "
+			+ " AND O.endDate <= :endDate "
+			+ " AND R.roomName LIKE %:roomName% ")
+	public List<RoomVo> joinTwoTables(@Param("startDate") LocalDate startDate,
+            @Param("endDate") LocalDate endDate,
+            @Param("roomName") String roomName);
 
 }

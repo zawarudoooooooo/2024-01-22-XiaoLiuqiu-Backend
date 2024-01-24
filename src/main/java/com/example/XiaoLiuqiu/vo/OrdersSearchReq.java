@@ -8,8 +8,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class OrdersSearchReq {
 
-	@Column(name = "member_name")
-	private String memberName;
+	@Column(name = "room_name")
+	private String roomName;
 	
 	@JsonProperty(value = "start_date")
 	private LocalDate startDate;
@@ -22,19 +22,19 @@ public class OrdersSearchReq {
 		// TODO Auto-generated constructor stub
 	}
 
-	public OrdersSearchReq(String memberName, LocalDate startDate, LocalDate endDate) {
+	public OrdersSearchReq(String roomName, LocalDate startDate, LocalDate endDate) {
 		super();
-		this.memberName = memberName;
+		this.roomName = roomName;
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}
 
-	public String getMemberName() {
-		return memberName;
+	public String getRoomName() {
+		return roomName;
 	}
 
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
+	public void setRoomName(String roomName) {
+		this.roomName = roomName;
 	}
 
 	public LocalDate getStartDate() {

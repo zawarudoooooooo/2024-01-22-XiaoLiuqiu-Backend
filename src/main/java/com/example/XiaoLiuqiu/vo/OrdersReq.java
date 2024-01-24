@@ -14,7 +14,7 @@ public class OrdersReq {
 	private String memberName;
 	
 	@JsonProperty(value = "room_id")
-	private List<Room> roomId;
+	private String roomId;
 	
 	@JsonProperty(value = "order_item")
 	private List<Extra> orderItem;
@@ -35,10 +35,8 @@ public class OrdersReq {
 		super();
 	}
 
-	
-
-	public OrdersReq(String memberName, List<Room> roomId, List<Extra> orderItem, LocalDate startDate,
-			LocalDate endDate, boolean orderPayment, boolean payOrNot) {
+	public OrdersReq(String memberName, String roomId, List<Extra> orderItem, LocalDate startDate, LocalDate endDate,
+			boolean orderPayment, boolean payOrNot) {
 		super();
 		this.memberName = memberName;
 		this.roomId = roomId;
@@ -49,8 +47,6 @@ public class OrdersReq {
 		this.payOrNot = payOrNot;
 	}
 
-
-
 	public String getMemberName() {
 		return memberName;
 	}
@@ -59,11 +55,11 @@ public class OrdersReq {
 		this.memberName = memberName;
 	}
 
-	public List<Room> getRoomId() {
+	public String getRoomId() {
 		return roomId;
 	}
 
-	public void setRoomId(List<Room> roomId) {
+	public void setRoomId(String roomId) {
 		this.roomId = roomId;
 	}
 

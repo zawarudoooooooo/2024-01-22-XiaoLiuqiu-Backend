@@ -10,11 +10,11 @@ import com.example.XiaoLiuqiu.vo.OrdersRes;
 
 public interface OrdersService {
 
-	public OrdersRes search(String memberName, LocalDate startDate, LocalDate endDate);
+	public OrdersRes search(String roomName, LocalDate startDate, LocalDate endDate);
 	
-	public OrdersRes searchRoomId(String memberName);
+	public OrdersRes searchMemberName(String memberName);
 	
-	public OrdersRes ordersCreate(String memberName, List<Room> roomIdStr,List<Extra> orderItemStr, 
+	public OrdersRes ordersCreate(String memberName, String roomIdStr,List<Extra> orderItemStr, 
 			LocalDate startDate, LocalDate endDate, boolean orderPayment ,boolean payOrNot);
 
 }

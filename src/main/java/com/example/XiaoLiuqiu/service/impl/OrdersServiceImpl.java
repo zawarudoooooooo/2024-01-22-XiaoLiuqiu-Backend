@@ -27,6 +27,7 @@ import com.example.XiaoLiuqiu.repository.RoomDAO;
 import com.example.XiaoLiuqiu.service.ifs.OrdersService;
 import com.example.XiaoLiuqiu.vo.OrdersGetRes;
 import com.example.XiaoLiuqiu.vo.OrdersRes;
+import com.example.XiaoLiuqiu.vo.OrdersRoomGetRes;
 import com.example.XiaoLiuqiu.vo.RoomVo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -50,20 +51,18 @@ public class OrdersServiceImpl implements OrdersService {
 	private JavaMailSender emailSender;
 
 	@Override
-	public OrdersRes search(String memberName, LocalDate startDate, LocalDate endDate) {
-		memberName = !StringUtils.hasText(memberName) ? "" : memberName;
+	public OrdersRes search(String roomName, LocalDate startDate, LocalDate endDate) {
+		roomName = !StringUtils.hasText(roomName) ? "" : roomName;
 		startDate = startDate == null ? startDate = LocalDate.of(1970, 01, 01) : startDate;
 		endDate = endDate == null ? endDate = LocalDate.of(2099, 12, 31) : endDate;
-		List<Orders> res = orderDao.findByMemberNameContainingAndStartDateGreaterThanEqualAndEndDateLessThanEqual(
-				memberName, startDate, endDate);
+		List<RoomVo> res = orderDao.joinTwoTables(startDate,endDate, roomName);
 		return new OrdersGetRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage(), res);
 	}
 
 	@Override
-
-	public OrdersRes ordersCreate(String memberName, List<Room> roomIdStr, List<Extra> orderItemStr,
+	public OrdersRes ordersCreate(String memberName, String roomId, List<Extra> orderItemStr,
 			LocalDate startDate, LocalDate endDate, boolean orderPayment, boolean payOrNot) {
-		if (!StringUtils.hasText(memberName) || startDate == null || endDate == null) {
+		if (!StringUtils.hasText(memberName) || !StringUtils.hasText(roomId)|| startDate == null || endDate == null) {
 			return new OrdersRes(RtnCode.PARAM_ERROR.getCode(), RtnCode.PARAM_ERROR.getMessage());
 		}
 		if (startDate.isAfter(endDate)) {
@@ -71,7 +70,6 @@ public class OrdersServiceImpl implements OrdersService {
 
 		}
 		try {
-			String roomId = mapper.writeValueAsString(roomIdStr);
 			String orderItem = mapper.writeValueAsString(orderItemStr);
 			Orders newOrder = new Orders(memberName, roomId, orderItem, startDate, endDate, LocalDateTime.now(),
 					orderPayment, payOrNot);
@@ -94,7 +92,6 @@ public class OrdersServiceImpl implements OrdersService {
 			String orderItemStr = order.getOrderItem();
 			try {
 				StringBuffer buf = new StringBuffer();
-				StringBuffer buff = new StringBuffer();
 				List<Map<String, Object>> list = mapper.readValue(orderItemStr, List.class);
 				for(Map<String, Object> listItem : list) {
 					int count = 0;
@@ -102,32 +99,35 @@ public class OrdersServiceImpl implements OrdersService {
 						if (mapItem.getKey().equalsIgnoreCase("extraId")) {
 							continue;
 						}
-						buf.append(mapItem.getValue());
+						String value = mapItem.getValue().toString().replace("\"", "");
+						buf.append(value);
 						count++;
 						if (count % 2 != 0) {
-							buf.append(": ");
+							buf.setCharAt(0, ' ');
+							buf.setCharAt(buf.length() - 1, ':');
+//							buf.append(": ");
 						} else {
 							buf.append(";\t");
 						}
 					}
 				}
-				String roomStr = order.getRoomId();
-					roomStr = roomStr.replace("roomId", "房間編號").replace("roomName", "房型");
-					list = mapper.readValue(roomStr, List.class);
-					for(Map<String, Object> item : list) {
-						for(Entry<String, Object> mapItem : item.entrySet()) {
-							if(mapItem.getKey().equalsIgnoreCase("房間編號") 
-									|| mapItem.getKey().equalsIgnoreCase("房型")) {
-								buff.append(" " + mapItem.getKey()).append(": ").append(mapItem.getValue()).append("; ");
-							}
-						}
-					}
+//				String roomStr = order.getRoomId();
+//					roomStr = roomStr.replace("roomId", "房間編號").replace("roomName", "房型");
+//					list = mapper.readValue(roomStr, List.class);
+//					for(Map<String, Object> item : list) {
+//						for(Entry<String, Object> mapItem : item.entrySet()) {
+//							if(mapItem.getKey().equalsIgnoreCase("房間編號") 
+//									|| mapItem.getKey().equalsIgnoreCase("房型")) {
+//								buff.append(" " + mapItem.getKey()).append(": ").append(mapItem.getValue()).append("; ");
+//							}
+//						}
+//					}
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
 				String to = member.getMemberEmail();
 				String subject = "訂單成立通知";
 				String text = "感謝您的訂購!\n" + "您的訂單編號為 : " + order.getOrderId() + "; \n"
-				               + "房間資訊 : " + buff.toString() + "\n" + "加購項目 : " + buf.toString() + "\n"
-						       + "訂單日期 : " + order.getOrderDateTime().format(formatter) + ";";
+				               + "房間資訊 : " + order.getRoomId() + "\n" + "加購項目 : " + buf.toString() + "\n"
+						       + "訂單日期 : " + order.getOrderDateTime().format(formatter) + " ;";
 
 				SimpleMailMessage message = new SimpleMailMessage();
 				message.setTo(to);
@@ -144,44 +144,10 @@ public class OrdersServiceImpl implements OrdersService {
 	}
 
 	@Override
-	public OrdersRes searchRoomId(String memberName) {
-		
+	public OrdersRes searchMemberName(String memberName) {
 		memberName = !StringUtils.hasText(memberName) ? "" : memberName;
-		
-		Orders order=new Orders();
-		Optional<Orders> op = orderDao.findByName(memberName);
-		
-		order=op.get();
-		StringBuffer buff = new StringBuffer();
-		String roomStr = order.getRoomId();
-		List<Map<String, Object>> list;
-		try {
-			list = mapper.readValue(roomStr, List.class);
-			for(Map<String, Object> item : list) {
-				buff.setLength(0);
-				for(Entry<String, Object> mapItem : item.entrySet()) {
-					if(mapItem.getKey().equalsIgnoreCase("roomId")) {
-						buff.append(mapItem.getValue());
-						System.out.println(buff.toString());
-						Optional<Room> roomRes=roomDao.findById(buff.toString());
-						Room room=roomRes.get();
-						
-//						System.out.println(res);
-					}
-				}
-			}
-			
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			 System.err.println("Error processing JSON: " + e.getMessage());
-			e.printStackTrace();
-		}
-		return null;
-		
-		
-		
-		
-		
+		List<Orders> res = orderDao.findByMemberNameContaining(memberName);
+		return new OrdersRoomGetRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage(), res);
 	}
 	
 //	@Override

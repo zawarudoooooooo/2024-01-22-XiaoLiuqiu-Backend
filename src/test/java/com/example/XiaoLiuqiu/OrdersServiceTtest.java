@@ -37,65 +37,38 @@ public class OrdersServiceTtest {
 	
 	@Test
 	public void orderTest1() {
-		List<Room> room=Arrays.asList(
-				new Room("A01","這是單人房","單人房",1500,true),
-				new Room("A02","這是單人房","單人房",1500,true));
 		List<Extra> order=Arrays.asList(
 				new Extra("早餐",200),
 				new Extra("門票",500)
 				);
-		OrdersRes res=ordersService.ordersCreate("Roy", room , order, 
+		OrdersRes res=ordersService.ordersCreate("Roy", "A02" , order, 
 				LocalDate.now(), LocalDate.now().plusDays(1),true,false);
 		System.out.println(res.getCode()+res.getMessage());
 	}
 	
 	@Test
 	public void orderTest2() {
-		List<Room> room=Arrays.asList(
-				new Room("C02","舒適的雙人房間","舒適雙人房",3000,true));
 		List<Extra> order=Arrays.asList(
-				new Extra("早餐",200)
+				new Extra("[早餐,摩托車]",1000)
 				);
-		OrdersRes res=ordersService.ordersCreate("Roy", room , order, 
+		OrdersRes res=ordersService.ordersCreate("王曉明", "A02" , order, 
 				LocalDate.now(), LocalDate.now().plusDays(1),true,false);
 		System.out.println(res.getCode()+res.getMessage());
 	}
 	
-	private ObjectMapper mapper = new ObjectMapper();
 	@Test
 	public void orderTest3() {
-		Orders order=new Orders();
-		Optional<Orders> op = orderDao.findById(6);
-//		Optional<Orders> op = orderDao.findByName("");
-		
-		order=op.get();
-		StringBuffer buff = new StringBuffer();
-		String roomStr = order.getRoomId();
-		List<Map<String, Object>> list;
-		try {
-			list = mapper.readValue(roomStr, List.class);
-			for(Map<String, Object> item : list) {
-				buff.setLength(0);
-				for(Entry<String, Object> mapItem : item.entrySet()) {
-					if(mapItem.getKey().equalsIgnoreCase("roomId")) {
-						buff.append(mapItem.getValue());
-//						System.out.println(buff.toString());
-						Optional<Room> roomRes=roomDao.findById(buff.toString());
-						Room room=roomRes.get();
-						
-						System.out.println(room.getRoomId());
-						System.out.println(room.getRoomName());
-					}
-				}
-			}
-			
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			 System.err.println("Error processing JSON: " + e.getMessage());
-			e.printStackTrace();
+		List<RoomVo> res=orderDao.joinTwoTables(LocalDate.of(2024, 01, 17),LocalDate.of(2024, 01, 18),"");
+		for (RoomVo roomVo : res) {
+			System.out.println(roomVo.getRoomId()+roomVo.getRoomName()+roomVo.getStartDate()+roomVo.getEndDate());
 		}
-		
 	}
-	
+
+	@Test
+	public void test() {
+		String inputString = "[早餐,門票]";
+		String resultString = inputString.substring(1, inputString.length() - 1);
+		System.out.println(resultString);
+	}
 	
 }
