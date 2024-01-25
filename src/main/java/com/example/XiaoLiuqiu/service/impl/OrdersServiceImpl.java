@@ -149,6 +149,22 @@ public class OrdersServiceImpl implements OrdersService {
 		List<Orders> res = orderDao.findByMemberNameContaining(memberName);
 		return new OrdersRoomGetRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage(), res);
 	}
+
+	@Override
+	public OrdersRes orderFinished(int orderId) {
+		Optional<Orders> optionalOrder = orderDao.findById(orderId);
+		
+		if(!optionalOrder.isPresent()) {
+			return new OrdersRes(RtnCode.ORDER_NOT_FOUND.getCode(), RtnCode.ORDER_NOT_FOUND.getMessage());
+		}
+		Orders order = optionalOrder.get();
+		if(order.isPayOrNot()) {
+			return new OrdersRes(RtnCode.ORDER_ALREADY_FINISHED.getCode(), RtnCode.ORDER_ALREADY_FINISHED.getMessage());
+		}
+		order.setPayOrNot(true);
+		orderDao.save(order);
+		return new OrdersRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
+	}
 	
 //	@Override
 //	public OrdersRes search(String memberName, LocalDate startDate, LocalDate endDate) {

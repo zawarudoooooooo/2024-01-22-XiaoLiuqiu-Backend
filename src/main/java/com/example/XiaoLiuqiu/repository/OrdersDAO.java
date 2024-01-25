@@ -21,6 +21,8 @@ public interface OrdersDAO extends JpaRepository<Orders, Integer>{
 	public List<Orders> findByMemberNameContainingAndStartDateGreaterThanEqualAndEndDateLessThanEqual
 	(String memberName ,LocalDate startDate, LocalDate endDate);
 	
+	public Optional<Orders> findByOrderId(int orderId);
+	
 	public List<Orders> findByMemberNameContaining(String memberName);
 	
 	@Query(value="select * from orders where member_name like %:member_name% " ,nativeQuery = true)

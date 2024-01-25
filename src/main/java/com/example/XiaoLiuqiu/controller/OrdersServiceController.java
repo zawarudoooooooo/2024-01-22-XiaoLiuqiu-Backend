@@ -40,5 +40,10 @@ public class OrdersServiceController {
 		return ordersService.searchMemberName(memberName);
 	}
 	
+	@PostMapping(value = "order/order_finished")
+	public OrdersRes orderFinished(@RequestParam int orderId) {
+		return ordersService.orderFinished(orderId);
+	}
+	
 
 }
