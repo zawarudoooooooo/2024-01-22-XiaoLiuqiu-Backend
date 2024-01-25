@@ -179,7 +179,7 @@ public class MemberServiceImpl implements MemberService {
 	        String resetCode = UUID.randomUUID().toString();
 	        member.setRestCode(resetCode);
 	        memberDao.save(member);
-
+ 
 	        // 發送郵件
 	        sendResetPasswordEmail(member.getAccount(), resetCode, member.getMemberEmail());
 
@@ -200,7 +200,6 @@ public class MemberServiceImpl implements MemberService {
 	        try {
 	            emailSender.send(message);
 	        } catch (Exception e) {
-	            // 處理郵件發送異常，可以記錄日誌或者返回相應的錯誤信息
 	            e.printStackTrace();
 	        }
 	    }

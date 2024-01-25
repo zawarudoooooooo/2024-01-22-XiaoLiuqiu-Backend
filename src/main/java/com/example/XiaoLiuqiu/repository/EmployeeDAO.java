@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.example.XiaoLiuqiu.constants.Department;
 import com.example.XiaoLiuqiu.entity.Employee;
 
 @Repository
@@ -35,11 +36,22 @@ public interface EmployeeDAO extends JpaRepository<Employee, Integer>{
 	public int insertMaster(//
 			@Param("account")String account,//
 			@Param("password")String pwd,
-			@Param("access")boolean access);
+			@Param("access")int access);
 	
-	public Optional<Employee>  findByAccount(String account);
+	public Optional<Employee> findByAccount(String account);
 	
 	public List<Employee> findByAccountContaining(String account);
+	
+	public List<Employee> findByDepartmentAndActive(Department department, boolean active);
+	
+	public List<Employee> findAllByActive(boolean active);
+	
+	public List<Employee> findByAccountAndActive(String account, boolean active);
+	
+	public List<Employee> findAll();
+	
+	@Query(value="select * from employee where account = :account", nativeQuery = true)
+	public Employee findByAccount2(@Param("account")String account);
 	
 	public boolean existsByAccount(String account);
 	

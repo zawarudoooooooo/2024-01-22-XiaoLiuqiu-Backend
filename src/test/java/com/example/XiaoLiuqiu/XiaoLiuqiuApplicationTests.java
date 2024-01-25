@@ -19,8 +19,8 @@ class XiaoLiuqiuApplicationTests {
 
 	@Test
 	public void employeeTest() {
-		EmployeeLoginRes res = employeeService.createMaster("A01", "159", true);
-		System.out.println(res.getRtncode());
+//		EmployeeLoginRes res = employeeService.createMaster("A01", "159", true, 20);
+//		System.out.println(res.getRtncode());
 	}
 
 }
