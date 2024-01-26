@@ -9,9 +9,11 @@ import org.springframework.util.StringUtils;
 
 import com.example.XiaoLiuqiu.constants.RtnCode;
 import com.example.XiaoLiuqiu.entity.Car;
+
 import com.example.XiaoLiuqiu.repository.CarDAO;
 import com.example.XiaoLiuqiu.service.ifs.CarService;
 import com.example.XiaoLiuqiu.vo.CarSearchRes;
+
 
 @Service
 public class CarServiceImpl implements CarService {
@@ -31,6 +33,13 @@ public class CarServiceImpl implements CarService {
 		}
 		return new CarSearchRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
 
+	}
+
+	@Override
+	public CarSearchRes carPhoto(String carId, int carTypeId, String carIntroduce) {
+		
+		carDAO.save(new Car(carId,carTypeId,carIntroduce));
+		return new CarSearchRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
 	}
 
 }
