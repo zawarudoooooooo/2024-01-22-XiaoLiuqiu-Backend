@@ -235,4 +235,21 @@ public class MemberServiceImpl implements MemberService {
 	    	
 	    return new MemberLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
 	}
+
+	@Override
+	public MemberLoginRes imgUpDate(int memberId,String memberImg) {
+		if(memberId<=0) {
+			return new MemberLoginRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage());
+		}
+		Optional<Member> op= memberDao.findById(memberId);
+		if(op.isEmpty()) {
+			return new MemberLoginRes(RtnCode.MEMBER_NOT_FOUMD.getCode(),RtnCode.MEMBER_NOT_FOUMD.getMessage());
+		}
+		Member member=op.get();
+		if(StringUtils.hasText(memberImg)) {
+			member.setMemberImgPhoto(memberImg);
+		}
+		memberDao.save(member);
+		return new MemberLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
+	}
 }

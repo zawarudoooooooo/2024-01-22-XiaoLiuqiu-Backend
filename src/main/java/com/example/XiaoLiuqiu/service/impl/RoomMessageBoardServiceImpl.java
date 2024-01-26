@@ -1,5 +1,6 @@
 package com.example.XiaoLiuqiu.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class RoomMessageBoardServiceImpl implements RoomMessageBoardService{
 		if(!StringUtils.hasText(memberName)||!StringUtils.hasText(roomId)||!StringUtils.hasText(roomMessageBoardDescription)) {
 			return new RoomMessageBoardRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage());
 		}
-		roomMessageBoardDao.save(new RoomMessageBoard(memberName,roomId,roomMessageBoardDescription));
+		roomMessageBoardDao.save(new RoomMessageBoard(memberName,roomId,roomMessageBoardDescription,LocalDateTime.now()));
 		return new RoomMessageBoardRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
 	}
 

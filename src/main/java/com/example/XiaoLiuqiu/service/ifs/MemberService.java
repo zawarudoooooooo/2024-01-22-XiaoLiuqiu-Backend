@@ -13,6 +13,8 @@ public interface MemberService {
 	public MemberLoginRes upDate(int memberId, String memberName, 
 			String memberPhone, String memberEmail, String memberPhoto);
 	
+	public MemberLoginRes imgUpDate(int memberId, String memberImg);
+	
 	public MemberLoginRes pwdUpDate(int memberId,String pwd,String newPwd,String confirmPwd);
 	
 	public MemberGetRes member(String account);

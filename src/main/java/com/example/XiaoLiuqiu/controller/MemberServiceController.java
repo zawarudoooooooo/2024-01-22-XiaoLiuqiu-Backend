@@ -72,6 +72,11 @@ public class MemberServiceController {
 		return memberService.upDate(memberId,req.getMemberName(),req.getMemberPhone(),req.getMemberEmail(),req.getMemberPhone());
 	}
 	
+	@PostMapping(value="member/imgUpDate")
+	public MemberLoginRes imgUpDate(@RequestParam int memberId,@RequestBody String memberImg) {
+		return memberService.imgUpDate(memberId,memberImg);
+	}
+	
 	@PostMapping(value="member/pwdUpDate")
 	public MemberLoginRes pwdUpDate(@RequestParam int memberId ,@RequestBody MemberPwdReq req) {
 		return memberService.pwdUpDate(memberId,req.getPwd(),req.getNewPwd(),req.getConfirmPwd());

@@ -1,5 +1,7 @@
 package com.example.XiaoLiuqiu.entity;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,17 +26,30 @@ public class RoomMessageBoard {
 	
 	@Column(name = "room_message_board_description")
 	private String roomMessageBoardDescription;
+	
+	@Column(name = "message_date_time")
+	private LocalDateTime messageDateTime;
 
 	public RoomMessageBoard() {
 		super();
 	}
 
-	public RoomMessageBoard(String memberName, String roomId, String roomMessageBoardDescription) {
+	
+
+	
+
+	public RoomMessageBoard(String memberName, String roomId, String roomMessageBoardDescription,
+			LocalDateTime messageDateTime) {
 		super();
 		this.memberName = memberName;
 		this.roomId = roomId;
 		this.roomMessageBoardDescription = roomMessageBoardDescription;
+		this.messageDateTime = messageDateTime;
 	}
+
+
+
+
 
 	public int getMessageBoardId() {
 		return messageBoardId;
@@ -67,6 +82,26 @@ public class RoomMessageBoard {
 	public void setRoomMessageBoardDescription(String roomMessageBoardDescription) {
 		this.roomMessageBoardDescription = roomMessageBoardDescription;
 	}
+
+
+
+
+
+	public LocalDateTime getMessageDateTime() {
+		return messageDateTime;
+	}
+
+
+
+
+
+	public void setMessageDateTime(LocalDateTime messageDateTime) {
+		this.messageDateTime = messageDateTime;
+	}
+
+
+
+	
 
 	
 	
