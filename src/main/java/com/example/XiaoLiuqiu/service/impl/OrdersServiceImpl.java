@@ -35,7 +35,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 public class OrdersServiceImpl implements OrdersService {
 
-//	¦r¦ê»Pª«¥ó(Ãş§O)¤¬Âà
+//	å­—ä¸²èˆ‡ç‰©ä»¶(é¡åˆ¥)äº’è½‰
 	private ObjectMapper mapper = new ObjectMapper();
 
 	@Autowired
@@ -61,7 +61,7 @@ public class OrdersServiceImpl implements OrdersService {
 
 	@Override
 	public OrdersRes ordersCreate(String memberName, String roomId, List<Extra> orderItemStr,
-			LocalDate startDate, LocalDate endDate, boolean orderPayment, boolean payOrNot) {
+			LocalDate startDate, LocalDate endDate, boolean orderPayment, boolean payOrNot,int total) {
 		if (!StringUtils.hasText(memberName) || !StringUtils.hasText(roomId)|| startDate == null || endDate == null) {
 			return new OrdersRes(RtnCode.PARAM_ERROR.getCode(), RtnCode.PARAM_ERROR.getMessage());
 		}
@@ -72,9 +72,9 @@ public class OrdersServiceImpl implements OrdersService {
 		try {
 			String orderItem = mapper.writeValueAsString(orderItemStr);
 			Orders newOrder = new Orders(memberName, roomId, orderItem, startDate, endDate, LocalDateTime.now(),
-					orderPayment, payOrNot);
+					orderPayment, payOrNot,total);
 			orderDao.save(newOrder);
-			// ¦¨¥\«Ø¥ß­q³æ«áµo°e¶l¥ó³qª¾ÅU«È
+			// æˆåŠŸå»ºç«‹è¨‚å–®å¾Œç™¼é€éƒµä»¶é€šçŸ¥é¡§å®¢
 			sendOrderConfirmationEmail(newOrder);
 			return new OrdersRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
 		} catch (JsonProcessingException e) {
@@ -112,22 +112,23 @@ public class OrdersServiceImpl implements OrdersService {
 					}
 				}
 //				String roomStr = order.getRoomId();
-//					roomStr = roomStr.replace("roomId", "©Ğ¶¡½s¸¹").replace("roomName", "©Ğ«¬");
+//					roomStr = roomStr.replace("roomId", "æˆ¿é–“ç·¨è™Ÿ").replace("roomName", "æˆ¿å‹");
 //					list = mapper.readValue(roomStr, List.class);
 //					for(Map<String, Object> item : list) {
 //						for(Entry<String, Object> mapItem : item.entrySet()) {
-//							if(mapItem.getKey().equalsIgnoreCase("©Ğ¶¡½s¸¹") 
-//									|| mapItem.getKey().equalsIgnoreCase("©Ğ«¬")) {
+//							if(mapItem.getKey().equalsIgnoreCase("æˆ¿é–“ç·¨è™Ÿ") 
+//									|| mapItem.getKey().equalsIgnoreCase("æˆ¿å‹")) {
 //								buff.append(" " + mapItem.getKey()).append(": ").append(mapItem.getValue()).append("; ");
 //							}
 //						}
 //					}
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
 				String to = member.getMemberEmail();
-				String subject = "­q³æ¦¨¥ß³qª¾";
-				String text = "·PÁÂ±zªº­qÁÊ!\n" + "±zªº­q³æ½s¸¹¬° : " + order.getOrderId() + "; \n"
-				               + "©Ğ¶¡¸ê°T : " + order.getRoomId() + "\n" + "¥[ÁÊ¶µ¥Ø : " + buf.toString() + "\n"
-						       + "­q³æ¤é´Á : " + order.getOrderDateTime().format(formatter) + " ;";
+				String subject = "è¨‚å–®æˆç«‹é€šçŸ¥";
+				String text = "æ„Ÿè¬æ‚¨çš„è¨‚è³¼!\n" + "æ‚¨çš„è¨‚å–®ç·¨è™Ÿç‚º : " + order.getOrderId() + "; \n"
+				               + "æˆ¿é–“è³‡è¨Š : " + order.getRoomId() + "\n" + "åŠ è³¼é …ç›® : " + buf.toString() + "\n"
+						       + "è¨‚å–®æ—¥æœŸ : " + order.getOrderDateTime().format(formatter) +"\n"+ "ç¸½é‡‘é¡ï¼š"+order.getTotal() +"\n"
+						       +"Â· å‡ºæ¸¡è¼ªç«™å¾Œï¼Œæ­¥è¡Œç´„3åˆ†é˜å³å¯æŠµé”Seaâ€¢Lifeåˆä½œå•†å®¶ï¼Œå¯æ–¼æ­¤ç§Ÿå€Ÿæ©Ÿè»Šã€å…Œæ›ç¥¨å·å’Œå¯„æ”¾è¡Œæ"+" ;";
 
 				SimpleMailMessage message = new SimpleMailMessage();
 				message.setTo(to);

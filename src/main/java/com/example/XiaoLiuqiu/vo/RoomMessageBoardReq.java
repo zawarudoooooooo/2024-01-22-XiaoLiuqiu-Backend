@@ -1,22 +1,29 @@
 package com.example.XiaoLiuqiu.vo;
 
 public class RoomMessageBoardReq {
-	
+
 	private String memberName;
-	
+
 	private String roomId;
-	
+
 	private String roomMessageBoardDescription;
+
+	private String messageImg;
+
+	private String account;
 
 	public RoomMessageBoardReq() {
 		super();
 	}
 
-	public RoomMessageBoardReq(String memberName, String roomId, String roomMessageBoardDescription) {
+	public RoomMessageBoardReq(String memberName, String roomId, String roomMessageBoardDescription, String messageImg,
+			String account) {
 		super();
 		this.memberName = memberName;
 		this.roomId = roomId;
 		this.roomMessageBoardDescription = roomMessageBoardDescription;
+		this.messageImg = messageImg;
+		this.account = account;
 	}
 
 	public String getMemberName() {
@@ -42,7 +49,21 @@ public class RoomMessageBoardReq {
 	public void setRoomMessageBoardDescription(String roomMessageBoardDescription) {
 		this.roomMessageBoardDescription = roomMessageBoardDescription;
 	}
-	
-	
+
+	public String getMessageImg() {
+		return messageImg;
+	}
+
+	public void setMessageImg(String messageImg) {
+		this.messageImg = messageImg;
+	}
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
+	}
 
 }

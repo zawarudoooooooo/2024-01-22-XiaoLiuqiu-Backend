@@ -42,16 +42,17 @@ public class Orders {
 	
 	@Column(name = "pay_or_not")
 	private boolean payOrNot;
+	
+	@Column(name = "total")
+	private int total;
 
 	public Orders() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	
-
 	public Orders(String memberName, String roomId, String orderItem, LocalDate startDate, LocalDate endDate,
-			LocalDateTime orderDateTime, boolean orderPayment, boolean payOrNot) {
+			LocalDateTime orderDateTime, boolean orderPayment, boolean payOrNot, int total) {
 		super();
 		this.memberName = memberName;
 		this.roomId = roomId;
@@ -61,9 +62,16 @@ public class Orders {
 		this.orderDateTime = orderDateTime;
 		this.orderPayment = orderPayment;
 		this.payOrNot = payOrNot;
+		this.total = total;
 	}
 
+	public int getTotal() {
+		return total;
+	}
 
+	public void setTotal(int total) {
+		this.total = total;
+	}
 
 	public int getOrderId() {
 		return orderId;

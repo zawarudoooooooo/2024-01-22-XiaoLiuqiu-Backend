@@ -27,17 +27,19 @@ public class RoomServiceImpl implements RoomService{
 		return new RoomGetRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage(), res);
 	}
 	@Override
-	public RoomRes createRoom(String roomId, String roomIntroduce, String roomName, int roomPrice, boolean isOpen) {
+	public RoomRes createRoom(String roomId, String roomIntroduce, String roomName, int roomPrice, boolean isOpen,
+			String roomImg) {
 		if(roomDao.existsByRoomId(roomId)) {
 			return new RoomRes(RtnCode.ROOM_ID_IS_EXISTED.getCode(), RtnCode.ROOM_ID_IS_EXISTED.getMessage());
 		}
-		roomDao.insertRoom(roomId, roomIntroduce, roomName, roomPrice,isOpen);
+		roomDao.insertRoom(roomId, roomIntroduce, roomName, roomPrice,isOpen,roomImg);
 		return new RoomRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
 	}
 
 	@Override
-	public RoomRes updateRoom(String roomId, String roomIntroduce , String roomName, int roomPrice, boolean isOpen) {
-		roomDao.updateRoom(roomId, roomIntroduce, roomName, roomPrice, isOpen);
+	public RoomRes updateRoom(String roomId, String roomIntroduce , String roomName, int roomPrice, boolean isOpen,
+			String roomImg) {
+		roomDao.updateRoom(roomId, roomIntroduce, roomName, roomPrice, isOpen, roomImg);
 		return new RoomRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
 	}
 
