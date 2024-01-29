@@ -18,16 +18,11 @@ public class RoomReq {
 	
 	@JsonProperty(value = "is_open")
 	private boolean isOpen;
-
+	
+	
 	public RoomReq() {
 		super();
 	}
-
-	
-
-	
-
-
 
 	public RoomReq(String roomId, String roomIntroduce, String roomName, int roomPrice, boolean isOpen) {
 		super();
@@ -37,12 +32,6 @@ public class RoomReq {
 		this.roomPrice = roomPrice;
 		this.isOpen = isOpen;
 	}
-
-
-
-
-
-
 
 	public String getRoomId() {
 		return roomId;
@@ -76,21 +65,9 @@ public class RoomReq {
 		this.roomPrice = roomPrice;
 	}
 
-
-
-
-
-
-
 	public boolean isOpen() {
 		return isOpen;
 	}
-
-
-
-
-
-
 
 	public void setOpen(boolean isOpen) {
 		this.isOpen = isOpen;

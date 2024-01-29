@@ -128,7 +128,6 @@ public class OrdersServiceImpl implements OrdersService {
 				String text = "感謝您的訂購!\n" + "您的訂單編號為 : " + order.getOrderId() + "; \n"
 				               + "房間資訊 : " + order.getRoomId() + "\n" + "加購項目 : " + buf.toString() + "\n"
 						       + "訂單日期 : " + order.getOrderDateTime().format(formatter) + " ;";
-
 				SimpleMailMessage message = new SimpleMailMessage();
 				message.setTo(to);
 				message.setSubject(subject);

@@ -19,7 +19,7 @@ public enum RtnCode {
 	ACCESS_IS_NOT_ALLOWED(400, "Access is not allowed"),//
 	ROOM_ID_IS_EXISTED(400,"RoomId is existed!!"),//
 	PLEASE_LOGIN_FIRST(400,"Please logon first"),//
-	Room_ID_IS_EXISTED(400,"RoomId is existed!!"),
+	CREATE_ROOM_FAILED(400, "Create room failed"),//
 	;
 	
 	private int code;

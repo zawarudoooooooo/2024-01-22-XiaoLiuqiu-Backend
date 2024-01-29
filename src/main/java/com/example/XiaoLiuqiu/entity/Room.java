@@ -24,7 +24,7 @@ public class Room {
 	
 	@Column(name = "is_open")
 	private boolean isOpen;
-
+	
 	public Room() {
 		super();
 	}
@@ -37,7 +37,7 @@ public class Room {
 		this.roomPrice = roomPrice;
 		this.isOpen = isOpen;
 	}
-	
+
 	public String getRoomId() {
 		return roomId;
 	}
