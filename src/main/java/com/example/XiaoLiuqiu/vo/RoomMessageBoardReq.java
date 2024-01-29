@@ -10,20 +10,20 @@ public class RoomMessageBoardReq {
 
 	private String messageImg;
 
-	private String account;
+	private String memberImg;
 
 	public RoomMessageBoardReq() {
 		super();
 	}
 
 	public RoomMessageBoardReq(String memberName, String roomId, String roomMessageBoardDescription, String messageImg,
-			String account) {
+			String memberImg) {
 		super();
 		this.memberName = memberName;
 		this.roomId = roomId;
 		this.roomMessageBoardDescription = roomMessageBoardDescription;
 		this.messageImg = messageImg;
-		this.account = account;
+		this.memberImg = memberImg;
 	}
 
 	public String getMemberName() {
@@ -58,12 +58,12 @@ public class RoomMessageBoardReq {
 		this.messageImg = messageImg;
 	}
 
-	public String getAccount() {
-		return account;
+	public String getMemberImg() {
+		return memberImg;
 	}
 
-	public void setAccount(String account) {
-		this.account = account;
+	public void setMemberImg(String memberImg) {
+		this.memberImg = memberImg;
 	}
 
 }

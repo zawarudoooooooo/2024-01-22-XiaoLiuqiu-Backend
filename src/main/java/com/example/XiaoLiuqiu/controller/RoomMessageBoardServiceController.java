@@ -21,7 +21,7 @@ public class RoomMessageBoardServiceController {
 	public RoomMessageBoardRes messageCreate(@RequestBody RoomMessageBoardReq req) {
 		
 		return roomMessageBoardService.messageCreate(req.getMemberName(), req.getRoomId(), 
-				req.getRoomMessageBoardDescription(),req.getMessageImg(),req.getAccount());
+				req.getRoomMessageBoardDescription(),req.getMessageImg(),req.getMemberImg());
 	}
 	@PostMapping(value="message/search")
 	public RoomMessageBoardRes search(@RequestBody RoomMessageBoardReq req) {
