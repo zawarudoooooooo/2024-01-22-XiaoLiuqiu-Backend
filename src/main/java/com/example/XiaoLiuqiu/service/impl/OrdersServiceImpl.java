@@ -35,7 +35,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 public class OrdersServiceImpl implements OrdersService {
 
-//	字串與物件(類別)互轉
+//	摮葡��隞�(憿)鈭��
 	private ObjectMapper mapper = new ObjectMapper();
 
 	@Autowired
@@ -74,7 +74,6 @@ public class OrdersServiceImpl implements OrdersService {
 			Orders newOrder = new Orders(memberName, roomId, orderItem, startDate, endDate, LocalDateTime.now(),
 					orderPayment, payOrNot,total);
 			orderDao.save(newOrder);
-			// 成功建立訂單後發送郵件通知顧客
 			sendOrderConfirmationEmail(newOrder);
 			return new OrdersRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
 		} catch (JsonProcessingException e) {
@@ -105,38 +104,19 @@ public class OrdersServiceImpl implements OrdersService {
 						if (count % 2 != 0) {
 							buf.setCharAt(0, ' ');
 							buf.setCharAt(buf.length() - 1, ':');
-//							buf.append(": ");
 						} else {
 							buf.append(";\t");
 						}
 					}
 				}
-//				String roomStr = order.getRoomId();
-//					roomStr = roomStr.replace("roomId", "房間編號").replace("roomName", "房型");
-//					list = mapper.readValue(roomStr, List.class);
-//					for(Map<String, Object> item : list) {
-//						for(Entry<String, Object> mapItem : item.entrySet()) {
-//							if(mapItem.getKey().equalsIgnoreCase("房間編號") 
-//									|| mapItem.getKey().equalsIgnoreCase("房型")) {
-//								buff.append(" " + mapItem.getKey()).append(": ").append(mapItem.getValue()).append("; ");
-//							}
-//						}
-//					}
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
 				String to = member.getMemberEmail();
-<<<<<<< HEAD
-				String subject = "�q�榨�߳q��";
-				String text = "�P�±z���q��!\n" + "�z���q��s���� : " + order.getOrderId() + "; \n"
-				               + "�ж���T : " + order.getRoomId() + "\n" + "�[�ʶ��� : " + buf.toString() + "\n"
-						       + "�q���� : " + order.getOrderDateTime().format(formatter) + " ;";
-=======
 				String subject = "訂單成立通知";
-				String text = "感謝您的訂購!\n" + "您的訂單編號為 : " + order.getOrderId() + "; \n"
-				               + "房間資訊 : " + order.getRoomId() + "\n" + "加購項目 : " + buf.toString() + "\n"
-						       + "訂單日期 : " + order.getOrderDateTime().format(formatter) +"\n"+ "總金額："+order.getTotal() +"\n"
-						       +"· 出渡輪站後，步行約3分鐘即可抵達Sea•Life合作商家，可於此租借機車、兌換票卷和寄放行李"+" ;";
-
->>>>>>> e8ce7168674f56e831483fa703f1bd0f7c8ea876
+                String text = "感謝您的訂購!\n" + "您的訂單編號為 : " + order.getOrderId() + "; \n"
+                               + "房間資訊 : " + order.getRoomId() + "\n" + "加購項目 : " + buf.toString() + "\n"
+                               + "訂單日期 : " + order.getOrderDateTime().format(formatter) +"\n"+ "總金額："+order.getTotal() +"\n"
+                               +"· 出渡輪站後，步行約3分鐘即可抵達Sea•Life合作商家，可於此租借機車、兌換票卷和寄放行李"+" ;";
+                
 				SimpleMailMessage message = new SimpleMailMessage();
 				message.setTo(to);
 				message.setSubject(subject);
@@ -173,17 +153,5 @@ public class OrdersServiceImpl implements OrdersService {
 		orderDao.save(order);
 		return new OrdersRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
 	}
-	
-//	@Override
-//	public OrdersRes search(String memberName, LocalDate startDate, LocalDate endDate) {
-//		memberName = !StringUtils.hasText(memberName) ? "" : memberName;
-//		startDate = startDate == null ? startDate = LocalDate.of(1970, 01, 01) : startDate;
-//		endDate = endDate == null ? endDate = LocalDate.of(2099, 12, 31) : endDate;
-//		List<Orders> res = orderDao.findByMemberNameContainingAndStartDateGreaterThanEqualAndEndDateLessThanEqual(
-//				memberName, startDate, endDate);
-//		return new OrdersGetRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage(), res);
-//	}
-
-
 
 }

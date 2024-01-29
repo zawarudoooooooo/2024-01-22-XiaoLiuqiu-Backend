@@ -32,11 +32,8 @@ public class RoomServiceImpl implements RoomService{
 		if(roomDao.existsByRoomId(roomId)) {
 			return new RoomRes(RtnCode.ROOM_ID_IS_EXISTED.getCode(), RtnCode.ROOM_ID_IS_EXISTED.getMessage());
 		}
-<<<<<<< HEAD
-		roomDao.insertRoom(roomId, roomIntroduce, roomName, roomPrice, isOpen);
-=======
+
 		roomDao.insertRoom(roomId, roomIntroduce, roomName, roomPrice,isOpen,roomImg);
->>>>>>> e8ce7168674f56e831483fa703f1bd0f7c8ea876
 		return new RoomRes(RtnCode.SUCCESSFUL.getCode(), RtnCode.SUCCESSFUL.getMessage());
 	}
 

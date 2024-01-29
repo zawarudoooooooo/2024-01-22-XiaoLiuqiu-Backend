@@ -25,21 +25,12 @@ public class Room {
 	@Column(name = "is_open")
 	private boolean isOpen;
 	
-<<<<<<< HEAD
-=======
 	@Column(name = "room_img")
 	private String roomImg;
 
->>>>>>> e8ce7168674f56e831483fa703f1bd0f7c8ea876
 	public Room() {
 		super();
 	}
-
-	
-	
-	
-
-
 
 	public Room(String roomIntroduce, String roomName, int roomPrice, boolean isOpen, String roomImg) {
 		super();
@@ -50,15 +41,6 @@ public class Room {
 		this.roomImg = roomImg;
 	}
 
-<<<<<<< HEAD
-=======
-
-
-
-
-
-
->>>>>>> e8ce7168674f56e831483fa703f1bd0f7c8ea876
 	public String getRoomId() {
 		return roomId;
 	}

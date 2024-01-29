@@ -19,23 +19,15 @@ public class RoomReq {
 	@JsonProperty(value = "is_open")
 	private boolean isOpen;
 	
-<<<<<<< HEAD
-	
-=======
 	@JsonProperty(value = "room_img")
 	private String roomImg;
 
->>>>>>> e8ce7168674f56e831483fa703f1bd0f7c8ea876
 	public RoomReq() {
 		super();
 	}
 
-<<<<<<< HEAD
-	public RoomReq(String roomId, String roomIntroduce, String roomName, int roomPrice, boolean isOpen) {
-=======
 	public RoomReq(String roomId, String roomIntroduce, String roomName, int roomPrice, boolean isOpen,
 			String roomImg) {
->>>>>>> e8ce7168674f56e831483fa703f1bd0f7c8ea876
 		super();
 		this.roomId = roomId;
 		this.roomIntroduce = roomIntroduce;
