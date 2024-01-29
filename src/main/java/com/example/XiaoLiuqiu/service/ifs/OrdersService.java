@@ -15,7 +15,7 @@ public interface OrdersService {
 	public OrdersRes searchMemberName(String memberName);
 	
 	public OrdersRes ordersCreate(String memberName, String roomIdStr,List<Extra> orderItemStr, 
-			LocalDate startDate, LocalDate endDate, boolean orderPayment ,boolean payOrNot);
+			LocalDate startDate, LocalDate endDate, boolean orderPayment ,boolean payOrNot,int total);
 	
 	public OrdersRes orderFinished(int orderId);
 

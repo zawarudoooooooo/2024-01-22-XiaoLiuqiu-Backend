@@ -25,19 +25,40 @@ public class Room {
 	@Column(name = "is_open")
 	private boolean isOpen;
 	
+<<<<<<< HEAD
+=======
+	@Column(name = "room_img")
+	private String roomImg;
+
+>>>>>>> e8ce7168674f56e831483fa703f1bd0f7c8ea876
 	public Room() {
 		super();
 	}
 
-	public Room(String roomId, String roomIntroduce, String roomName, int roomPrice, boolean isOpen) {
+	
+	
+	
+
+
+
+	public Room(String roomIntroduce, String roomName, int roomPrice, boolean isOpen, String roomImg) {
 		super();
-		this.roomId = roomId;
 		this.roomIntroduce = roomIntroduce;
 		this.roomName = roomName;
 		this.roomPrice = roomPrice;
 		this.isOpen = isOpen;
+		this.roomImg = roomImg;
 	}
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+>>>>>>> e8ce7168674f56e831483fa703f1bd0f7c8ea876
 	public String getRoomId() {
 		return roomId;
 	}
@@ -76,6 +97,14 @@ public class Room {
 
 	public void setOpen(boolean isOpen) {
 		this.isOpen = isOpen;
+	}
+
+	public String getRoomImg() {
+		return roomImg;
+	}
+
+	public void setRoomImg(String roomImg) {
+		this.roomImg = roomImg;
 	}
 
 }

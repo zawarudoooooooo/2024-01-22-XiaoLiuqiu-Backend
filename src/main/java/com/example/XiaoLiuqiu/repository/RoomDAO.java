@@ -26,8 +26,8 @@ public interface RoomDAO extends JpaRepository<Room, String>{
 	
 	@Transactional(rollbackOn = Exception.class)
 	@Modifying
-	@Query(value = "insert into room(room_id, room_introduce, room_name, room_price, is_open)"
-			+ "select :room_id, :room_introduce, :room_name, :room_price, :is_open "
+	@Query(value = "insert into room(room_id, room_introduce, room_name, room_price, is_open, room_img)"
+			+ "select :room_id, :room_introduce, :room_name, :room_price, :is_open, :room_img "
 			+ "where not exists (select 1 from room where room_id = :room_id)",		
 	nativeQuery = true)
 	public int insertRoom(//
@@ -35,15 +35,23 @@ public interface RoomDAO extends JpaRepository<Room, String>{
 			@Param("room_introduce")String roomIntroduce,//
 			@Param("room_name")String roomName,//
 			@Param("room_price")int roomPrice,//
-			@Param("is_open")boolean isOpen);
+			@Param("is_open")boolean isOpen,//
+			@Param("room_img") String roomImg);
 	
 	//還是可以用，但是一般不建議讓PK可設定
 	//判斷數值、布林值用 CASE WHEN
 	//COALESCE()若都是NULL回傳NULL，int boolean若使用會與期望成果相悖，抑或是寫成大寫Integer、Boolean便可使用
 	@Transactional(rollbackOn = Exception.class)
+<<<<<<< HEAD
     @Modifying
     @Query(value = "update room set room_introduce = ?2, room_name = ?3, room_price = ?4, is_open=?5 "
             + " where room_id = ?1", nativeQuery = true)
     public int updateRoom(String roomId, String roomIntroduce, String roomName, int roomPrice, boolean isOpen);
+=======
+	@Modifying(clearAutomatically = true)
+	@Query(value = "update room set room_introduce = ?2, room_name = ?3, room_price = ?4, is_open=?5, room_img=?6 "
+			+ " where room_id = ?1", nativeQuery = true)
+	public int updateRoom(String roomId, String roomIntroduce, String roomName, int roomPrice, boolean isOpen, String roomImg);
+>>>>>>> e8ce7168674f56e831483fa703f1bd0f7c8ea876
 	
 }

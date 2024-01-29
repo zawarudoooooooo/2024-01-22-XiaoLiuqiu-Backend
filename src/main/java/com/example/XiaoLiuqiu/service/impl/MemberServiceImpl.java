@@ -50,7 +50,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberLoginRes signUp(String account, String pwd, String memberName, String memberPhone,
-			String memberEmail,String memberPhoto) {
+			String memberEmail) {
 		if(!StringUtils.hasText(account)||!StringUtils.hasText(pwd)||!StringUtils.hasText(memberName)
 				||!StringUtils.hasText(memberPhone)||!StringUtils.hasText(memberEmail)) {
 			return new MemberLoginRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage());
@@ -67,7 +67,6 @@ public class MemberServiceImpl implements MemberService {
 		member.setMemberEmail(memberEmail);
 		member.setVerificationCode(UUID.randomUUID().toString());
 		member.setVerified(false);
-		member.setMemberPhoto(memberPhoto);
 		
 		memberDao.save(member);
 		
@@ -117,7 +116,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberLoginRes upDate(int memberId, String memberName, String memberPhone, String memberEmail, String memberPhoto) {
+	public MemberLoginRes upDate(int memberId, String memberName, String memberPhone, String memberEmail) {
 		if(memberId<=0) {
 			return new MemberLoginRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage());
 		}
@@ -234,5 +233,22 @@ public class MemberServiceImpl implements MemberService {
 	    	memberDao.save(member);
 	    	
 	    return new MemberLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
+	}
+
+	@Override
+	public MemberLoginRes imgUpDate(int memberId,String memberImg) {
+		if(memberId<=0) {
+			return new MemberLoginRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage());
+		}
+		Optional<Member> op= memberDao.findById(memberId);
+		if(op.isEmpty()) {
+			return new MemberLoginRes(RtnCode.MEMBER_NOT_FOUMD.getCode(),RtnCode.MEMBER_NOT_FOUMD.getMessage());
+		}
+		Member member=op.get();
+		if(StringUtils.hasText(memberImg)) {
+			member.setMemberImgPhoto(memberImg);
+		}
+		memberDao.save(member);
+		return new MemberLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
 	}
 }

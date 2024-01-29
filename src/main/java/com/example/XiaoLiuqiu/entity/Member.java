@@ -39,22 +39,49 @@ public class Member {
 	
 	@Column(name = "verified")
 	private boolean verified;
-
-	@Column(name = "member_photo")
-	private String memberPhoto;
+	
+	@Column(name = "member_img")
+	private String memberImgPhoto;
+	
 	public Member() {
 		super();
 	}
 
-	public Member(String account, String pwd, String memberName, String memberPhone, String memberEmail, boolean verified, String memberPhoto) {
+	
+	
+	
+
+	
+
+
+
+
+
+	public Member(String account, String pwd, String memberName, String memberPhone, String memberEmail,
+			String restCode, String verificationCode, boolean verified) {
 		super();
 		this.account = account;
 		this.pwd = pwd;
 		this.memberName = memberName;
 		this.memberPhone = memberPhone;
 		this.memberEmail = memberEmail;
+		this.restCode = restCode;
+		this.verificationCode = verificationCode;
 		this.verified = verified;
-		this.memberPhoto = memberPhoto;
+	}
+	
+	public Member(String account, String pwd, String memberName, String memberPhone, String memberEmail,
+			String restCode, String verificationCode, boolean verified, String memberImgPhoto) {
+		super();
+		this.account = account;
+		this.pwd = pwd;
+		this.memberName = memberName;
+		this.memberPhone = memberPhone;
+		this.memberEmail = memberEmail;
+		this.restCode = restCode;
+		this.verificationCode = verificationCode;
+		this.verified = verified;
+		this.memberImgPhoto = memberImgPhoto;
 	}
 
 	public int getMemberId() {
@@ -129,12 +156,12 @@ public class Member {
 		this.verified = verified;
 	}
 
-	public String getMemberPhoto() {
-		return memberPhoto;
+	public String getMemberImgPhoto() {
+		return memberImgPhoto;
 	}
 
-	public void setMemberPhoto(String memberPhoto) {
-		this.memberPhoto = memberPhoto;
+	public void setMemberImgPhoto(String memberImgPhoto) {
+		this.memberImgPhoto = memberImgPhoto;
 	}
 
 	

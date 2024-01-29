@@ -20,7 +20,8 @@ public class RoomMessageBoardServiceController {
 	@PostMapping(value="message/messageCreate")
 	public RoomMessageBoardRes messageCreate(@RequestBody RoomMessageBoardReq req) {
 		
-		return roomMessageBoardService.messageCreate(req.getMemberName(), req.getRoomId(), req.getRoomMessageBoardDescription());
+		return roomMessageBoardService.messageCreate(req.getMemberName(), req.getRoomId(), 
+				req.getRoomMessageBoardDescription(),req.getMessageImg(),req.getAccount());
 	}
 	@PostMapping(value="message/search")
 	public RoomMessageBoardRes search(@RequestBody RoomMessageBoardReq req) {

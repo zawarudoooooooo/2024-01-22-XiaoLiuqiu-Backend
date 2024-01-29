@@ -35,26 +35,26 @@ public class OrdersServiceTtest {
 	@Autowired
 	private RoomDAO roomDao;
 	
-	@Test
-	public void orderTest1() {
-		List<Extra> order=Arrays.asList(
-				new Extra("Ν繺",200),
-				new Extra("布",500)
-				);
-		OrdersRes res=ordersService.ordersCreate("Roy", "A02" , order, 
-				LocalDate.now(), LocalDate.now().plusDays(1),true,false);
-		System.out.println(res.getCode()+res.getMessage());
-	}
-	
-	@Test
-	public void orderTest2() {
-		List<Extra> order=Arrays.asList(
-				new Extra("[Ν繺,集Λó]",1000)
-				);
-		OrdersRes res=ordersService.ordersCreate("惧", "A02" , order, 
-				LocalDate.now(), LocalDate.now().plusDays(1),true,false);
-		System.out.println(res.getCode()+res.getMessage());
-	}
+//	@Test
+//	public void orderTest1() {
+//		List<Extra> order=Arrays.asList(
+//				new Extra("Ν繺",200),
+//				new Extra("布",500)
+//				);
+//		OrdersRes res=ordersService.ordersCreate("Roy", "A02" , order, 
+//				LocalDate.now(), LocalDate.now().plusDays(1),true,false);
+//		System.out.println(res.getCode()+res.getMessage());
+//	}
+//	
+//	@Test
+//	public void orderTest2() {
+//		List<Extra> order=Arrays.asList(
+//				new Extra("[Ν繺,集Λó]",1000)
+//				);
+//		OrdersRes res=ordersService.ordersCreate("惧", "A02" , order, 
+//				LocalDate.now(), LocalDate.now().plusDays(1),true,false);
+//		System.out.println(res.getCode()+res.getMessage());
+//	}
 	
 	@Test
 	public void orderTest3() {

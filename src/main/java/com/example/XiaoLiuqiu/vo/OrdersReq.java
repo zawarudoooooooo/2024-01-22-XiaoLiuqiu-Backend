@@ -30,13 +30,17 @@ public class OrdersReq {
 	
 	@JsonProperty(value = "pay_or_not")
 	private boolean payOrNot;
+	
+	private int total;
 
 	public OrdersReq() {
 		super();
 	}
 
+	
+
 	public OrdersReq(String memberName, String roomId, List<Extra> orderItem, LocalDate startDate, LocalDate endDate,
-			boolean orderPayment, boolean payOrNot) {
+			boolean orderPayment, boolean payOrNot, int total) {
 		super();
 		this.memberName = memberName;
 		this.roomId = roomId;
@@ -45,6 +49,15 @@ public class OrdersReq {
 		this.endDate = endDate;
 		this.orderPayment = orderPayment;
 		this.payOrNot = payOrNot;
+		this.total = total;
+	}
+
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
 	}
 
 	public String getMemberName() {

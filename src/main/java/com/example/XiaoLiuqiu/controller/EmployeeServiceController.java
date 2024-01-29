@@ -104,7 +104,7 @@ public class EmployeeServiceController {
 		     Employee loggedInEmployee = employeeDao.findByAccount2(loggedInAccount);
 		     // 檢查用戶是否為人事主管且擁有新增員工的權限
 		     if (loggedInEmployee != null && loggedInEmployee.getRole() == EmployeeRole.ADMINISTRATIVE_SUPERVISOR) {
-		         // 3. 如果有權限，執行新增員工的操作
+//		         // 3. 如果有權限，執行新增員工的操作
 		         return employeeService.create(req.getAccount(), req.getPwd(), req.getDepartment(), req.getAccess(), req.getRole());
 		     } else {
 		         return new EmployeeLoginRes(RtnCode.ACCESS_IS_NOT_ALLOWED);
