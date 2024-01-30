@@ -47,13 +47,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 		if (!StringUtils.hasText(account) || !StringUtils.hasText(pwd)) {
 			return new EmployeeLoginRes(RtnCode.PARAM_ERROR);
 		}
+		
 		Optional<Employee> op = employeeDao.findByAccount(account);
 		if (op.isEmpty()) {
 			return new EmployeeLoginRes(RtnCode.ACCOUNT_NOT_FOUND);
 		}
+		
 		Employee employee = op.get();
 		if (!encoder.matches(pwd, employee.getPwd())) {
 			return new EmployeeLoginRes(RtnCode.ACCOUNT_NOT_FOUND);
+		}
+		if(!employee.isResignation()) {
+			return new EmployeeLoginRes(RtnCode.THIS_ACCOUNT_IS_RESIGNED);
 		}
 
 		return new EmployeeLoginRes(RtnCode.SUCCESSFUL);
@@ -76,6 +81,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	    employee.setAccess(access);
 	    employee.setRole(role);
 	    employee.setActive(false);
+	    employee.setResignation(true);
 
 	    employeeDao.save(employee);
 		return new EmployeeLoginRes(RtnCode.SUCCESSFUL);
@@ -166,6 +172,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 		Employee employeeToUpdate = optionalEmployee.get();
 		employeeToUpdate.setActive(false);
+		employeeToUpdate.setResignation(false);
 		employeeDao.save(employeeToUpdate);
 		
 		return new EmployeeLoginRes(RtnCode.SUCCESSFUL);

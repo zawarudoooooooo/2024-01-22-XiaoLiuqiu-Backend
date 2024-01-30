@@ -40,13 +40,16 @@ public class Employee {
 	
 	@Column(name = "active")
 	private boolean active;
+	
+	@Column(name = "resignation")
+	private boolean resignation;
 
 	public Employee() {
 		super();
 	}
 
 	public Employee(int employeeId, String account, String pwd, int access, EmployeeRole role,
-			Department department, boolean active) {
+			Department department, boolean active, boolean resignation) {
 		super();
 		this.employeeId = employeeId;
 		this.account = account;
@@ -55,6 +58,7 @@ public class Employee {
 		this.role = role;
 		this.department = department;
 		this.active = active;
+		this.resignation = resignation;
 	}
 
 	public int getEmployeeId() {
@@ -115,6 +119,14 @@ public class Employee {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public boolean isResignation() {
+		return resignation;
+	}
+
+	public void setResignation(boolean resignation) {
+		this.resignation = resignation;
 	}
 
 }

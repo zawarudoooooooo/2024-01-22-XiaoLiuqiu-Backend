@@ -17,6 +17,7 @@ public enum RtnCode {
 	ORDER_NOT_FOUND(400, "Order not found"),//
 	ORDER_ALREADY_FINISHED(400, "Order already finished"),//
 	ACCESS_IS_NOT_ALLOWED(400, "Access is not allowed"),//
+	THIS_ACCOUNT_IS_RESIGNED(400, "This account is resigned"),//
 	ROOM_ID_IS_EXISTED(400,"RoomId is existed!!"),//
 	PLEASE_LOGIN_FIRST(400,"Please logon first"),//
 	CREATE_ROOM_FAILED(400, "Create room failed"),//

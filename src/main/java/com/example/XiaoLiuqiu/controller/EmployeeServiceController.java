@@ -39,20 +39,6 @@ public class EmployeeServiceController {
 	@Autowired
 	private EmployeeDAO employeeDao;
 	
-//	@PostMapping(value = "employee/search")
-//	public EmployeeGetRes search(@RequestBody EmployeeReq req) {
-//		if(req == null) {
-//			return new EmployeeGetRes(RtnCode.PARAM_ERROR, null);
-//		}
-//		String account = req.getAccount();
-//		Department department = req.getDepartment();
-//		EmployeeRole role = req.getRole();
-//		
-//		List<Employee> res;
-//		
-//		return employeeService.search(req.getAccount());
-//	}
-	
 	@PostMapping(value = "employee/employeeSearch")
 	public EmployeeGetRes employeeSearch(@RequestParam String account, HttpSession session) {
 		System.out.println(session.getId());	
@@ -74,7 +60,7 @@ public class EmployeeServiceController {
 			if(op.isPresent()) {
 				Employee employee = op.get();
 				
-				Cookie memberIdCookie = new Cookie("employee", req.getAccount() + ":" + employee.getAccess() + ":" + employee.isActive());
+				Cookie memberIdCookie = new Cookie("employee", req.getAccount() + ":" + employee.getAccess() + ":" + employee.isActive() + ":" + employee.getDepartment());
 				memberIdCookie.setMaxAge(600); 
 				memberIdCookie.setPath("/");
 				response.addCookie(memberIdCookie);
@@ -98,20 +84,20 @@ public class EmployeeServiceController {
 
 	@PostMapping(value = "employee/create")
 	public EmployeeLoginRes create(@RequestBody EmployeeReq req, HttpSession session) {
-		System.out.println(session.getId());
-		String loggedInAccount = (String) session.getAttribute("account");
-		 if (StringUtils.hasText(loggedInAccount)) {
-		     Employee loggedInEmployee = employeeDao.findByAccount2(loggedInAccount);
-		     // 檢查用戶是否為人事主管且擁有新增員工的權限
-		     if (loggedInEmployee != null && loggedInEmployee.getRole() == EmployeeRole.ADMINISTRATIVE_SUPERVISOR) {
+//		System.out.println(session.getId());
+//		String loggedInAccount = (String) session.getAttribute("account");
+//		 if (StringUtils.hasText(loggedInAccount)) {
+//		     Employee loggedInEmployee = employeeDao.findByAccount2(loggedInAccount);
+//		     // 檢查用戶是否為人事主管且擁有新增員工的權限
+//		     if (loggedInEmployee != null && loggedInEmployee.getRole() == EmployeeRole.ADMINISTRATIVE_SUPERVISOR) {
 //		         // 3. 如果有權限，執行新增員工的操作
 		         return employeeService.create(req.getAccount(), req.getPwd(), req.getDepartment(), req.getAccess(), req.getRole());
-		     } else {
-		         return new EmployeeLoginRes(RtnCode.ACCESS_IS_NOT_ALLOWED);
-		     }
-		 } else {
-		        return new EmployeeLoginRes(RtnCode.PARAM_ERROR);
-		    }
+//		     } else {
+//		         return new EmployeeLoginRes(RtnCode.ACCESS_IS_NOT_ALLOWED);
+//		     }
+//		 } else {
+//		        return new EmployeeLoginRes(RtnCode.PARAM_ERROR);
+//		    }
 	}
 	
 	@PostMapping(value = "employee/update")

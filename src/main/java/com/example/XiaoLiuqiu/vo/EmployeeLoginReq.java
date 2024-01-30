@@ -7,16 +7,18 @@ public class EmployeeLoginReq {
 
 	@JsonProperty(value = "password")
 	private String pwd;
+	
+	private boolean resignation;
 
 	public EmployeeLoginReq() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public EmployeeLoginReq(String account, String pwd) {
+	public EmployeeLoginReq(String account, String pwd, boolean resignation) {
 		super();
 		this.account = account;
 		this.pwd = pwd;
+		this.resignation = resignation;
 	}
 
 	public String getAccount() {
@@ -34,6 +36,13 @@ public class EmployeeLoginReq {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-	
-	
+
+	public boolean isResignation() {
+		return resignation;
+	}
+
+	public void setResignation(boolean resignation) {
+		this.resignation = resignation;
+	}
+
 }
