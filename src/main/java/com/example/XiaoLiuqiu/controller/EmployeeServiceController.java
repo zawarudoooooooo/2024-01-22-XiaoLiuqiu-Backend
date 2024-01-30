@@ -84,20 +84,20 @@ public class EmployeeServiceController {
 
 	@PostMapping(value = "employee/create")
 	public EmployeeLoginRes create(@RequestBody EmployeeReq req, HttpSession session) {
-//		System.out.println(session.getId());
-//		String loggedInAccount = (String) session.getAttribute("account");
-//		 if (StringUtils.hasText(loggedInAccount)) {
-//		     Employee loggedInEmployee = employeeDao.findByAccount2(loggedInAccount);
-//		     // 檢查用戶是否為人事主管且擁有新增員工的權限
-//		     if (loggedInEmployee != null && loggedInEmployee.getRole() == EmployeeRole.ADMINISTRATIVE_SUPERVISOR) {
-//		         // 3. 如果有權限，執行新增員工的操作
+		System.out.println(session.getId());
+		String loggedInAccount = (String) session.getAttribute("account");
+		 if (StringUtils.hasText(loggedInAccount)) {
+		     Employee loggedInEmployee = employeeDao.findByAccount2(loggedInAccount);
+		     // 檢查用戶是否為人事主管且擁有新增員工的權限
+		     if (loggedInEmployee != null && loggedInEmployee.getRole() == EmployeeRole.ADMINISTRATIVE_SUPERVISOR) {
+		         // 3. 如果有權限，執行新增員工的操作
 		         return employeeService.create(req.getAccount(), req.getPwd(), req.getDepartment(), req.getAccess(), req.getRole());
-//		     } else {
-//		         return new EmployeeLoginRes(RtnCode.ACCESS_IS_NOT_ALLOWED);
-//		     }
-//		 } else {
-//		        return new EmployeeLoginRes(RtnCode.PARAM_ERROR);
-//		    }
+		     } else {
+		         return new EmployeeLoginRes(RtnCode.ACCESS_IS_NOT_ALLOWED);
+		     }
+		 } else {
+		        return new EmployeeLoginRes(RtnCode.PARAM_ERROR);
+		    }
 	}
 	
 	@PostMapping(value = "employee/update")
