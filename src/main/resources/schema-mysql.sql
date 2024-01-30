@@ -69,6 +69,13 @@ CREATE TABLE if not exists `employee` (
   PRIMARY KEY (`employee_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+CREATE TABLE if not exists `room_type` (
+  `room_type_id` int NOT NULL AUTO_INCREMENT,
+  `room_type_name` varchar(45) NOT NULL,
+  PRIMARY KEY (`room_type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
 
 
 
