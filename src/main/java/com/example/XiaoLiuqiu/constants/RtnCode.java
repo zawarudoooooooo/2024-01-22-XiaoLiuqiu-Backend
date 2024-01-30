@@ -20,6 +20,8 @@ public enum RtnCode {
 	ROOM_ID_IS_EXISTED(400,"RoomId is existed!!"),//
 	PLEASE_LOGIN_FIRST(400,"Please logon first"),//
 	CREATE_ROOM_FAILED(400, "Create room failed"),//
+	Room_ID_IS_EXISTED(400,"RoomId is existed!!"),//
+	ROOM_TYPE_EXISTED(400,"Room type existed"),//
 	;
 	
 	private int code;

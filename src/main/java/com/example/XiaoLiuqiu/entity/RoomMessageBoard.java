@@ -33,22 +33,22 @@ public class RoomMessageBoard {
 	@Column(name = "message_img")
 	private String messageImg;
 
-	@Column(name = "account")
-	private String account;
+	@Column(name = "member_img")
+	private String memberImg;
 
 	public RoomMessageBoard() {
 		super();
 	}
 
 	public RoomMessageBoard(String memberName, String roomId, String roomMessageBoardDescription,
-			LocalDateTime messageDateTime, String messageImg, String account) {
+			LocalDateTime messageDateTime, String messageImg, String memberImg) {
 		super();
 		this.memberName = memberName;
 		this.roomId = roomId;
 		this.roomMessageBoardDescription = roomMessageBoardDescription;
 		this.messageDateTime = messageDateTime;
 		this.messageImg = messageImg;
-		this.account = account;
+		this.memberImg = memberImg;
 	}
 
 	public int getMessageBoardId() {
@@ -99,12 +99,14 @@ public class RoomMessageBoard {
 		this.messageImg = messageImg;
 	}
 
-	public String getAccount() {
-		return account;
+	public String getMemberImg() {
+		return memberImg;
 	}
 
-	public void setAccount(String account) {
-		this.account = account;
+	public void setMemberImg(String memberImg) {
+		this.memberImg = memberImg;
 	}
+
+
 
 }

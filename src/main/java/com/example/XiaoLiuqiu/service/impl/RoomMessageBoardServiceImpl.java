@@ -22,12 +22,12 @@ public class RoomMessageBoardServiceImpl implements RoomMessageBoardService{
 
 	@Override
 	public RoomMessageBoardRes messageCreate(String memberName, String roomId, String roomMessageBoardDescription,
-			String messageImg, String account) {
-		if(!StringUtils.hasText(memberName)||!StringUtils.hasText(account)||!StringUtils.hasText(roomId)||!StringUtils.hasText(roomMessageBoardDescription)) {
+			String messageImg, String memberImg) {
+		if(!StringUtils.hasText(memberName)||!StringUtils.hasText(memberImg)||!StringUtils.hasText(roomId)||!StringUtils.hasText(roomMessageBoardDescription)) {
 			return new RoomMessageBoardRes(RtnCode.PARAM_ERROR.getCode(),RtnCode.PARAM_ERROR.getMessage());
 		}
 		roomMessageBoardDao.save(new RoomMessageBoard(memberName,roomId,roomMessageBoardDescription,
-				LocalDateTime.now(),messageImg,account));
+				LocalDateTime.now(),messageImg,memberImg));
 		return new RoomMessageBoardRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
 	}
 

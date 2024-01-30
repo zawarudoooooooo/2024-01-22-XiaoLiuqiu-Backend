@@ -6,7 +6,7 @@ import com.example.XiaoLiuqiu.vo.RoomMessageBoardRes;
 public interface RoomMessageBoardService {
 	
 	public RoomMessageBoardRes messageCreate(String memberName,String roomId,String roomMessageBoardDescription,
-			String messageImg, String account);
+			String messageImg, String memberImg);
 	
 	public RoomMessageBoardGetRes search(String memberName,String roomId,String roomMessageBoardDescription);
 
