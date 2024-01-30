@@ -66,8 +66,10 @@ CREATE TABLE if not exists `employee` (
   `role` varchar(45) NOT NULL,
   `department` varchar(45) NOT NULL,
   `active` tinyint DEFAULT '0',
+  `resignation` tinyint DEFAULT '0',
   PRIMARY KEY (`employee_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 CREATE TABLE if not exists `room_type` (
   `room_type_id` int NOT NULL AUTO_INCREMENT,

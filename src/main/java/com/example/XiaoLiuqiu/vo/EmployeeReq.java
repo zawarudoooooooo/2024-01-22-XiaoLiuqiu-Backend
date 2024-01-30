@@ -18,13 +18,15 @@ public class EmployeeReq {
 	private Department department;
 	
 	private boolean active;
+	
+	private boolean resignation;
 
 	public EmployeeReq() {
 		super();
 	}
 
 	public EmployeeReq(String account, String pwd, int access, EmployeeRole role, Department department,
-			boolean active) {
+			boolean active, boolean resignation) {
 		super();
 		this.account = account;
 		this.pwd = pwd;
@@ -32,6 +34,7 @@ public class EmployeeReq {
 		this.role = role;
 		this.department = department;
 		this.active = active;
+		this.resignation = resignation;
 	}
 
 	public String getAccount() {
@@ -80,6 +83,14 @@ public class EmployeeReq {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public boolean isResignation() {
+		return resignation;
+	}
+
+	public void setResignation(boolean resignation) {
+		this.resignation = resignation;
 	}
 
 }
