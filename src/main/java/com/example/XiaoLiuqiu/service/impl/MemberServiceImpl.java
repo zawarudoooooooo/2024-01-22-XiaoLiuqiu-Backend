@@ -58,6 +58,9 @@ public class MemberServiceImpl implements MemberService {
 		if(memberDao.existsByAccount(account)) {
 			return new MemberLoginRes(RtnCode.ACCOUNT_EXISTED.getCode(),RtnCode.ACCOUNT_EXISTED.getMessage());
 		}
+		if(memberDao.existsByMemberEmail(memberEmail)) {
+			return new MemberLoginRes(RtnCode.EMAIL_EXISTED.getCode(), RtnCode.EMAIL_EXISTED.getMessage());
+		}
 		
 		Member member = new Member();
 		member.setAccount(account);
@@ -163,17 +166,22 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberLoginRes sendResetPasswordEmail(String account) {
-		 if (!StringUtils.hasText(account)) {
+	public MemberLoginRes sendResetPasswordEmail(String identifier) {
+		 if (!StringUtils.hasText(identifier)) {
 	            return new MemberLoginRes(RtnCode.PARAM_ERROR.getCode(), RtnCode.PARAM_ERROR.getMessage());
 	        }
 
-	        Optional<Member> op = memberDao.findByAccount(account);
-	        Member member = op.get();
-	        if (member.getAccount() == null) {
-	            return new MemberLoginRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(), RtnCode.ACCOUNT_NOT_FOUND.getMessage());
+	        Optional<Member> op;
+	        if(identifier.contains("@")) {
+	        	op = memberDao.findByMemberEmail(identifier);
+	        }else {
+	        	op = memberDao.findByAccount(identifier);
 	        }
-
+	        if(!op.isPresent()) {
+	        	return new MemberLoginRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(), RtnCode.ACCOUNT_NOT_FOUND.getMessage());
+	        }
+	        
+	        Member member = op.get();
 	        // ¥Í¦¨­«¸m½X
 	        String resetCode = UUID.randomUUID().toString();
 	        member.setRestCode(resetCode);

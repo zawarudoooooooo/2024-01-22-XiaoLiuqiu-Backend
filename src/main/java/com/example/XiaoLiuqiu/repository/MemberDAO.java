@@ -14,7 +14,7 @@ import com.example.XiaoLiuqiu.entity.Member;
 @Repository
 public interface MemberDAO extends JpaRepository<Member, Integer> {
 
-	public boolean  existsByAccount(String accout);
+	public boolean existsByAccount(String accout);
 	
 	public Optional<Member> findByMemberEmail(String memberEmail);
 	
