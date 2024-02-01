@@ -6,7 +6,8 @@ public enum RtnCode {
 	PARAM_ERROR(400,"Param error"),//
 	ACCOUNT_EXISTED(400,"Account existed!!"),//
 	ACCOUNT_NOT_FOUND(404,"Account not found!!"),//
-	ACCOUNT_IS_ALREADY_ACTIVED(400, "Account is already actived"),
+	ACCOUNT_IS_ALREADY_ACTIVED(400, "Account is already actived"),//
+	ACCOUBT_IS_NOT_VERIFIED(400, "Account is not verified"),//
 	MEMBER_NOT_FOUMD(400,"Member not foumd"),//
 	PWD_NOT_FOUMD(400,"Pwd not foumd"),
 	PWD_IS_EMPTY(400,"Pwd is empty"),

@@ -44,6 +44,9 @@ public class MemberServiceImpl implements MemberService {
 		if(!encoder.matches(pwd, member.getPwd())) {
 			return new MemberLoginRes(RtnCode.ACCOUNT_NOT_FOUND.getCode(),RtnCode.ACCOUNT_NOT_FOUND.getMessage());
 		}
+		if(!member.isVerified()) {
+			return new MemberLoginRes(RtnCode.ACCOUBT_IS_NOT_VERIFIED.getCode(), RtnCode.ACCOUBT_IS_NOT_VERIFIED.getMessage());
+		}
 		
 		return new MemberLoginRes(RtnCode.SUCCESSFUL.getCode(),RtnCode.SUCCESSFUL.getMessage());
 	}
